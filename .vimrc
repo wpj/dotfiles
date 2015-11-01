@@ -36,3 +36,4 @@ call vundle#end()
 
 " vim-go
 let g:go_fmt_command = 'goimports' " format with goimports instead of gofmt
+
