@@ -20,12 +20,14 @@ Plugin 'VundleVim/Vundle.vim'
 Plugin 'fatih/vim-go'
 Plugin 'jiangmiao/auto-pairs'
 Plugin 'tpope/vim-surround'
+Plugin 'tpope/vim-fugitive'
 Plugin 'mattn/emmet-vim'
 Plugin 'bling/vim-airline'
 Plugin 'scrooloose/nerdtree'
 Plugin 'scrooloose/nerdcommenter'
 Plugin 'kien/ctrlp.vim'
 Plugin 'airblade/vim-gitgutter'        
+Plugin 'Valloric/YouCompleteMe'
 
 call vundle#end()
 " END vundle
@@ -37,3 +39,6 @@ call vundle#end()
 " vim-go
 let g:go_fmt_command = 'goimports' " format with goimports instead of gofmt
 
+" START mapping
+map <C-n> :NERDTreeToggle<CR>
+" END mapping
