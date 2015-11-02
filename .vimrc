@@ -13,6 +13,8 @@ set hlsearch
 set nocompatible
 filetype off
 filetype plugin indent on
+filetype plugin on
+
 set rtp+=~/.vim/bundle/Vundle.vim
 call vundle#begin()
 
@@ -32,9 +34,6 @@ Plugin 'Valloric/YouCompleteMe'
 call vundle#end()
 " END vundle
 
-
-" To ignore plugin indent changes, instead use:
-" filetype plugin on
 
 " vim-go
 let g:go_fmt_command = 'goimports' " format with goimports instead of gofmt
