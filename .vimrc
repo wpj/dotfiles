@@ -9,6 +9,10 @@ set hlsearch
 " set number
 " set relativenumber
 
+" START mapping
+let mapleader = ','
+" END mapping
+
 " START vundle
 set nocompatible
 filetype off
@@ -34,10 +38,13 @@ Plugin 'Valloric/YouCompleteMe'
 call vundle#end()
 " END vundle
 
+" START plugin config
 
 " vim-go
 let g:go_fmt_command = 'goimports' " format with goimports instead of gofmt
 
-" START mapping
+" END plugin config
+
+" START plugin mapping
 map <C-n> :NERDTreeToggle<CR>
-" END mapping
+" END plugin  mapping
