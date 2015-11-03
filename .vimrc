@@ -9,8 +9,6 @@ set showmatch
 set hlsearch
 set nocompatible
 filetype off
-filetype plugin on
-filetype plugin indent on
 " set number
 " set relativenumber
 
@@ -38,6 +36,8 @@ Plugin 'airblade/vim-gitgutter'
 Plugin 'fatih/vim-go'
 
 call vundle#end()
+filetype plugin on
+filetype plugin indent on
 " END vundle
 
 " START plugin config
