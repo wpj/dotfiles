@@ -8,6 +8,19 @@ set encoding=utf-8
 set showmatch
 set hlsearch
 set nocompatible
+set autoread " read changes to file made externally
+set wildmenu
+set backspace=indent,eol,start " make backspace function as it should
+set so=7 " set 7 lines to the cursor when moving vertically
+set cmdheight=2 " height of command bar
+set hidden " hides buffers when they're abandoned
+set mat=2 " blink matching brackets for 2/10 second
+
+" files, backups, undo
+set nobackup
+set nowb
+set noswapfile
+
 filetype off
 " set number
 " set relativenumber
@@ -34,6 +47,8 @@ Plugin 'scrooloose/nerdcommenter'
 Plugin 'kien/ctrlp.vim'
 Plugin 'airblade/vim-gitgutter'        
 Plugin 'fatih/vim-go'
+Plugin 'ervandew/supertab'
+Plugin 'Valloric/YouCompleteMe'
 
 call vundle#end()
 filetype plugin on
@@ -41,6 +56,9 @@ filetype plugin indent on
 " END vundle
 
 " START plugin config
+
+" NERDTree
+let NERDTreeShowHidden=1
 
 " vim-go
 let g:go_fmt_command = 'goimports' " format with goimports instead of gofmt
@@ -50,10 +68,15 @@ let g:go_highlight_structs = 1
 let g:go_highlight_operators = 1
 let g:go_highlight_build_constraints = 1
 
+" YCM
+let g:ycm_key_list_select_completion = ['<C-n>', '<Down>']
+let g:ycm_key_list_previous_completion = ['<C-p>', '<Up>']
+let g:SuperTabDefaultCompletionType = '<C-n>'
+
 " ultisnips
-"let g:UltiSnipsExpandTrigger='<Tab>'
-"let g:UltiSnipsJumpForwardTrigger='<c-b>'
-"let g:UltiSnipsJumpBackwardTrigger='<c-z>'
+let g:UltiSnipsExpandTrigger='<tab>'
+let g:UltiSnipsJumpForwardTrigger='<tab>'
+let g:UltiSnipsJumpBackwardTrigger='<s-tab>'
 
 " END plugin config
 
