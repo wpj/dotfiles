@@ -15,6 +15,7 @@ set so=7 " set 7 lines to the cursor when moving vertically
 set cmdheight=2 " height of command bar
 set hidden " hides buffers when they're abandoned
 set mat=2 " blink matching brackets for 2/10 second
+set clipboard=unnamed " enable copying to OSX clipboard
 
 " files, backups, undo
 set nobackup
