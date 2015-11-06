@@ -49,7 +49,8 @@ Plugin 'kien/ctrlp.vim'
 Plugin 'airblade/vim-gitgutter'        
 Plugin 'fatih/vim-go'
 Plugin 'ervandew/supertab'
-Plugin 'Valloric/YouCompleteMe'
+"Plugin 'Valloric/YouCompleteMe'
+Plugin 'Shougo/neocomplete.vim'
 
 call vundle#end()
 filetype plugin on
@@ -70,9 +71,12 @@ let g:go_highlight_operators = 1
 let g:go_highlight_build_constraints = 1
 
 " YCM
-let g:ycm_key_list_select_completion = ['<C-n>', '<Down>']
-let g:ycm_key_list_previous_completion = ['<C-p>', '<Up>']
-let g:SuperTabDefaultCompletionType = '<C-n>'
+"let g:ycm_key_list_select_completion = ['<C-n>', '<Down>']
+"let g:ycm_key_list_previous_completion = ['<C-p>', '<Up>']
+"let g:SuperTabDefaultCompletionType = '<C-n>'
+
+" neocomplete
+let g:neocomplete#enable_at_startup = 1
 
 " ultisnips
 let g:UltiSnipsExpandTrigger='<tab>'
