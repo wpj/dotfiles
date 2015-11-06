@@ -52,6 +52,7 @@ Plugin 'kien/ctrlp.vim'
 Plugin 'airblade/vim-gitgutter'        
 Plugin 'fatih/vim-go'
 Plugin 'Shougo/neocomplete.vim'
+Plugin 'majutsushi/tagbar'
 
 call vundle#end()
 filetype plugin on
@@ -87,6 +88,10 @@ let g:go_highlight_build_constraints = 1
 "let g:UltiSnipsExpandTrigger='<tab>'
 "let g:UltiSnipsJumpForwardTrigger='<tab>'
 "let g:UltiSnipsJumpBackwardTrigger='<s-tab>'
+
+" tagbar
+" ======
+map <Leader>tt <esc>:TagbarToggle<cr>
 
 " neocomplete
 " ===========
