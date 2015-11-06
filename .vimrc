@@ -18,6 +18,7 @@ set cmdheight=2 " height of command bar
 set hidden " hides buffers when they're abandoned
 set mat=2 " blink matching brackets for 2/10 second
 set clipboard=unnamed " enable copying to OSX clipboard
+set completeopt-=preview " disable scratch preview on autocompletion
 
 " files, backups, undo
 set nobackup
