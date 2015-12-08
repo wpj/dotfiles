@@ -162,3 +162,7 @@ let g:indent_guides_enable_on_vim_startup = 0
 
 " vim-jsx
 let g:jsx_ext_required = 0
+
+" nerdcommenter
+" =============
+let NERDSpaceDelims=1
