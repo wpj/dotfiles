@@ -55,7 +55,6 @@ Plugin 'Shougo/neocomplete.vim'
 Plugin 'majutsushi/tagbar'
 Plugin 'pangloss/vim-javascript'
 Plugin 'mxw/vim-jsx'
-Plugin 'nathanaelkane/vim-indent-guides'
 
 call vundle#end()
 filetype plugin on
