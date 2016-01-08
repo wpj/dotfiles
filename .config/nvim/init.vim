@@ -35,7 +35,6 @@ inoremap jk <ESC>
 " END mapping
 
 call plug#begin('~/.config/nvim/plugged')
-Plug 'VundleVim/Vundle.vim'
 Plug 'SirVer/ultisnips'
 Plug 'honza/vim-snippets'
 Plug 'jiangmiao/auto-pairs'
