@@ -34,33 +34,26 @@ let mapleader = ','
 inoremap jk <ESC>
 " END mapping
 
-" START vundle
-set rtp+=~/.vim/bundle/Vundle.vim
-call vundle#begin()
-
-Plugin 'VundleVim/Vundle.vim'
-Plugin 'SirVer/ultisnips'
-Plugin 'honza/vim-snippets'
-Plugin 'jiangmiao/auto-pairs'
-Plugin 'tpope/vim-surround'
-Plugin 'tpope/vim-fugitive'
-Plugin 'mattn/emmet-vim'
-Plugin 'bling/vim-airline'
-Plugin 'scrooloose/nerdtree'
-Plugin 'scrooloose/nerdcommenter'
-Plugin 'kien/ctrlp.vim'
-Plugin 'airblade/vim-gitgutter'        
-Plugin 'fatih/vim-go'
-Plugin 'Shougo/neocomplete.vim'
-Plugin 'majutsushi/tagbar'
-Plugin 'pangloss/vim-javascript'
-Plugin 'mxw/vim-jsx'
-Plugin 'nathanaelkane/vim-indent-guides'
-
-call vundle#end()
-filetype plugin on
-filetype plugin indent on
-" END vundle
+call plug#begin('~/.config/nvim/plugged')
+Plug 'SirVer/ultisnips'
+Plug 'honza/vim-snippets'
+Plug 'jiangmiao/auto-pairs'
+Plug 'tpope/vim-surround'
+Plug 'tpope/vim-fugitive'
+Plug 'mattn/emmet-vim'
+Plug 'bling/vim-airline'
+Plug 'scrooloose/nerdtree'
+Plug 'scrooloose/nerdcommenter'
+Plug 'kien/ctrlp.vim'
+Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
+Plug 'junegunn/fzf.vim'
+Plug 'airblade/vim-gitgutter'
+Plug 'fatih/vim-go'
+Plug 'Shougo/deoplete.nvim'
+Plug 'majutsushi/tagbar'
+Plug 'pangloss/vim-javascript'
+Plug 'mxw/vim-jsx'
+call plug#end()
 
 " =============
 " plugin config
