@@ -158,3 +158,7 @@ let g:jsx_ext_required = 0
 " nerdcommenter
 " =============
 let NERDSpaceDelims=1
+
+" fzf
+" ===
+map <C-p> :FZF<CR>
