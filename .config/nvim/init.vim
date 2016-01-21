@@ -42,7 +42,7 @@ Plug 'tpope/vim-surround'
 Plug 'tpope/vim-fugitive'
 Plug 'mattn/emmet-vim'
 Plug 'bling/vim-airline'
-Plug 'scrooloose/nerdtree'
+Plug 'tpope/vim-vinegar'
 Plug 'scrooloose/nerdcommenter'
 Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
 Plug 'junegunn/fzf.vim'
@@ -57,11 +57,6 @@ call plug#end()
 " =============
 " plugin config
 " =============
-
-" NERDTree
-" ========
-let NERDTreeShowHidden=1
-map <C-n> :NERDTreeToggle<CR>
 
 " vim-go
 " ======
