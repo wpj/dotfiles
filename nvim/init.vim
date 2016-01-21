@@ -49,6 +49,7 @@ Plug 'junegunn/fzf.vim'
 Plug 'junegunn/rainbow_parentheses.vim'
 Plug 'junegunn/goyo.vim'
 Plug 'junegunn/limelight.vim'
+Plug 'junegunn/seoul256.vim'
 Plug 'airblade/vim-gitgutter'
 Plug 'fatih/vim-go'
 Plug 'Shougo/deoplete.nvim'
@@ -56,6 +57,12 @@ Plug 'majutsushi/tagbar'
 Plug 'pangloss/vim-javascript'
 Plug 'mxw/vim-jsx'
 call plug#end()
+
+" ===========
+" color theme
+" ===========
+let g:seoul256_background = 235
+colo seoul256
 
 " =============
 " plugin config
