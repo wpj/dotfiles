@@ -41,12 +41,15 @@ Plug 'jiangmiao/auto-pairs'
 Plug 'tpope/vim-surround'
 Plug 'tpope/vim-fugitive'
 Plug 'mattn/emmet-vim'
-Plug 'bling/vim-airline'
-Plug 'scrooloose/nerdtree'
+Plug 'itchyny/lightline.vim'
+Plug 'tpope/vim-vinegar'
 Plug 'scrooloose/nerdcommenter'
-Plug 'kien/ctrlp.vim'
 Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
 Plug 'junegunn/fzf.vim'
+Plug 'junegunn/rainbow_parentheses.vim'
+Plug 'junegunn/goyo.vim'
+Plug 'junegunn/limelight.vim'
+Plug 'junegunn/seoul256.vim'
 Plug 'airblade/vim-gitgutter'
 Plug 'fatih/vim-go'
 Plug 'Shougo/deoplete.nvim'
@@ -55,14 +58,15 @@ Plug 'pangloss/vim-javascript'
 Plug 'mxw/vim-jsx'
 call plug#end()
 
+" ===========
+" color theme
+" ===========
+let g:seoul256_background = 235
+colo seoul256
+
 " =============
 " plugin config
 " =============
-
-" NERDTree
-" ========
-let NERDTreeShowHidden=1
-map <C-n> :NERDTreeToggle<CR>
 
 " vim-go
 " ======
@@ -159,3 +163,7 @@ let g:jsx_ext_required = 0
 " nerdcommenter
 " =============
 let NERDSpaceDelims=1
+
+" fzf
+" ===
+map <C-p> :FZF<CR>
