@@ -53,10 +53,12 @@ Plug 'junegunn/goyo.vim'
 Plug 'junegunn/limelight.vim'
 Plug 'junegunn/seoul256.vim'
 Plug 'airblade/vim-gitgutter'
-Plug 'fatih/vim-go'
 Plug 'majutsushi/tagbar'
+
+" language extensions
 Plug 'pangloss/vim-javascript'
 Plug 'mxw/vim-jsx'
+Plug 'fatih/vim-go'
 Plug 'elixir-lang/vim-elixir'
 call plug#end()
 
