@@ -38,6 +38,7 @@ call plug#begin('~/.config/nvim/plugged')
 Plug 'SirVer/ultisnips'
 Plug 'honza/vim-snippets'
 Plug 'jiangmiao/auto-pairs'
+Plug 'ervandew/supertab'
 Plug 'tpope/vim-surround'
 Plug 'tpope/vim-fugitive'
 Plug 'mattn/emmet-vim'
@@ -52,7 +53,6 @@ Plug 'junegunn/limelight.vim'
 Plug 'junegunn/seoul256.vim'
 Plug 'airblade/vim-gitgutter'
 Plug 'fatih/vim-go'
-Plug 'Shougo/deoplete.nvim'
 Plug 'majutsushi/tagbar'
 Plug 'pangloss/vim-javascript'
 Plug 'mxw/vim-jsx'
@@ -92,6 +92,10 @@ let g:go_highlight_build_constraints = 1
 " tagbar
 " ======
 map <Leader>tt <esc>:TagbarToggle<cr>
+
+" deoplete
+" ========
+let g:deoplete#enable_at_startup = 1
 
 " neocomplete
 " ===========
