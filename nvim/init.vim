@@ -56,6 +56,7 @@ Plug 'fatih/vim-go'
 Plug 'majutsushi/tagbar'
 Plug 'pangloss/vim-javascript'
 Plug 'mxw/vim-jsx'
+Plug 'elixir-lang/vim-elixir'
 call plug#end()
 
 " ===========
