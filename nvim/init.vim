@@ -41,7 +41,7 @@ Plug 'jiangmiao/auto-pairs'
 Plug 'ervandew/supertab'
 Plug 'tpope/vim-surround'
 Plug 'tpope/vim-fugitive'
-Plug 'Valloric/YouCompleteMe', { 'do': './install.py' }
+" Plug 'Valloric/YouCompleteMe', { 'do': './install.py' }
 Plug 'mattn/emmet-vim'
 Plug 'itchyny/lightline.vim'
 Plug 'tpope/vim-vinegar'
