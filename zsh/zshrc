@@ -7,7 +7,7 @@ source $ZSH/oh-my-zsh.sh
 
 # configuration
 # ==================
-export PATH=/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin
+export PATH=/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin:/usr/local/sbin:$HOME/.cargo/bin
 # export MANPATH="/usr/local/man:$MANPATH"
 
 # editor (ssh/local)
@@ -24,6 +24,9 @@ export PATH=$PATH:$GOPATH/bin
 export PATH=$PATH:$GOROOT/bin
 
 # python
+export WORKON_HOME=$HOME/.virtualenvs
+export PROJECT_HOME=$HOME/code/python
+source /usr/local/bin/virtualenvwrapper.sh
 
 # ruby
 eval "$(rbenv init -)" # rbenv
@@ -44,6 +47,8 @@ alias gstat="git status"
 alias gaa="git add --all"
 alias open.="open ."
 alias vi="nvim"
+alias a="atom"
+alias aa="atom ."
 alias sa='storyadapter -env=prod'
 alias sa-local='storyadapter -env=local'
 alias sa-dev='storyadapter -env=dev'
@@ -59,3 +64,5 @@ if [ -d "$HOME/.secret/" ]; then
 		source "$file"
 	done
 fi
+
+eval $(thefuck --alias)

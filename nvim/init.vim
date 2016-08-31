@@ -54,6 +54,7 @@ Plug 'junegunn/limelight.vim'
 Plug 'junegunn/seoul256.vim'
 Plug 'airblade/vim-gitgutter'
 Plug 'majutsushi/tagbar'
+Plug 'elixir-lang/vim-elixir'
 
 " language extensions
 Plug 'pangloss/vim-javascript'
