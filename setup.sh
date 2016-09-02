@@ -13,7 +13,10 @@ mkdir -p ~/.config/nvim/autoload
 mkdir -p ~/.vim/autoload
 
 # autoload vim-plug
-curl --insecure -fLo $HOME/.config/nvim/autoload/plug.vim https://raw.github.com/junegunn/vim-plug/master/plug.vim
+if [ ! -f $HOME/.config/nvim/autoload/plug.vim ]; then
+	echo "Installing vim-plug"
+	curl --insecure -fLo $HOME/.config/nvim/autoload/plug.vim https://raw.github.com/junegunn/vim-plug/master/plug.vim
+fi
 
 # symlink vimrc and init.vim
 mv -v $HOME/.config/nvim/init.vim $HOME/.config/nvim/init.vim.old 2> /dev/null
