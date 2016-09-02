@@ -1,14 +1,13 @@
+# configuration
+# =============
+
 # oh-my-zsh
-# =========
 export ZSH=$HOME/.oh-my-zsh
 ZSH_THEME="robbyrussell"
 plugins=(git z sublime git-flow)
-source $ZSH/oh-my-zsh.sh
 
-# configuration
-# ==================
+# PATH
 export PATH=/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin:/usr/local/sbin:$HOME/.cargo/bin
-# export MANPATH="/usr/local/man:$MANPATH"
 
 # editor (ssh/local)
 if [[ -n $SSH_CONNECTION ]]; then
@@ -26,36 +25,37 @@ export PATH=$PATH:$GOROOT/bin
 # python
 export WORKON_HOME=$HOME/.virtualenvs
 export PROJECT_HOME=$HOME/code/python
-source /usr/local/bin/virtualenvwrapper.sh
 
-# ruby
-eval "$(rbenv init -)" # rbenv
-
-# nodejs
+# node
 export NVM_DIR=$HOME/.nvm
-[ -s "$NVM_DIR/nvm.sh" ] && . "$NVM_DIR/nvm.sh"  # This loads nvm
 
 # java
 export JAVA_HOME=/Library/Java/JavaVirtualMachines/jdk1.7.0_75.jdk/Contents/Home
 
-# ssh
-# export SSH_KEY_PATH="~/.ssh/dsa_id"
-
-# aliases
-# =======
-alias gstat="git status"
-alias gaa="git add --all"
-alias open.="open ."
-alias vi="nvim"
-alias a="atom"
-alias aa="atom ."
-alias sa='storyadapter -env=prod'
-alias sa-local='storyadapter -env=local'
-alias sa-dev='storyadapter -env=dev'
 
 # initialization
 # ==============
+
+# oh-my-zsh
+source $ZSH/oh-my-zsh.sh
+
+# fzf
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
+
+# direnv
+eval "$(direnv hook zsh)"
+
+# fuck
+eval $(thefuck --alias)
+
+# ruby
+eval "$(rbenv init -)" # rbenv
+
+# python
+source /usr/local/bin/virtualenvwrapper.sh
+
+# node
+[ -s "$NVM_DIR/nvm.sh" ] && . "$NVM_DIR/nvm.sh"  # This loads nvm
 
 # source secrets
 if [ -d "$HOME/.secret/" ]; then
@@ -65,4 +65,13 @@ if [ -d "$HOME/.secret/" ]; then
 	done
 fi
 
-eval $(thefuck --alias)
+
+# aliases
+# =======
+
+alias gstat="git status"
+alias gaa="git add --all"
+alias open.="open ."
+alias vi="nvim"
+alias a="atom"
+alias aa="atom ."
