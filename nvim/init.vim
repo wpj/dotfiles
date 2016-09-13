@@ -30,7 +30,8 @@ filetype off
 " set relativenumber
 
 " START mapping
-let mapleader = ','
+let mapleader = ' '
+let maplocalleader = ' '
 inoremap jk <ESC>
 " END mapping
 
