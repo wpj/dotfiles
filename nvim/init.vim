@@ -35,6 +35,7 @@ let maplocalleader = ' '
 inoremap jk <ESC>
 " END mapping
 
+" Plugins
 call plug#begin('~/.config/nvim/plugged')
 Plug 'SirVer/ultisnips'
 Plug 'honza/vim-snippets'
@@ -44,7 +45,7 @@ Plug 'tpope/vim-surround'
 Plug 'tpope/vim-fugitive'
 " Plug 'Valloric/YouCompleteMe', { 'do': './install.py' }
 Plug 'mattn/emmet-vim'
-Plug 'itchyny/lightline.vim'
+Plug 'vim-airline/vim-airline'
 Plug 'tpope/vim-vinegar'
 Plug 'scrooloose/nerdcommenter'
 Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
@@ -56,6 +57,7 @@ Plug 'junegunn/seoul256.vim'
 Plug 'airblade/vim-gitgutter'
 Plug 'majutsushi/tagbar'
 Plug 'easymotion/vim-easymotion'
+Plug 'osyo-manga/vim-over'
 
 " language extensions
 Plug 'elixir-lang/vim-elixir'
@@ -118,3 +120,6 @@ let NERDSpaceDelims=1
 " fzf
 " ===
 map <C-p> :FZF<CR>
+
+" airline
+let g:airline_powerline_fonts = 1
