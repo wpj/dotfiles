@@ -1,15 +1,21 @@
+" ==============
+" Basic settings
+" ==============
 syntax enable
+set nu
 set background=dark
+set visualbell
 set tabstop=2
 set autoindent
 set smartindent
 set shiftwidth=2
 set nowrap
 set title
-" set ruler
 set encoding=utf-8
 set showmatch
 set hlsearch
+set incsearch
+set nostartofline
 set nocompatible
 set autoread " read changes to file made externally
 set wildmenu
@@ -19,25 +25,27 @@ set cmdheight=2 " height of command bar
 set hidden " hides buffers when they're abandoned
 set mat=2 " blink matching brackets for 2/10 second
 set clipboard=unnamed " enable copying to OSX clipboard
-" set completeopt-=preview " disable scratch preview on autocompletion
+filetype off
+
+" 80 chars/line
+set textwidth=0
+if exists('&colorcolumn')
+  set colorcolumn=80
+endif
 
 " files, backups, undo
 set nobackup
 set nowb
 set noswapfile
 
-filetype off
-" set number
-" set relativenumber
 
-" START mapping
-let mapleader = ' '
-let maplocalleader = ' '
-inoremap jk <ESC>
-" END mapping
-
+" =======
 " Plugins
+" =======
 silent! if plug#begin('~/.config/nvim/plugged')
+if has('nvim')
+	Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }
+end
 Plug 'SirVer/ultisnips'
 Plug 'honza/vim-snippets'
 Plug 'jiangmiao/auto-pairs'
@@ -77,39 +85,99 @@ Plug 'honza/dockerfile.vim'
 call plug#end()
 endif
 
+
+" ========
+" Mappings
+" ========
+let mapleader = ' '
+let maplocalleader = ' '
+inoremap jk <ESC>
+
+" buffers
+nnoremap ]b :bnext<cr>
+nnoremap [b :bprev<cr>
+
+" tabs
+nnoremap ]t :tabn<cr>
+nnoremap [t :tabp<cr>
+
+" circular window navigation
+nnoremap <tab>   <c-w>w
+nnoremap <S-tab> <c-w>W
+
+" <tab> / <s-tab> / <c-v><tab> | super-duper-tab
+function! s:can_complete(func, prefix)
+  if empty(a:func) || call(a:func, [1, '']) < 0
+    return 0
+  endif
+  let result = call(a:func, [0, matchstr(a:prefix, '\k\+$')])
+  return !empty(type(result) == type([]) ? result : result.words)
+endfunction
+
+function! s:super_duper_tab(k, o)
+  if pumvisible()
+    return a:k
+  endif
+
+  let line = getline('.')
+  let col = col('.') - 2
+  if line[col] !~ '\k\|[/~.]'
+    return a:o
+  endif
+
+  let prefix = expand(matchstr(line[0:col], '\S*$'))
+  if prefix =~ '^[~/.]'
+    return "\<c-x>\<c-f>"
+  endif
+  if s:can_complete(&omnifunc, prefix)
+    return "\<c-x>\<c-o>"
+  endif
+  if s:can_complete(&completefunc, prefix)
+    return "\<c-x>\<c-u>"
+  endif
+  return a:k
+endfunction
+
 " ===========
-" color theme
+" Color theme
 " ===========
 let g:seoul256_background = 235
 colo seoul256
 
+
 " =============
-" plugin config
+" Plugin config
 " =============
 
-" vim-go
-" ======
-"let g:go_fmt_command = 'goimports' " format with goimports instead of gofmt
+" deoplete
+let g:deoplete#enable_at_startup = 1
+
 let g:go_highlight_functions = 1
 let g:go_highlight_methods = 1
 let g:go_highlight_structs = 1
 let g:go_highlight_operators = 1
 let g:go_highlight_build_constraints = 1
 
-" YCM
-" ===
-let g:ycm_key_list_select_completion = ['<C-n>', '<Down>']
-let g:ycm_key_list_previous_completion = ['<C-p>', '<Up>']
-let g:SuperTabDefaultCompletionType = '<C-n>'
-
 " ultisnips
-" ========
-let g:UltiSnipsExpandTrigger='<tab>'
-let g:UltiSnipsJumpForwardTrigger='<tab>'
-let g:UltiSnipsJumpBackwardTrigger='<s-tab>'
+if has_key(g:plugs, 'ultisnips')
+  " UltiSnips will be loaded only when tab is first pressed in insert mode
+  if !exists(':UltiSnipsEdit')
+    inoremap <silent> <Plug>(tab) <c-r>=plug#load('ultisnips')?UltiSnips#ExpandSnippet():''<cr>
+    imap <tab> <Plug>(tab)
+  endif
+
+  let g:SuperTabMappingForward  = "<tab>"
+  let g:SuperTabMappingBackward = "<s-tab>"
+  function! SuperTab(m)
+    return s:super_duper_tab(a:m == 'n' ? "\<c-n>" : "\<c-p>",
+                           \ a:m == 'n' ? "\<tab>" : "\<s-tab>")
+  endfunction
+else
+  inoremap <expr> <tab>   <SID>super_duper_tab("\<c-n>", "\<tab>")
+  inoremap <expr> <s-tab> <SID>super_duper_tab("\<c-p>", "\<s-tab>")
+endif
 
 " tagbar
-" ======
 map <Leader>tt <esc>:TagbarToggle<cr>
 
 " Enable omni completion.
@@ -123,11 +191,9 @@ autocmd FileType xml setlocal omnifunc=xmlcomplete#CompleteTags
 let g:jsx_ext_required = 0
 
 " nerdcommenter
-" =============
 let NERDSpaceDelims=1
 
 " fzf
-" ===
 map <C-p> :FZF<CR>
 
 " airline
