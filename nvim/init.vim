@@ -1,6 +1,7 @@
 syntax enable
 set background=dark
 set tabstop=2
+set autoindent
 set smartindent
 set shiftwidth=2
 set nowrap
@@ -36,17 +37,22 @@ inoremap jk <ESC>
 " END mapping
 
 " Plugins
-call plug#begin('~/.config/nvim/plugged')
+silent! if plug#begin('~/.config/nvim/plugged')
 Plug 'SirVer/ultisnips'
 Plug 'honza/vim-snippets'
 Plug 'jiangmiao/auto-pairs'
 Plug 'ervandew/supertab'
 Plug 'tpope/vim-surround'
+
 Plug 'tpope/vim-fugitive'
-" Plug 'Valloric/YouCompleteMe', { 'do': './install.py' }
+if v:version >= 703
+  Plug 'mhinz/vim-signify'
+endif
+
 Plug 'mattn/emmet-vim'
 Plug 'vim-airline/vim-airline'
 Plug 'tpope/vim-vinegar'
+Plug 'tpope/vim-endwise'
 Plug 'scrooloose/nerdcommenter'
 Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
 Plug 'junegunn/fzf.vim'
@@ -58,6 +64,7 @@ Plug 'airblade/vim-gitgutter'
 Plug 'majutsushi/tagbar'
 Plug 'easymotion/vim-easymotion'
 Plug 'osyo-manga/vim-over'
+Plug 'scrooloose/syntastic'
 
 " language extensions
 Plug 'elixir-lang/vim-elixir'
@@ -66,7 +73,9 @@ Plug 'pangloss/vim-javascript'
 Plug 'mxw/vim-jsx'
 Plug 'fatih/vim-go'
 Plug 'elixir-lang/vim-elixir'
+Plug 'honza/dockerfile.vim'
 call plug#end()
+endif
 
 " ===========
 " color theme
