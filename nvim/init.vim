@@ -17,20 +17,20 @@ set hlsearch
 set incsearch
 set nostartofline
 set nocompatible
-set autoread " read changes to file made externally
+set autoread                   " read changes to file made externally
 set wildmenu
 set backspace=indent,eol,start " make backspace function as it should
-set so=7 " set 7 lines to the cursor when moving vertically
+set so=7                       " set 7 lines to the cursor when moving vertically
 set splitbelow
 set splitright
 set ignorecase
 set smartcase
 set nohlsearch
 set noshowmode
-set cmdheight=2 " height of command bar
-set hidden " hides buffers when they're abandoned
-set mat=2 " blink matching brackets for 2/10 second
-set clipboard=unnamed " enable copying to OSX clipboard
+set cmdheight=2                " height of command bar
+set hidden                     " hides buffers when they're abandoned
+set mat=2                      " blink matching brackets for 2/10 second
+set clipboard=unnamed          " enable copying to OSX clipboard
 
 " 80 chars/line
 set textwidth=0
@@ -49,7 +49,7 @@ set noswapfile
 " =======
 silent! if plug#begin('~/.config/nvim/plugged')
 if has('nvim')
-	Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }
+	Plug 'Shougo/deoplete.nvim',  { 'do': ':UpdateRemotePlugins' }
 end
 Plug 'SirVer/ultisnips'
 Plug 'honza/vim-snippets'
@@ -68,10 +68,10 @@ Plug 'vim-airline/vim-airline-themes'
 Plug 'tpope/vim-vinegar'
 Plug 'tpope/vim-endwise'
 Plug 'scrooloose/nerdcommenter'
-Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
+Plug 'junegunn/fzf',            { 'dir': '~/.fzf', 'do': './install --all' }
 Plug 'junegunn/fzf.vim'
 Plug 'junegunn/rainbow_parentheses.vim'
-Plug 'junegunn/vim-easy-align'
+Plug 'junegunn/vim-easy-align', { 'on': ['<Plug>(EasyAlign)', 'EasyAlign'] }
 Plug 'junegunn/goyo.vim'
 Plug 'junegunn/limelight.vim'
 Plug 'junegunn/seoul256.vim'
@@ -149,7 +149,7 @@ endfunction
 " Color theme
 " ===========
 let g:seoul256_background = 235
-colo seoul256
+silent! colo seoul256
 
 
 " =============
@@ -207,3 +207,7 @@ map <C-p> :FZF<CR>
 " airline
 let g:airline_powerline_fonts = 1
 let g:airline_theme = "luna"
+
+" easy-align
+xmap ga <Plug>(EasyAlign)
+nmap ga <Plug>(EasyAlign)
