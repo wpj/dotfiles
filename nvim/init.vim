@@ -26,6 +26,7 @@ set splitright
 set ignorecase
 set smartcase
 set nohlsearch
+set noshowmode
 set cmdheight=2 " height of command bar
 set hidden " hides buffers when they're abandoned
 set mat=2 " blink matching brackets for 2/10 second
@@ -63,6 +64,7 @@ endif
 
 Plug 'mattn/emmet-vim'
 Plug 'vim-airline/vim-airline'
+Plug 'vim-airline/vim-airline-themes'
 Plug 'tpope/vim-vinegar'
 Plug 'tpope/vim-endwise'
 Plug 'scrooloose/nerdcommenter'
@@ -203,3 +205,4 @@ map <C-p> :FZF<CR>
 
 " airline
 let g:airline_powerline_fonts = 1
+let g:airline_theme = "luna"
