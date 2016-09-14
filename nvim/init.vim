@@ -12,6 +12,7 @@ set shiftwidth=2
 set nowrap
 set title
 set encoding=utf-8
+set lazyredraw
 set showmatch
 set hlsearch
 set incsearch
