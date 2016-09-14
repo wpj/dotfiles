@@ -35,7 +35,7 @@ set clipboard=unnamed " enable copying to OSX clipboard
 " 80 chars/line
 set textwidth=0
 if exists('&colorcolumn')
-  set colorcolumn=80
+	set colorcolumn=80
 endif
 
 " files, backups, undo
@@ -59,7 +59,7 @@ Plug 'tpope/vim-surround'
 
 Plug 'tpope/vim-fugitive'
 if v:version >= 703
-  Plug 'mhinz/vim-signify'
+	Plug 'mhinz/vim-signify'
 endif
 
 Plug 'mattn/emmet-vim'
@@ -71,6 +71,7 @@ Plug 'scrooloose/nerdcommenter'
 Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
 Plug 'junegunn/fzf.vim'
 Plug 'junegunn/rainbow_parentheses.vim'
+Plug 'junegunn/vim-easy-align'
 Plug 'junegunn/goyo.vim'
 Plug 'junegunn/limelight.vim'
 Plug 'junegunn/seoul256.vim'
@@ -113,35 +114,35 @@ nnoremap <S-tab> <c-w>W
 
 " <tab> / <s-tab> / <c-v><tab> | super-duper-tab
 function! s:can_complete(func, prefix)
-  if empty(a:func) || call(a:func, [1, '']) < 0
-    return 0
-  endif
-  let result = call(a:func, [0, matchstr(a:prefix, '\k\+$')])
-  return !empty(type(result) == type([]) ? result : result.words)
+	if empty(a:func) || call(a:func, [1, '']) < 0
+		return 0
+	endif
+	let result = call(a:func, [0, matchstr(a:prefix, '\k\+$')])
+	return !empty(type(result) == type([]) ? result : result.words)
 endfunction
 
 function! s:super_duper_tab(k, o)
-  if pumvisible()
-    return a:k
-  endif
+	if pumvisible()
+		return a:k
+	endif
 
-  let line = getline('.')
-  let col = col('.') - 2
-  if line[col] !~ '\k\|[/~.]'
-    return a:o
-  endif
+	let line = getline('.')
+	let col = col('.') - 2
+	if line[col] !~ '\k\|[/~.]'
+		return a:o
+	endif
 
-  let prefix = expand(matchstr(line[0:col], '\S*$'))
-  if prefix =~ '^[~/.]'
-    return "\<c-x>\<c-f>"
-  endif
-  if s:can_complete(&omnifunc, prefix)
-    return "\<c-x>\<c-o>"
-  endif
-  if s:can_complete(&completefunc, prefix)
-    return "\<c-x>\<c-u>"
-  endif
-  return a:k
+	let prefix = expand(matchstr(line[0:col], '\S*$'))
+	if prefix =~ '^[~/.]'
+		return "\<c-x>\<c-f>"
+	endif
+	if s:can_complete(&omnifunc, prefix)
+		return "\<c-x>\<c-o>"
+	endif
+	if s:can_complete(&completefunc, prefix)
+		return "\<c-x>\<c-u>"
+	endif
+	return a:k
 endfunction
 
 " ===========
@@ -167,21 +168,21 @@ let g:go_highlight_build_constraints = 1
 
 " ultisnips
 if has_key(g:plugs, 'ultisnips')
-  " UltiSnips will be loaded only when tab is first pressed in insert mode
-  if !exists(':UltiSnipsEdit')
-    inoremap <silent> <Plug>(tab) <c-r>=plug#load('ultisnips')?UltiSnips#ExpandSnippet():''<cr>
-    imap <tab> <Plug>(tab)
-  endif
+	" UltiSnips will be loaded only when tab is first pressed in insert mode
+	if !exists(':UltiSnipsEdit')
+		inoremap <silent> <Plug>(tab) <c-r>=plug#load('ultisnips')?UltiSnips#ExpandSnippet():''<cr>
+		imap <tab> <Plug>(tab)
+	endif
 
-  let g:SuperTabMappingForward  = "<tab>"
-  let g:SuperTabMappingBackward = "<s-tab>"
-  function! SuperTab(m)
-    return s:super_duper_tab(a:m == 'n' ? "\<c-n>" : "\<c-p>",
-                           \ a:m == 'n' ? "\<tab>" : "\<s-tab>")
-  endfunction
+	let g:SuperTabMappingForward  = "<tab>"
+	let g:SuperTabMappingBackward = "<s-tab>"
+	function! SuperTab(m)
+		return s:super_duper_tab(a:m == 'n' ? "\<c-n>" : "\<c-p>",
+						\ a:m == 'n' ? "\<tab>" : "\<s-tab>")
+	endfunction
 else
-  inoremap <expr> <tab>   <SID>super_duper_tab("\<c-n>", "\<tab>")
-  inoremap <expr> <s-tab> <SID>super_duper_tab("\<c-p>", "\<s-tab>")
+	inoremap <expr> <tab>   <SID>super_duper_tab("\<c-n>", "\<tab>")
+	inoremap <expr> <s-tab> <SID>super_duper_tab("\<c-p>", "\<s-tab>")
 endif
 
 " tagbar
