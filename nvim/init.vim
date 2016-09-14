@@ -21,11 +21,15 @@ set autoread " read changes to file made externally
 set wildmenu
 set backspace=indent,eol,start " make backspace function as it should
 set so=7 " set 7 lines to the cursor when moving vertically
+set splitbelow
+set splitright
+set ignorecase
+set smartcase
+set nohlsearch
 set cmdheight=2 " height of command bar
 set hidden " hides buffers when they're abandoned
 set mat=2 " blink matching brackets for 2/10 second
 set clipboard=unnamed " enable copying to OSX clipboard
-filetype off
 
 " 80 chars/line
 set textwidth=0
@@ -152,6 +156,7 @@ colo seoul256
 " deoplete
 let g:deoplete#enable_at_startup = 1
 
+" vim-go
 let g:go_highlight_functions = 1
 let g:go_highlight_methods = 1
 let g:go_highlight_structs = 1
