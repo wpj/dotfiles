@@ -57,6 +57,7 @@ Plug 'honza/vim-snippets'
 Plug 'jiangmiao/auto-pairs'
 Plug 'ervandew/supertab'
 Plug 'tpope/vim-surround'
+Plug 'mhinz/vim-startify'
 
 Plug 'tpope/vim-fugitive'
 if v:version >= 703
