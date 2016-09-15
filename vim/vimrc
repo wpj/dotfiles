@@ -48,7 +48,7 @@ set noswapfile
 " =======
 " Plugins
 " =======
-silent! if plug#begin('~/.config/nvim/plugged')
+silent! if plug#begin('~/.vim/plugged')
 if has('nvim')
 	Plug 'Shougo/deoplete.nvim',  { 'do': ':UpdateRemotePlugins' }
 end

@@ -15,18 +15,19 @@ mkdir -p ~/.vim/autoload
 # autoload vim-plug
 if [ ! -f $HOME/.config/nvim/autoload/plug.vim ]; then
 	echo "Installing vim-plug"
-	curl --insecure -fLo $HOME/.config/nvim/autoload/plug.vim https://raw.github.com/junegunn/vim-plug/master/plug.vim
+	curl --insecure -fLo ~/.vim/autoload/plug.vim https://raw.github.com/junegunn/vim-plug/master/plug.vim
 fi
 
-# symlink vimrc and init.vim
-mv -v $HOME/.config/nvim/init.vim $HOME/.config/nvim/init.vim.old 2> /dev/null
-ln -sf $BASE/nvim/init.vim $HOME/.config/nvim/init.vim
-mv -v $HOME/.vimrc $HOME/.vimrc.old 2> /dev/null
-ln -sf $BASE/nvim/init.vim $HOME/.vimrc
-ln -sf $HOME/.config/nvim/autoload/plug.vim  $HOME/.vim/autoload/
+# vimrc
+mv -v ~/.vimrc ~/.vimrc.old 2> /dev/null
+ln -sf $BASE/vim/vimrc ~/.vimrc
+
+# nvim
+ln -sf $BASE/vim/vimrc ~/.config/nvim/init.vim
+ln -sf ~/.vim/autoload/plug.vim ~/.config/nvim/autoload/
 
 # install plugins
-nvim +PlugInstall +qall
+vim +PlugInstall +qall
 
 
 # zsh
