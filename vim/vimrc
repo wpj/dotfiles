@@ -52,7 +52,6 @@ silent! if plug#begin('~/.vim/plugged')
 if has('nvim')
 	Plug 'Shougo/deoplete.nvim',  { 'do': ':UpdateRemotePlugins' }
 end
-Plug 'SirVer/ultisnips'
 Plug 'honza/vim-snippets'
 Plug 'jiangmiao/auto-pairs'
 Plug 'ervandew/supertab'
@@ -60,6 +59,7 @@ Plug 'tpope/vim-surround'
 Plug 'mhinz/vim-startify'
 Plug 'tpope/vim-fugitive'
 if v:version >= 703
+	Plug 'SirVer/ultisnips'
 	Plug 'mhinz/vim-signify'
 endif
 
