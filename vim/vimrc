@@ -58,6 +58,7 @@ Plug 'ervandew/supertab'
 Plug 'tpope/vim-surround'
 Plug 'mhinz/vim-startify'
 Plug 'tpope/vim-fugitive'
+Plug 'editorconfig/editorconfig-vim'
 if v:version >= 703
 	Plug 'SirVer/ultisnips'
 	Plug 'mhinz/vim-signify'
@@ -188,6 +189,9 @@ endif
 
 " tagbar
 map <Leader>tt <esc>:TagbarToggle<cr>
+
+" editorconfig
+let g:EditorConfig_exclude_patterns = ['fugitive://.*', 'scp://.*']
 
 " Enable omni completion.
 autocmd FileType css setlocal omnifunc=csscomplete#CompleteCSS
