@@ -84,6 +84,7 @@ Plug 'majutsushi/tagbar'
 Plug 'easymotion/vim-easymotion'
 Plug 'osyo-manga/vim-over'
 Plug 'scrooloose/syntastic'
+Plug 'mtscout6/syntastic-local-eslint.vim'
 
 " language extensions
 Plug 'elixir-lang/vim-elixir'
@@ -163,6 +164,11 @@ silent! colo seoul256
 " deoplete
 let g:deoplete#enable_at_startup = 1
 
+inoremap <silent> <CR> <C-r>=<SID>select_completion()<CR>
+function! s:select_completion() abort
+  return pumvisible() ? deoplete#close_popup() : "\<CR>"
+endfunction
+
 " vim-go
 let g:go_highlight_functions = 1
 let g:go_highlight_methods = 1
@@ -218,3 +224,6 @@ let g:airline_theme = "luna"
 " easy-align
 xmap ga <Plug>(EasyAlign)
 nmap ga <Plug>(EasyAlign)
+
+" syntastic
+let g:syntastic_javascript_checkers = ['eslint']
