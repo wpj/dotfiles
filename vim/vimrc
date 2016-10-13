@@ -184,8 +184,8 @@ if has_key(g:plugs, 'ultisnips')
 		imap <tab> <Plug>(tab)
 	endif
 
-	let g:SuperTabMappingForward  = "<tab>"
-	let g:SuperTabMappingBackward = "<s-tab>"
+  let g:SuperTabDefaultCompletionType = "<c-n>"
+
 	function! SuperTab(m)
 		return s:super_duper_tab(a:m == 'n' ? "\<c-n>" : "\<c-p>",
 						\ a:m == 'n' ? "\<tab>" : "\<s-tab>")
