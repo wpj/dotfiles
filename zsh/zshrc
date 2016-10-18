@@ -7,7 +7,7 @@ ZSH_THEME="robbyrussell"
 plugins=(git z sublime git-flow)
 
 # PATH
-export PATH=/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin:/usr/local/sbin:$HOME/.cargo/bin
+export PATH=/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin:/usr/local/sbin:$HOME/.cargo/bin:$HOME/.yarn/bin
 
 # editor (ssh/local)
 if [[ -n $SSH_CONNECTION ]]; then
