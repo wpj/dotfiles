@@ -213,6 +213,7 @@ let g:jsx_ext_required = 0
 
 " nerdcommenter
 let NERDSpaceDelims=1
+let g:NERDDefaultAlign = 'left'
 
 " fzf
 map <C-p> :FZF<CR>
