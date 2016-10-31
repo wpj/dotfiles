@@ -34,6 +34,7 @@ set cmdheight=2                " height of command bar
 set hidden                     " hides buffers when they're abandoned
 set mat=2                      " blink matching brackets for 2/10 second
 set clipboard=unnamed          " enable copying to OSX clipboard
+filetype plugin on
 
 " 80 chars/line
 set textwidth=0
@@ -85,6 +86,7 @@ Plug 'easymotion/vim-easymotion'
 Plug 'osyo-manga/vim-over'
 Plug 'scrooloose/syntastic'
 Plug 'mtscout6/syntastic-local-eslint.vim'
+Plug 'suan/vim-instant-markdown'
 
 " language extensions
 Plug 'elixir-lang/vim-elixir'
