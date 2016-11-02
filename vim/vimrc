@@ -96,6 +96,7 @@ Plug 'mxw/vim-jsx'
 Plug 'fatih/vim-go'
 Plug 'elixir-lang/vim-elixir'
 Plug 'honza/dockerfile.vim'
+Plug 'plasticboy/vim-markdown'
 call plug#end()
 endif
 
