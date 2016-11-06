@@ -52,6 +52,7 @@ set noswapfile
 " Plugins
 " =======
 silent! if plug#begin('~/.vim/plugged')
+
 if has('nvim')
 	Plug 'Shougo/deoplete.nvim',  { 'do': ':UpdateRemotePlugins' }
 end
@@ -90,13 +91,15 @@ Plug 'suan/vim-instant-markdown'
 
 " language extensions
 Plug 'elixir-lang/vim-elixir'
-Plug 'slashmili/alchemist.vim'
+Plug 'slashmili/alchemist.vim', { 'for': 'elixir' }
 Plug 'pangloss/vim-javascript'
 Plug 'mxw/vim-jsx'
 Plug 'fatih/vim-go'
 Plug 'elixir-lang/vim-elixir'
 Plug 'honza/dockerfile.vim'
 Plug 'plasticboy/vim-markdown'
+Plug 'nginx/nginx',             { 'rtp': 'contrib/vim' }
+
 call plug#end()
 endif
 
