@@ -27,7 +27,7 @@
 	smudge = git lfs smudge %f
 	required = true
 [credential]
-	helper = osxkeychain
+	helper = cache
 [push]
 	default = simple
 [pager]
