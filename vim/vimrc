@@ -91,6 +91,7 @@ Plug 'suan/vim-instant-markdown'
 
 " language extensions
 Plug 'sheerun/vim-polyglot'
+Plug 'plasticboy/vim-markdown'
 Plug 'slashmili/alchemist.vim', { 'for': 'elixir' }
 
 call plug#end()
