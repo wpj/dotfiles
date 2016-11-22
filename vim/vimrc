@@ -90,15 +90,8 @@ Plug 'mtscout6/syntastic-local-eslint.vim'
 Plug 'suan/vim-instant-markdown'
 
 " language extensions
-Plug 'elixir-lang/vim-elixir'
+Plug 'sheerun/vim-polyglot'
 Plug 'slashmili/alchemist.vim', { 'for': 'elixir' }
-Plug 'pangloss/vim-javascript'
-Plug 'mxw/vim-jsx'
-Plug 'fatih/vim-go'
-Plug 'elixir-lang/vim-elixir'
-Plug 'honza/dockerfile.vim'
-Plug 'plasticboy/vim-markdown'
-Plug 'nginx/nginx',             { 'rtp': 'contrib/vim' }
 
 call plug#end()
 endif
