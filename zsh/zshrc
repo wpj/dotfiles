@@ -59,6 +59,10 @@ source /usr/local/bin/virtualenvwrapper.sh
 # node
 [ -s "$NVM_DIR/nvm.sh" ] && . "$NVM_DIR/nvm.sh"  # This loads nvm
 
+# asdf
+. $HOME/.asdf/asdf.sh
+. $HOME/.asdf/completions/asdf.bash
+
 # source secrets
 if [ -d "$HOME/.secret/" ]; then
 	for file in $HOME/.secret/*
