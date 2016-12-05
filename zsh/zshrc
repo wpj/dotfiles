@@ -31,9 +31,6 @@ export PATH=$PATH:$GOROOT/bin
 export WORKON_HOME=$HOME/.virtualenvs
 export PROJECT_HOME=$HOME/code/python
 
-# node
-export NVM_DIR=$HOME/.nvm
-
 # java
 export JAVA_HOME=/Library/Java/JavaVirtualMachines/jdk1.7.0_75.jdk/Contents/Home
 
@@ -55,9 +52,6 @@ eval $(thefuck --alias)
 
 # python
 source /usr/local/bin/virtualenvwrapper.sh
-
-# node
-[ -s "$NVM_DIR/nvm.sh" ] && . "$NVM_DIR/nvm.sh"  # This loads nvm
 
 # asdf
 . $HOME/.asdf/asdf.sh
