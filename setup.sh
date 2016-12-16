@@ -20,10 +20,10 @@ fi
 
 # vimrc
 mv -v ~/.vimrc ~/.vimrc.old 2> /dev/null
-ln -sf $BASE/vim/vimrc ~/.vimrc
+ln -sf $BASE/vimrc ~/.vimrc
 
 # nvim
-ln -sf $BASE/vim/vimrc ~/.config/nvim/init.vim
+ln -sf $BASE/vimrc ~/.config/nvim/init.vim
 ln -sf ~/.vim/autoload/plug.vim ~/.config/nvim/autoload/
 
 # install plugins
@@ -35,14 +35,14 @@ vim +PlugInstall +qall
 
 # symlink zshrc
 mv -v $HOME/.zshrc $HOME/.zshrc.old 2> /dev/null
-ln -sf $BASE/zsh/zshrc $HOME/.zshrc
+ln -sf $BASE/zshrc $HOME/.zshrc
 
 # git
 # ===
 
 # symlink gitconfig
 mv -v $HOME/.gitconfig $HOME/.gitconfig.old 2> /dev/null
-ln -sf $BASE/git/gitconfig $HOME/.gitconfig
+ln -sf $BASE/gitconfig $HOME/.gitconfig
 
 # editorconfig
 # ============
