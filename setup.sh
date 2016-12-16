@@ -43,3 +43,8 @@ ln -sf $BASE/zsh/zshrc $HOME/.zshrc
 # symlink gitconfig
 mv -v $HOME/.gitconfig $HOME/.gitconfig.old 2> /dev/null
 ln -sf $BASE/git/gitconfig $HOME/.gitconfig
+
+# editorconfig
+# ============
+
+ls -sf $BASE/editorconfig $HOME/.editorconfig
