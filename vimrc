@@ -231,4 +231,4 @@ let g:syntastic_javascript_checkers = ['eslint']
 
 " markdown
 let g:vim_markdown_folding_disabled = 1
-autocmd BufNewFile,BufRead *.md filetype plugin indent off
+let g:vim_markdown_new_list_item_indent = 0 " disable auto-indent in lists
