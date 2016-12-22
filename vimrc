@@ -34,7 +34,7 @@ set cmdheight=2                " height of command bar
 set hidden                     " hides buffers when they're abandoned
 set mat=2                      " blink matching brackets for 2/10 second
 set clipboard=unnamedplus      " enable copying to system clipboard
-filetype plugin on
+filetype plugin indent on
 
 " 80 chars/line
 set textwidth=0
