@@ -8,3 +8,7 @@ insert_final_newline = true
 [nginx.conf]
 indent_style = space
 indent_size = 4
+
+[*.hs]
+indent_style = space
+indent_size = 2
