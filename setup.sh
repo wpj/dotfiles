@@ -48,3 +48,9 @@ ln -sf $BASE/gitconfig $HOME/.gitconfig
 # ============
 
 ls -sf $BASE/editorconfig $HOME/.editorconfig
+
+# ghci
+# ====
+
+mv -v $HOME/.ghci $HOME/.ghci.old 2> /dev/null
+ln -sf $BASE/ghci $HOME/.ghci
