@@ -232,3 +232,6 @@ let g:syntastic_javascript_checkers = ['eslint']
 let g:vim_markdown_folding_disabled = 1
 let g:vim_markdown_new_list_item_indent = 0 " disable auto-indent in lists
 let g:instant_markdown_autostart = 0
+
+" javascript
+let g:javascript_plugin_jsdoc = 1
