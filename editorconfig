@@ -12,3 +12,7 @@ indent_size = 4
 [*.hs]
 indent_style = space
 indent_size = 4
+
+[*.{ex,exs}]
+indent_style = space
+indent_size = 2
