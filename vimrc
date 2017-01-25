@@ -84,9 +84,12 @@ Plug 'airblade/vim-gitgutter'
 Plug 'majutsushi/tagbar'
 Plug 'easymotion/vim-easymotion'
 Plug 'osyo-manga/vim-over'
+Plug 'suan/vim-instant-markdown'
+
+" Linting
 Plug 'scrooloose/syntastic'
 Plug 'mtscout6/syntastic-local-eslint.vim'
-Plug 'suan/vim-instant-markdown'
+Plug 'sindresorhus/vim-xo'
 
 " language extensions
 Plug 'sheerun/vim-polyglot'
