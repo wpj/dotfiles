@@ -45,10 +45,16 @@ source $ZSH/oh-my-zsh.sh
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
 
 # direnv
-eval "$(direnv hook zsh)"
+if (( $+commands[direnv] ))
+then
+  eval "$(direnv hook zsh)"
+fi
 
 # fuck
-eval $(thefuck --alias)
+if (( $+commands[thefuck] ))
+then
+  eval $(thefuck --alias)
+fi
 
 # python
 source /usr/local/bin/virtualenvwrapper.sh
@@ -58,7 +64,10 @@ source /usr/local/bin/virtualenvwrapper.sh
 . $HOME/.asdf/completions/asdf.bash
 
 # yarn path
-export PATH="$PATH:`yarn global bin`"
+if (( $+commands[yarn] ))
+then
+  export PATH="$PATH:`yarn global bin`"
+fi
 
 # source secrets
 if [ -d "$HOME/.secret/" ]; then
