@@ -210,6 +210,9 @@ autocmd FileType javascript setlocal omnifunc=javascriptcomplete#CompleteJS
 autocmd FileType python setlocal omnifunc=pythoncomplete#Complete
 autocmd FileType xml setlocal omnifunc=xmlcomplete#CompleteTags
 
+" Enable spellcheck
+autocmd FileType markdown setlocal spell
+
 " vim-jsx
 let g:jsx_ext_required = 0
 
