@@ -12,7 +12,7 @@ plugins=(git z sublime git-flow)
 export PATH=/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin:/usr/local/sbin
 
 # package manager paths
-export PATH=$PATH:$HOME/{.cargo,.yarn,.local}/bin
+export PATH=$PATH:$HOME/{.cargo,.local}/bin
 
 # editor (ssh/local)
 if [[ -n $SSH_CONNECTION ]]; then
@@ -56,6 +56,9 @@ source /usr/local/bin/virtualenvwrapper.sh
 # asdf
 . $HOME/.asdf/asdf.sh
 . $HOME/.asdf/completions/asdf.bash
+
+# yarn path
+export PATH="$PATH:`yarn global bin`"
 
 # source secrets
 if [ -d "$HOME/.secret/" ]; then
