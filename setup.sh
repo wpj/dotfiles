@@ -54,3 +54,9 @@ ls -sf $BASE/editorconfig $HOME/.editorconfig
 
 mv -v $HOME/.ghci $HOME/.ghci.old 2> /dev/null
 ln -sf $BASE/ghci $HOME/.ghci
+
+# hyper
+# =====
+
+mv -v $HOME/.hyper.js $HOME/.hyper.js.old 2> /dev/null
+ln -sf $BASE/hyper.js $HOME/.hyper.js
