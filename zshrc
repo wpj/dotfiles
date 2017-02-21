@@ -3,7 +3,8 @@
 
 # zplug
 
-if [[ ! -d ~/.zplug ]];then
+if [[ ! -d ~/.zplug ]]
+then
   git clone https://github.com/zplug/zplug $HOME/.zplug
 fi
 
@@ -57,6 +58,12 @@ export JAVA_HOME=/Library/Java/JavaVirtualMachines/jdk1.7.0_75.jdk/Contents/Home
 
 # initialization
 # ==============
+
+# fasd
+if (( $+commands[fasd] ))
+then
+  eval "$(fasd --init auto)"
+fi
 
 # fzf
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
