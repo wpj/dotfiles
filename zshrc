@@ -1,20 +1,32 @@
 # configuration
 # =============
 
-export ZPLUG_HOME=/usr/local/opt/zplug
+# zplug
+
+if [[ ! -d ~/.zplug ]];then
+  git clone https://github.com/zplug/zplug $HOME/.zplug
+fi
+
+export ZPLUG_HOME=$HOME/.zplug
 source $ZPLUG_HOME/init.zsh
 
-# theme
 zplug "mafredri/zsh-async", from:github
 zplug "sindresorhus/pure", use:pure.zsh, from:github, as:theme
-
-# plugins
 zplug "plugins/git", from:oh-my-zsh
 zplug "plugins/z", from:oh-my-zsh
 zplug "plugins/git-flow", from:oh-my-zsh
 zplug "plugins/sublime", from:oh-my-zsh
+zplug "plugins/common-aliases", from:oh-my-zsh
+zplug "zsh-users/zsh-completions", defer:2
+zplug "zsh-users/zsh-autosuggestions", defer:2
+zplug "zsh-users/zsh-syntax-highlighting", defer:2
+zplug "zsh-users/zsh-history-substring-search", defer:2
 
 zplug load
+
+# bind up and down arrow keys to history search
+bindkey '^[[A' history-substring-search-up
+bindkey '^[[B' history-substring-search-down
 
 # PATH
 
