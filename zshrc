@@ -11,10 +11,8 @@ export ZPLUG_HOME=$HOME/.zplug
 source $ZPLUG_HOME/init.zsh
 
 zplug "mafredri/zsh-async", from:github
-zplug "sindresorhus/pure", use:pure.zsh, from:github, as:theme
+zplug "sindresorhus/pure", use:pure.zsh, as:theme
 zplug "plugins/git", from:oh-my-zsh
-zplug "plugins/z", from:oh-my-zsh
-zplug "plugins/git-flow", from:oh-my-zsh
 zplug "plugins/sublime", from:oh-my-zsh
 zplug "plugins/common-aliases", from:oh-my-zsh
 zplug "zsh-users/zsh-completions", defer:2
