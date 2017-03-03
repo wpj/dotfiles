@@ -244,5 +244,5 @@ let g:javascript_plugin_jsdoc = 1
 
 " prettier
 if executable("prettier")
-  autocmd FileType javascript set formatprg=prettier\ --single-quote\ --trailing-comma\ --stdin
+  autocmd FileType javascript set formatprg=prettier\ --single-quote\ --trailing-comma\ all\ --stdin
 endif
