@@ -16,6 +16,7 @@ zplug "sindresorhus/pure", use:pure.zsh, as:theme
 zplug "plugins/git", from:oh-my-zsh
 zplug "plugins/sublime", from:oh-my-zsh
 zplug "plugins/common-aliases", from:oh-my-zsh
+zplug "lib/history", from:oh-my-zsh
 zplug "zsh-users/zsh-completions", defer:2
 zplug "zsh-users/zsh-autosuggestions", defer:2
 zplug "zsh-users/zsh-syntax-highlighting", defer:2
