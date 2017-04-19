@@ -107,6 +107,7 @@ endif
 let mapleader = ' '
 let maplocalleader = ' '
 inoremap jk <ESC>
+nnoremap fmt :Neoformat<cr>
 
 " buffers
 nnoremap ]b :bnext<cr>
