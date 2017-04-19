@@ -85,6 +85,7 @@ Plug 'majutsushi/tagbar'
 Plug 'easymotion/vim-easymotion'
 Plug 'osyo-manga/vim-over'
 Plug 'suan/vim-instant-markdown'
+Plug 'sbdchd/neoformat'
 
 " Linting
 Plug 'scrooloose/syntastic'
@@ -246,3 +247,6 @@ let g:javascript_plugin_jsdoc = 1
 if executable("prettier")
   autocmd FileType javascript set formatprg=prettier\ --stdin\ --single-quote\ --trailing-comma\ all
 endif
+
+" neoformat
+let g:neoformat_try_formatprg = 1
