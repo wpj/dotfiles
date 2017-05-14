@@ -82,7 +82,9 @@ then
 fi
 
 # python
+export VIRTUAL_ENV_DISABLE_PROMPT=1
 source /usr/local/bin/virtualenvwrapper.sh
+workon default
 
 # asdf
 . $HOME/.asdf/asdf.sh
