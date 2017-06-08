@@ -96,6 +96,13 @@ then
   export PATH="$PATH:`yarn global bin`"
 fi
 
+# opam
+if (( $+commands[opam] ))
+then
+  . ~/.opam/opam-init/init.zsh > /dev/null 2> /dev/null || true
+  eval $(opam config env)
+fi
+
 # source secrets
 if [ -d "$HOME/.secret/" ]; then
 	for file in $HOME/.secret/*
