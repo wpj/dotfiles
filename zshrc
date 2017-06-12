@@ -115,7 +115,6 @@ fi
 # aliases
 # =======
 
-alias gstat="git status"
 alias gaa="git add --all"
 alias open.="open ."
 alias vi="nvim"
