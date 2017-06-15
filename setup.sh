@@ -47,7 +47,7 @@ ln -sf $BASE/gitconfig $HOME/.gitconfig
 # editorconfig
 # ============
 
-ls -sf $BASE/editorconfig $HOME/.editorconfig
+ln -sf $BASE/editorconfig $HOME/.editorconfig
 
 # ghci
 # ====
