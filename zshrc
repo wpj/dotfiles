@@ -34,7 +34,8 @@ bindkey '^[[B' history-substring-search-down
 export PATH=/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin:/usr/local/sbin
 
 # package manager paths
-export PATH=$PATH:$HOME/{.cargo,.local}/bin
+export PATH=$PATH:$HOME/.cargo/bin
+export PATH=$PATH:$HOME/.local/bin
 
 # editor (ssh/local)
 if [[ -n $SSH_CONNECTION ]]; then
