@@ -17,6 +17,7 @@ set encoding=utf-8
 set lazyredraw
 set showmatch
 set hlsearch
+set mouse=a
 set incsearch
 set nostartofline
 set nocompatible
