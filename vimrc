@@ -96,7 +96,8 @@ Plug 'sindresorhus/vim-xo'
 
 " language extensions
 Plug 'sheerun/vim-polyglot'
-Plug 'plasticboy/vim-markdown'
+Plug 'plasticboy/vim-markdown', { 'for': 'markdown' }
+Plug 'racer-rust/vim-racer', { 'for': 'rust' }
 Plug 'slashmili/alchemist.vim', { 'for': 'elixir' }
 
 call plug#end()
@@ -245,6 +246,9 @@ let g:instant_markdown_autostart = 0
 
 " javascript
 let g:javascript_plugin_jsdoc = 1
+
+" rust
+let g:rustfmt_autosave = 1
 
 " prettier
 if executable("prettier")
