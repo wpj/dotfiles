@@ -3,30 +3,29 @@
 
 # zplug
 
-if [[ ! -d ~/.zplug ]]
-then
-  git clone https://github.com/zplug/zplug $HOME/.zplug
-fi
-
 export ZPLUG_HOME=$HOME/.zplug
-source $ZPLUG_HOME/init.zsh
 
-zplug "mafredri/zsh-async"
-zplug "sindresorhus/pure", use:pure.zsh, as:theme
-zplug "plugins/git", from:oh-my-zsh
-zplug "plugins/sublime", from:oh-my-zsh
-zplug "plugins/common-aliases", from:oh-my-zsh
-zplug "lib/history", from:oh-my-zsh
-zplug "zsh-users/zsh-completions", defer:2
-zplug "zsh-users/zsh-autosuggestions", defer:2
-zplug "zsh-users/zsh-syntax-highlighting", defer:2
-zplug "zsh-users/zsh-history-substring-search", defer:2
+if [ -f $ZPLUG_HOME/init.zsh ]
+then
+  source $ZPLUG_HOME/init.zsh
 
-zplug load
+  zplug "mafredri/zsh-async"
+  zplug "sindresorhus/pure", use:pure.zsh, as:theme
+  zplug "plugins/git", from:oh-my-zsh
+  zplug "plugins/sublime", from:oh-my-zsh
+  zplug "plugins/common-aliases", from:oh-my-zsh
+  zplug "lib/history", from:oh-my-zsh
+  zplug "zsh-users/zsh-completions", defer:2
+  zplug "zsh-users/zsh-autosuggestions", defer:2
+  zplug "zsh-users/zsh-syntax-highlighting", defer:2
+  zplug "zsh-users/zsh-history-substring-search", defer:2
 
-# bind up and down arrow keys to history search
-bindkey '^[[A' history-substring-search-up
-bindkey '^[[B' history-substring-search-down
+  zplug load
+
+  # bind up and down arrow keys to history search
+  bindkey '^[[A' history-substring-search-up
+  bindkey '^[[B' history-substring-search-down
+fi
 
 # PATH
 
@@ -71,35 +70,29 @@ fi
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
 
 # direnv
-if (( $+commands[direnv] ))
-then
-  eval "$(direnv hook zsh)"
-fi
+(( $+commands[direnv] )) && eval "$(direnv hook zsh)"
 
 # fuck
-if (( $+commands[thefuck] ))
-then
-  eval $(thefuck --alias)
-fi
+(( $+commands[thefuck] )) && eval "$(thefuck --alias)"
 
 # python
 export VIRTUAL_ENV_DISABLE_PROMPT=1
-source /usr/local/bin/virtualenvwrapper.sh
+[ -f /usr/local/bin/virtualenvwrapper.sh ] && source /usr/local/bin/virtualenvwrapper.sh
 
 # asdf
-. $HOME/.asdf/asdf.sh
-. $HOME/.asdf/completions/asdf.bash
+[ -f $HOME/.asdf/asdf.sh ] && source $HOME/.asdf/asdf.sh
+[ -f $HOME/.asdf/completions/asdf.bash ] && source $HOME/.asdf/completions/asdf.bash
 
 # yarn path
 if (( $+commands[yarn] ))
 then
-  export PATH="$PATH:`yarn global bin`"
+  export PATH=$PATH:`yarn global bin`
 fi
 
 # opam
 if (( $+commands[opam] ))
 then
-  . ~/.opam/opam-init/init.zsh > /dev/null 2> /dev/null || true
+  source ~/.opam/opam-init/init.zsh > /dev/null 2> /dev/null || true
   eval $(opam config env)
 fi
 
