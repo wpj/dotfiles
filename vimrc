@@ -252,7 +252,7 @@ let g:rustfmt_autosave = 1
 
 " prettier
 if executable("prettier")
-  autocmd FileType javascript set formatprg=prettier\ --stdin\ --single-quote\ --trailing-comma\ all
+  autocmd FileType javascript set formatprg=prettier\ --stdin\ --single-quote
 endif
 
 " neoformat
