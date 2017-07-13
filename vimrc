@@ -237,7 +237,7 @@ xmap ga <Plug>(EasyAlign)
 nmap ga <Plug>(EasyAlign)
 
 " syntastic
-let g:syntastic_javascript_checkers = ['eslint', 'xo']
+let g:syntastic_javascript_checkers = ['flow', 'eslint']
 
 " markdown
 let g:vim_markdown_folding_disabled = 1
@@ -246,6 +246,7 @@ let g:instant_markdown_autostart = 0
 
 " javascript
 let g:javascript_plugin_jsdoc = 1
+let g:javascript_plugin_flow = 1
 
 " rust
 let g:rustfmt_autosave = 1
