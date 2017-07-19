@@ -251,5 +251,10 @@ let g:javascript_plugin_flow = 1
 " rust
 let g:rustfmt_autosave = 1
 
+" prettier
+if executable("prettier")
+  autocmd FileType javascript set formatprg=prettier\ --stdin
+endif
+
 " neoformat
 let g:neoformat_try_formatprg = 1
