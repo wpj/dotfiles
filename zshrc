@@ -52,6 +52,7 @@ export PATH=$PATH:$GOROOT/bin
 # python
 export WORKON_HOME=$HOME/.virtualenvs
 export PROJECT_HOME=$HOME/code/python
+export VIRTUALENVWRAPPER_PYTHON=`which python3`
 
 # java
 export JAVA_HOME=/Library/Java/JavaVirtualMachines/jdk1.7.0_75.jdk/Contents/Home
