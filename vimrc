@@ -90,9 +90,7 @@ Plug 'suan/vim-instant-markdown'
 Plug 'sbdchd/neoformat'
 
 " Linting
-Plug 'scrooloose/syntastic'
-Plug 'mtscout6/syntastic-local-eslint.vim'
-Plug 'sindresorhus/vim-xo'
+Plug 'w0rp/ale'
 
 " language extensions
 Plug 'sheerun/vim-polyglot'
@@ -231,13 +229,11 @@ map <C-p> :FZF<CR>
 " airline
 let g:airline_powerline_fonts = 1
 let g:airline_theme = "luna"
+let g:airline#extensions#ale#enabled = 1
 
 " easy-align
 xmap ga <Plug>(EasyAlign)
 nmap ga <Plug>(EasyAlign)
-
-" syntastic
-let g:syntastic_javascript_checkers = ['flow', 'eslint']
 
 " markdown
 let g:vim_markdown_folding_disabled = 1
