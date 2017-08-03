@@ -97,6 +97,7 @@ Plug 'sheerun/vim-polyglot'
 Plug 'plasticboy/vim-markdown', { 'for': 'markdown' }
 Plug 'racer-rust/vim-racer', { 'for': 'rust' }
 Plug 'slashmili/alchemist.vim', { 'for': 'elixir' }
+Plug 'fleischie/vim-styled-components'
 
 call plug#end()
 endif
