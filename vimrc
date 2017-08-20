@@ -94,6 +94,8 @@ Plug 'w0rp/ale'
 
 " language extensions
 Plug 'sheerun/vim-polyglot'
+Plug 'othree/yajs.vim', { 'for': ['javascript', 'javascript.jsx'] }
+Plug 'othree/es.next.syntax.vim', { 'for': ['javascript', 'javascript.jsx'] }
 Plug 'plasticboy/vim-markdown', { 'for': 'markdown' }
 Plug 'racer-rust/vim-racer', { 'for': 'rust' }
 Plug 'slashmili/alchemist.vim', { 'for': 'elixir' }
@@ -265,6 +267,9 @@ let g:rustfmt_autosave = 1
 if executable("prettier")
   autocmd FileType javascript set formatprg=prettier\ --stdin
 endif
+
+" polyglot
+let g:polyglot_disabled = ['javascript']
 
 " neoformat
 let g:neoformat_try_formatprg = 1
