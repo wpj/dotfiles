@@ -96,6 +96,7 @@ Plug 'w0rp/ale'
 Plug 'sheerun/vim-polyglot'
 Plug 'othree/yajs.vim', { 'for': ['javascript', 'javascript.jsx'] }
 Plug 'othree/es.next.syntax.vim', { 'for': ['javascript', 'javascript.jsx'] }
+Plug 'mxw/vim-jsx', { 'for': ['javascript.jsx'] }
 Plug 'plasticboy/vim-markdown', { 'for': 'markdown' }
 Plug 'racer-rust/vim-racer', { 'for': 'rust' }
 Plug 'slashmili/alchemist.vim', { 'for': 'elixir' }
@@ -269,7 +270,7 @@ if executable("prettier")
 endif
 
 " polyglot
-let g:polyglot_disabled = ['javascript']
+let g:polyglot_disabled = ['javascript', 'javascript.jsx']
 
 " neoformat
 let g:neoformat_try_formatprg = 1
