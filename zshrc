@@ -74,7 +74,7 @@ fi
 (( $+commands[direnv] )) && eval "$(direnv hook zsh)"
 
 # fuck
-(( $+commands[thefuck] )) && eval "$(thefuck --alias)"
+(( $+commands[thefuck] )) && eval $(thefuck --alias)
 
 # python
 export VIRTUAL_ENV_DISABLE_PROMPT=1
