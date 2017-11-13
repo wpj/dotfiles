@@ -73,7 +73,7 @@ endif
 Plug 'mattn/emmet-vim'
 Plug 'vim-airline/vim-airline'
 Plug 'vim-airline/vim-airline-themes'
-Plug 'tpope/vim-vinegar'
+Plug 'justinmk/vim-dirvish'
 Plug 'tpope/vim-endwise'
 Plug 'scrooloose/nerdcommenter'
 Plug 'junegunn/fzf',            { 'dir': '~/.fzf', 'do': './install --all' }
