@@ -67,7 +67,6 @@ Plug 'editorconfig/editorconfig-vim'
 Plug 'nathanaelkane/vim-indent-guides'
 if v:version >= 703
 	Plug 'SirVer/ultisnips'
-	Plug 'mhinz/vim-signify'
 endif
 
 Plug 'mattn/emmet-vim'
@@ -80,8 +79,6 @@ Plug 'junegunn/fzf',            { 'dir': '~/.fzf', 'do': './install --all' }
 Plug 'junegunn/fzf.vim'
 Plug 'junegunn/rainbow_parentheses.vim'
 Plug 'junegunn/vim-easy-align', { 'on': ['<Plug>(EasyAlign)', 'EasyAlign'] }
-Plug 'junegunn/goyo.vim'
-Plug 'junegunn/limelight.vim'
 Plug 'junegunn/seoul256.vim'
 Plug 'airblade/vim-gitgutter'
 Plug 'majutsushi/tagbar'
