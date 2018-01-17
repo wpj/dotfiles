@@ -237,15 +237,6 @@ let g:airline#extensions#ale#enabled = 1
 xmap ga <Plug>(EasyAlign)
 nmap ga <Plug>(EasyAlign)
 
-" elixir
-let g:neoformat_elixir_exfmt = {
-  \ 'exe': 'mix',
-  \ 'args': ['exfmt', '--stdin'],
-  \ 'stdin': 1
-  \ }
-
-let g:neoformat_enabled_elixir = ['exfmt']
-
 " markdown
 let g:vim_markdown_folding_disabled = 1
 let g:vim_markdown_new_list_item_indent = 0 " disable auto-indent in lists
