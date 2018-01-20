@@ -109,7 +109,6 @@ endif
 " ========
 let mapleader = ' '
 let maplocalleader = ' '
-inoremap jk <ESC>
 nnoremap fmt :Neoformat<cr>
 
 " buffers
