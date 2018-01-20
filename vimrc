@@ -110,6 +110,7 @@ endif
 let mapleader = ' '
 let maplocalleader = ' '
 nnoremap fmt :Neoformat<cr>
+nnoremap mdp :InstantMarkdownPreview<cr>
 
 " buffers
 nnoremap ]b :bnext<cr>
