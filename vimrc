@@ -226,7 +226,7 @@ let NERDSpaceDelims=1
 let g:NERDDefaultAlign = 'left'
 
 " fzf
-map <C-p> :FZF<CR>
+map <Leader>p :FZF<CR>
 
 " airline
 let g:airline_powerline_fonts = 1
