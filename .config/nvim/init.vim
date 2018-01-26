@@ -1,1 +1,1 @@
-/Users/wyattjohnston/.vimrc
+../../.vimrc
