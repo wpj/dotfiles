@@ -109,6 +109,7 @@ fi
 # aliases
 # =======
 
+alias config='git --git-dir=$HOME/.cfg/ --work-tree=$HOME'  
 alias gaa="git add --all"
 alias open.="open ."
 alias vi="nvim"
