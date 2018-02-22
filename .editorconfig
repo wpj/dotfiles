@@ -12,3 +12,6 @@ indent_size = 4
 
 [*.hs]
 indent_size = 4
+
+[*.rs]
+indent_size = 4
