@@ -69,6 +69,7 @@ Plug 'tpope/vim-repeat'
 Plug 'tpope/vim-fugitive'
 Plug 'editorconfig/editorconfig-vim'
 Plug 'nathanaelkane/vim-indent-guides'
+Plug 'machakann/vim-highlightedyank'
 if v:version >= 703
 	Plug 'SirVer/ultisnips'
 endif
