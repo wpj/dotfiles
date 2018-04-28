@@ -19,6 +19,9 @@ set showmatch
 set hlsearch
 set mouse=a
 set incsearch
+if has('nvim')                 " enable live substitution in neovim
+  set inccommand=nosplit
+endif
 set nostartofline
 set nocompatible
 set autoread                   " read changes to file made externally
