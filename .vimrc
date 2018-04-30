@@ -89,8 +89,6 @@ Plug 'junegunn/vim-easy-align', { 'on': ['<Plug>(EasyAlign)', 'EasyAlign'] }
 Plug 'junegunn/seoul256.vim'
 Plug 'airblade/vim-gitgutter'
 Plug 'majutsushi/tagbar'
-Plug 'easymotion/vim-easymotion'
-Plug 'osyo-manga/vim-over'
 Plug 'suan/vim-instant-markdown'
 Plug 'sbdchd/neoformat'
 
