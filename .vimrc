@@ -103,7 +103,7 @@ Plug 'mxw/vim-jsx', { 'for': ['javascript.jsx'] }
 Plug 'plasticboy/vim-markdown', { 'for': 'markdown' }
 Plug 'racer-rust/vim-racer', { 'for': 'rust' }
 Plug 'slashmili/alchemist.vim', { 'for': 'elixir' }
-Plug 'fleischie/vim-styled-components'
+Plug 'fleischie/vim-styled-components', { 'for': ['javascript', 'javascript.jsx'] }
 
 call plug#end()
 endif
