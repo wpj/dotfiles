@@ -11,9 +11,6 @@ then
 
   zplug "mafredri/zsh-async"
   zplug "sindresorhus/pure", use:pure.zsh, as:theme
-  zplug "plugins/git", from:oh-my-zsh
-  zplug "plugins/sublime", from:oh-my-zsh
-  zplug "lib/history", from:oh-my-zsh
   zplug "zsh-users/zsh-completions", defer:2
   zplug "zsh-users/zsh-autosuggestions", defer:2
   zplug "zsh-users/zsh-syntax-highlighting", defer:2
@@ -83,6 +80,11 @@ export VIRTUAL_ENV_DISABLE_PROMPT=1
 [ -f $HOME/.asdf/asdf.sh ] && source $HOME/.asdf/asdf.sh
 [ -f $HOME/.asdf/completions/asdf.bash ] && source $HOME/.asdf/completions/asdf.bash
 
+# history
+HISTFILE=~/.zsh_history
+HISTSIZE=50000
+SAVEHIST=10000
+
 # yarn path
 if (( $+commands[yarn] ))
 then
@@ -110,6 +112,10 @@ fi
 
 alias config='git --git-dir=$HOME/.cfg/ --work-tree=$HOME'  
 alias gaa="git add --all"
+alias g="git"
+alias gst="git status"
+alias gco="git checkout"
+alias gb="git branch"
 alias open.="open ."
 alias vi="nvim"
 alias vi.="vi ."
