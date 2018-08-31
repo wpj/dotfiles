@@ -61,52 +61,44 @@ silent! if plug#begin('~/.vim/plugged')
 if has('nvim')
 	Plug 'Shougo/deoplete.nvim',  { 'do': ':UpdateRemotePlugins' }
 end
-Plug 'Shougo/neosnippet.vim'
-Plug 'Shougo/neosnippet-snippets'
-" Plug 'honza/vim-snippets'
-Plug 'jiangmiao/auto-pairs'
-Plug 'ervandew/supertab'
-Plug 'tpope/vim-surround'
-Plug 'tpope/vim-repeat'
-Plug 'tpope/vim-fugitive'
-Plug 'tpope/vim-rhubarb'
-Plug 'tpope/vim-unimpaired'
-Plug 'editorconfig/editorconfig-vim'
-Plug 'nathanaelkane/vim-indent-guides'
-Plug 'machakann/vim-highlightedyank'
 
-Plug 'mattn/emmet-vim'
-Plug 'vim-airline/vim-airline'
-Plug 'vim-airline/vim-airline-themes'
-Plug 'justinmk/vim-dirvish'
-Plug 'tpope/vim-endwise'
-Plug 'tpope/vim-commentary'
-Plug 'junegunn/fzf',            { 'dir': '~/.fzf', 'do': './install --all' }
+Plug 'airblade/vim-gitgutter'
+Plug 'autozimu/LanguageClient-neovim',  { 'branch': 'next','do': 'bash install.sh' }
+Plug 'editorconfig/editorconfig-vim'
+Plug 'ervandew/supertab'
+Plug 'fleischie/vim-styled-components', { 'for': ['javascript', 'javascript.jsx'] }
+Plug 'jiangmiao/auto-pairs'
+Plug 'junegunn/fzf',                    { 'dir': '~/.fzf', 'do': './install --all' }
 Plug 'junegunn/fzf.vim'
 Plug 'junegunn/rainbow_parentheses.vim'
-Plug 'junegunn/vim-easy-align', { 'on': ['<Plug>(EasyAlign)', 'EasyAlign'] }
 Plug 'junegunn/seoul256.vim'
-Plug 'airblade/vim-gitgutter'
+Plug 'junegunn/vim-easy-align',         { 'on': ['<Plug>(EasyAlign)', 'EasyAlign'] }
+Plug 'justinmk/vim-dirvish'
+Plug 'machakann/vim-highlightedyank'
 Plug 'majutsushi/tagbar'
-Plug 'suan/vim-instant-markdown'
+Plug 'mattn/emmet-vim'
+Plug 'mxw/vim-jsx',                     { 'for': ['javascript.jsx'] }
+Plug 'nathanaelkane/vim-indent-guides'
+Plug 'othree/es.next.syntax.vim',       { 'for': ['javascript', 'javascript.jsx'] }
+Plug 'othree/yajs.vim',                 { 'for': ['javascript', 'javascript.jsx'] }
+Plug 'plasticboy/vim-markdown',         { 'for': 'markdown' }
+Plug 'racer-rust/vim-racer',            { 'for': 'rust' }
 Plug 'sbdchd/neoformat'
-Plug 'autozimu/LanguageClient-neovim', {
-    \ 'branch': 'next',
-    \ 'do': 'bash install.sh',
-    \ }
-
-" Linting
-Plug 'w0rp/ale'
-
-" language extensions
 Plug 'sheerun/vim-polyglot'
-Plug 'othree/yajs.vim', { 'for': ['javascript', 'javascript.jsx'] }
-Plug 'othree/es.next.syntax.vim', { 'for': ['javascript', 'javascript.jsx'] }
-Plug 'mxw/vim-jsx', { 'for': ['javascript.jsx'] }
-Plug 'plasticboy/vim-markdown', { 'for': 'markdown' }
-Plug 'racer-rust/vim-racer', { 'for': 'rust' }
-Plug 'slashmili/alchemist.vim', { 'for': 'elixir' }
-Plug 'fleischie/vim-styled-components', { 'for': ['javascript', 'javascript.jsx'] }
+Plug 'Shougo/neosnippet.vim'
+Plug 'Shougo/neosnippet-snippets'
+Plug 'slashmili/alchemist.vim',         { 'for': 'elixir' }
+Plug 'suan/vim-instant-markdown'
+Plug 'tpope/vim-commentary'
+Plug 'tpope/vim-endwise'
+Plug 'tpope/vim-fugitive'
+Plug 'tpope/vim-repeat'
+Plug 'tpope/vim-rhubarb'
+Plug 'tpope/vim-surround'
+Plug 'tpope/vim-unimpaired'
+Plug 'vim-airline/vim-airline'
+Plug 'vim-airline/vim-airline-themes'
+Plug 'w0rp/ale'
 
 call plug#end()
 endif
