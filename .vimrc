@@ -73,7 +73,6 @@ let g:LanguageClient_serverCommands = {
 Plug 'editorconfig/editorconfig-vim'
 let g:EditorConfig_exclude_patterns = ['fugitive://.*', 'scp://.*']
 
-Plug 'ervandew/supertab'
 Plug 'fleischie/vim-styled-components', { 'for': ['javascript', 'javascript.jsx'] }
 Plug 'jiangmiao/auto-pairs'
 
@@ -120,6 +119,10 @@ Plug 'sheerun/vim-polyglot'
 let g:polyglot_disabled = ['javascript', 'javascript.jsx']
 
 Plug 'Shougo/neosnippet.vim'
+imap <C-k> <Plug>(neosnippet_expand_or_jump)
+smap <C-k> <Plug>(neosnippet_expand_or_jump)
+xmap <C-k> <Plug>(neosnippet_expand_target)
+
 Plug 'Shougo/neosnippet-snippets'
 Plug 'slashmili/alchemist.vim',         { 'for': 'elixir' }
 
@@ -166,40 +169,6 @@ nnoremap [t :tabp<cr>
 " circular window navigation
 nnoremap <tab>   <c-w>w
 nnoremap <S-tab> <c-w>W
-
-" <tab> / <s-tab> / <c-v><tab> | super-duper-tab
-function! s:can_complete(func, prefix)
-	if empty(a:func) || call(a:func, [1, '']) < 0
-		return 0
-	endif
-	let result = call(a:func, [0, matchstr(a:prefix, '\k\+$')])
-	return !empty(type(result) == type([]) ? result : result.words)
-endfunction
-
-function! s:super_duper_tab(k, o)
-	if pumvisible()
-		return a:k
-	endif
-
-	let line = getline('.')
-	let col = col('.') - 2
-	if line[col] !~ '\k\|[/~.]'
-		return a:o
-	endif
-
-	let prefix = expand(matchstr(line[0:col], '\S*$'))
-	if prefix =~ '^[~/.]'
-		return "\<c-x>\<c-f>"
-	endif
-	if s:can_complete(&omnifunc, prefix)
-		return "\<c-x>\<c-o>"
-	endif
-	if s:can_complete(&completefunc, prefix)
-		return "\<c-x>\<c-u>"
-	endif
-	return a:k
-endfunction
-
 
 " Enable omni completion.
 autocmd FileType css setlocal omnifunc=csscomplete#CompleteCSS
