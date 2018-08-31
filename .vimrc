@@ -61,34 +61,71 @@ silent! if plug#begin('~/.vim/plugged')
 if has('nvim')
 	Plug 'Shougo/deoplete.nvim',  { 'do': ':UpdateRemotePlugins' }
 end
+let g:deoplete#enable_at_startup = 1
 
 Plug 'airblade/vim-gitgutter'
+
 Plug 'autozimu/LanguageClient-neovim',  { 'branch': 'next','do': 'bash install.sh' }
+let g:LanguageClient_serverCommands = {
+    \ 'rust': ['~/.cargo/bin/rustup', 'run', 'stable', 'rls'],
+    \ }
+
 Plug 'editorconfig/editorconfig-vim'
+let g:EditorConfig_exclude_patterns = ['fugitive://.*', 'scp://.*']
+
 Plug 'ervandew/supertab'
 Plug 'fleischie/vim-styled-components', { 'for': ['javascript', 'javascript.jsx'] }
 Plug 'jiangmiao/auto-pairs'
+
 Plug 'junegunn/fzf',                    { 'dir': '~/.fzf', 'do': './install --all' }
 Plug 'junegunn/fzf.vim'
+map <Leader>p :FZF<CR>
+
 Plug 'junegunn/rainbow_parentheses.vim'
+
 Plug 'junegunn/seoul256.vim'
+let g:seoul256_background = 235
+
 Plug 'junegunn/vim-easy-align',         { 'on': ['<Plug>(EasyAlign)', 'EasyAlign'] }
+xmap ga <Plug>(EasyAlign)
+nmap ga <Plug>(EasyAlign)
+
 Plug 'justinmk/vim-dirvish'
 Plug 'machakann/vim-highlightedyank'
+
 Plug 'majutsushi/tagbar'
+map <Leader>tt <esc>:TagbarToggle<cr>
+
 Plug 'mattn/emmet-vim'
+
 Plug 'mxw/vim-jsx',                     { 'for': ['javascript.jsx'] }
+let g:jsx_ext_required = 0
+
 Plug 'nathanaelkane/vim-indent-guides'
 Plug 'othree/es.next.syntax.vim',       { 'for': ['javascript', 'javascript.jsx'] }
 Plug 'othree/yajs.vim',                 { 'for': ['javascript', 'javascript.jsx'] }
+
 Plug 'plasticboy/vim-markdown',         { 'for': 'markdown' }
+let g:vim_markdown_folding_disabled = 1
+let g:vim_markdown_new_list_item_indent = 0 " disable auto-indent in lists
+let g:instant_markdown_autostart = 0
+
 Plug 'racer-rust/vim-racer',            { 'for': 'rust' }
+
 Plug 'sbdchd/neoformat'
+let g:neoformat_try_formatprg = 1
+nnoremap fmt :Neoformat<cr>
+
 Plug 'sheerun/vim-polyglot'
+let g:polyglot_disabled = ['javascript', 'javascript.jsx']
+
 Plug 'Shougo/neosnippet.vim'
 Plug 'Shougo/neosnippet-snippets'
 Plug 'slashmili/alchemist.vim',         { 'for': 'elixir' }
+
 Plug 'suan/vim-instant-markdown'
+nnoremap mdp :InstantMarkdownPreview<cr>
+
 Plug 'tpope/vim-commentary'
 Plug 'tpope/vim-endwise'
 Plug 'tpope/vim-fugitive'
@@ -96,9 +133,17 @@ Plug 'tpope/vim-repeat'
 Plug 'tpope/vim-rhubarb'
 Plug 'tpope/vim-surround'
 Plug 'tpope/vim-unimpaired'
+
 Plug 'vim-airline/vim-airline'
+let g:airline_powerline_fonts = 1
+let g:airline_theme = "luna"
+let g:airline#extensions#ale#enabled = 1
+
 Plug 'vim-airline/vim-airline-themes'
+
 Plug 'w0rp/ale'
+nmap <silent> <C-k> <Plug>(ale_previous_wrap)
+nmap <silent> <C-j> <Plug>(ale_next_wrap)
 
 call plug#end()
 endif
@@ -109,8 +154,6 @@ endif
 " ========
 let mapleader = ' '
 let maplocalleader = ' '
-nnoremap fmt :Neoformat<cr>
-nnoremap mdp :InstantMarkdownPreview<cr>
 
 " buffers
 nnoremap ]b :bnext<cr>
@@ -157,37 +200,6 @@ function! s:super_duper_tab(k, o)
 	return a:k
 endfunction
 
-" ===========
-" Color theme
-" ===========
-let g:seoul256_background = 235
-silent! colo seoul256
-
-
-" =============
-" Plugin config
-" =============
-
-" deoplete
-let g:deoplete#enable_at_startup = 1
-
-inoremap <silent> <CR> <C-r>=<SID>select_completion()<CR>
-function! s:select_completion() abort
-  return pumvisible() ? deoplete#close_popup() : "\<CR>"
-endfunction
-
-" vim-go
-let g:go_highlight_functions = 1
-let g:go_highlight_methods = 1
-let g:go_highlight_structs = 1
-let g:go_highlight_operators = 1
-let g:go_highlight_build_constraints = 1
-
-" tagbar
-map <Leader>tt <esc>:TagbarToggle<cr>
-
-" editorconfig
-let g:EditorConfig_exclude_patterns = ['fugitive://.*', 'scp://.*']
 
 " Enable omni completion.
 autocmd FileType css setlocal omnifunc=csscomplete#CompleteCSS
@@ -199,41 +211,9 @@ autocmd FileType xml setlocal omnifunc=xmlcomplete#CompleteTags
 " Enable spellcheck
 autocmd FileType markdown setlocal spell
 
-" vim-jsx
-let g:jsx_ext_required = 0
-
-" nerdcommenter
-let NERDSpaceDelims=1
-let g:NERDDefaultAlign = 'left'
-
-" fzf
-map <Leader>p :FZF<CR>
-
-" airline
-let g:airline_powerline_fonts = 1
-let g:airline_theme = "luna"
-let g:airline#extensions#ale#enabled = 1
-
-" easy-align
-xmap ga <Plug>(EasyAlign)
-nmap ga <Plug>(EasyAlign)
-
-" markdown
-let g:vim_markdown_folding_disabled = 1
-let g:vim_markdown_new_list_item_indent = 0 " disable auto-indent in lists
-let g:instant_markdown_autostart = 0
-
 " javascript
 let g:javascript_plugin_jsdoc = 1
 let g:javascript_plugin_flow = 1
-
-" ale
-nmap <silent> <C-k> <Plug>(ale_previous_wrap)
-nmap <silent> <C-j> <Plug>(ale_next_wrap)
-
-" jsx
-" let g:ale_linters = {'jsx': ['stylelint', 'eslint']}
-" let g:ale_linter_aliases = {'jsx': 'css'}
 
 " rust
 let g:rustfmt_autosave = 1
@@ -244,13 +224,4 @@ if executable("prettier")
   autocmd FileType markdown set formatprg=prettier\ --parser\ markdown\ --stdin
 endif
 
-" polyglot
-let g:polyglot_disabled = ['javascript', 'javascript.jsx']
-
-" neoformat
-let g:neoformat_try_formatprg = 1
-
-" LanguageClient
-let g:LanguageClient_serverCommands = {
-    \ 'rust': ['~/.cargo/bin/rustup', 'run', 'stable', 'rls'],
-    \ }
+silent! colo seoul256
