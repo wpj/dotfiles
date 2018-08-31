@@ -61,7 +61,9 @@ silent! if plug#begin('~/.vim/plugged')
 if has('nvim')
 	Plug 'Shougo/deoplete.nvim',  { 'do': ':UpdateRemotePlugins' }
 end
-Plug 'honza/vim-snippets'
+Plug 'Shougo/neosnippet.vim'
+Plug 'Shougo/neosnippet-snippets'
+" Plug 'honza/vim-snippets'
 Plug 'jiangmiao/auto-pairs'
 Plug 'ervandew/supertab'
 Plug 'tpope/vim-surround'
@@ -72,9 +74,6 @@ Plug 'tpope/vim-unimpaired'
 Plug 'editorconfig/editorconfig-vim'
 Plug 'nathanaelkane/vim-indent-guides'
 Plug 'machakann/vim-highlightedyank'
-if v:version >= 703
-	Plug 'SirVer/ultisnips'
-endif
 
 Plug 'mattn/emmet-vim'
 Plug 'vim-airline/vim-airline'
@@ -91,6 +90,10 @@ Plug 'airblade/vim-gitgutter'
 Plug 'majutsushi/tagbar'
 Plug 'suan/vim-instant-markdown'
 Plug 'sbdchd/neoformat'
+Plug 'autozimu/LanguageClient-neovim', {
+    \ 'branch': 'next',
+    \ 'do': 'bash install.sh',
+    \ }
 
 " Linting
 Plug 'w0rp/ale'
@@ -188,25 +191,6 @@ let g:go_highlight_structs = 1
 let g:go_highlight_operators = 1
 let g:go_highlight_build_constraints = 1
 
-" ultisnips
-if has_key(g:plugs, 'ultisnips')
-	" UltiSnips will be loaded only when tab is first pressed in insert mode
-	if !exists(':UltiSnipsEdit')
-		inoremap <silent> <Plug>(tab) <c-r>=plug#load('ultisnips')?UltiSnips#ExpandSnippet():''<cr>
-		imap <tab> <Plug>(tab)
-	endif
-
-  let g:SuperTabDefaultCompletionType = "<c-n>"
-
-	function! SuperTab(m)
-		return s:super_duper_tab(a:m == 'n' ? "\<c-n>" : "\<c-p>",
-						\ a:m == 'n' ? "\<tab>" : "\<s-tab>")
-	endfunction
-else
-	inoremap <expr> <tab>   <SID>super_duper_tab("\<c-n>", "\<tab>")
-	inoremap <expr> <s-tab> <SID>super_duper_tab("\<c-p>", "\<s-tab>")
-endif
-
 " tagbar
 map <Leader>tt <esc>:TagbarToggle<cr>
 
@@ -273,3 +257,8 @@ let g:polyglot_disabled = ['javascript', 'javascript.jsx']
 
 " neoformat
 let g:neoformat_try_formatprg = 1
+
+" LanguageClient
+let g:LanguageClient_serverCommands = {
+    \ 'rust': ['~/.cargo/bin/rustup', 'run', 'stable', 'rls'],
+    \ }
