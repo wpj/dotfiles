@@ -1,3 +1,6 @@
+let mapleader = ' '
+let maplocalleader = ' '
+
 " ==============
 " Basic settings
 " ==============
@@ -65,10 +68,10 @@ let g:deoplete#enable_at_startup = 1
 
 Plug 'airblade/vim-gitgutter'
 
-Plug 'autozimu/LanguageClient-neovim',  { 'branch': 'next','do': 'bash install.sh' }
-let g:LanguageClient_serverCommands = {
-    \ 'rust': ['~/.cargo/bin/rustup', 'run', 'stable', 'rls'],
-    \ }
+" Plug 'autozimu/LanguageClient-neovim',  { 'branch': 'next','do': 'bash install.sh' }
+" let g:LanguageClient_serverCommands = {
+"     \ 'rust': ['~/.cargo/bin/rustup', 'run', 'stable', 'rls'],
+"     \ }
 
 Plug 'editorconfig/editorconfig-vim'
 let g:EditorConfig_exclude_patterns = ['fugitive://.*', 'scp://.*']
@@ -110,6 +113,7 @@ let g:vim_markdown_new_list_item_indent = 0 " disable auto-indent in lists
 let g:instant_markdown_autostart = 0
 
 Plug 'racer-rust/vim-racer',            { 'for': 'rust' }
+" let g:racer_experimental_completer = 1
 
 Plug 'sbdchd/neoformat'
 let g:neoformat_try_formatprg = 1
@@ -155,8 +159,6 @@ endif
 " ========
 " Mappings
 " ========
-let mapleader = ' '
-let maplocalleader = ' '
 
 " buffers
 nnoremap ]b :bnext<cr>
