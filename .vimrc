@@ -47,7 +47,7 @@ filetype plugin indent on
 " 80 chars/line
 set textwidth=0
 if exists('&colorcolumn')
-	set colorcolumn=80
+  set colorcolumn=80
 endif
 
 " files, backups, undo
@@ -62,7 +62,7 @@ set noswapfile
 silent! if plug#begin('~/.vim/plugged')
 
 if has('nvim')
-	Plug 'Shougo/deoplete.nvim',  { 'do': ':UpdateRemotePlugins' }
+  Plug 'Shougo/deoplete.nvim',  { 'do': ':UpdateRemotePlugins' }
 end
 let g:deoplete#enable_at_startup = 1
 
