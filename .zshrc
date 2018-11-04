@@ -98,6 +98,10 @@ then
   eval $(opam config env)
 fi
 
+# zsh history
+setopt INC_APPEND_HISTORY
+setopt SHARE_HISTORY
+
 # source secrets
 if [ -d "$HOME/.secret/" ]; then
 	for file in $HOME/.secret/*
