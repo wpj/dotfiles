@@ -77,6 +77,7 @@ Plug 'editorconfig/editorconfig-vim'
 let g:EditorConfig_exclude_patterns = ['fugitive://.*', 'scp://.*']
 
 Plug 'fleischie/vim-styled-components', { 'for': ['javascript', 'javascript.jsx'] }
+Plug 'jremmen/vim-ripgrep'
 Plug 'jiangmiao/auto-pairs'
 
 Plug 'junegunn/fzf',                    { 'dir': '~/.fzf', 'do': './install --all' }
@@ -93,6 +94,7 @@ xmap ga <Plug>(EasyAlign)
 nmap ga <Plug>(EasyAlign)
 
 Plug 'justinmk/vim-dirvish'
+Plug 'jxnblk/vim-mdx-js'
 Plug 'machakann/vim-highlightedyank'
 
 Plug 'majutsushi/tagbar'
@@ -196,3 +198,10 @@ if executable("prettier")
 endif
 
 silent! colo seoul256
+
+nnoremap <C-j> :m .+1<CR>==
+nnoremap <C-k> :m .-2<CR>==
+inoremap <C-j> <Esc>:m .+1<CR>==gi
+inoremap <C-k> <Esc>:m .-2<CR>==gi
+vnoremap <C-j> :m '>+1<CR>gv=gv
+vnoremap <C-k> :m '<-2<CR>gv=gv
