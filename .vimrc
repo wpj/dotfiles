@@ -118,7 +118,6 @@ Plug 'racer-rust/vim-racer',            { 'for': 'rust' }
 " let g:racer_experimental_completer = 1
 
 Plug 'sbdchd/neoformat'
-let g:neoformat_try_formatprg = 1
 nnoremap fmt :Neoformat<cr>
 
 Plug 'sheerun/vim-polyglot'
@@ -190,12 +189,6 @@ let g:javascript_plugin_flow = 1
 
 " rust
 let g:rustfmt_autosave = 1
-
-" prettier
-if executable("prettier")
-  autocmd FileType javascript set formatprg=prettier\ --stdin
-  autocmd FileType markdown set formatprg=prettier\ --parser\ markdown\ --stdin
-endif
 
 silent! colo seoul256
 
