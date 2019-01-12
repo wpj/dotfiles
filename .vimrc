@@ -130,10 +130,6 @@ xmap <C-k> <Plug>(neosnippet_expand_target)
 
 Plug 'Shougo/neosnippet-snippets'
 Plug 'slashmili/alchemist.vim',         { 'for': 'elixir' }
-
-Plug 'suan/vim-instant-markdown'
-nnoremap mdp :InstantMarkdownPreview<cr>
-
 Plug 'tpope/vim-commentary'
 Plug 'tpope/vim-endwise'
 Plug 'tpope/vim-fugitive'
@@ -182,6 +178,11 @@ autocmd FileType xml setlocal omnifunc=xmlcomplete#CompleteTags
 
 " Enable spellcheck
 autocmd FileType markdown setlocal spell
+
+" markdown preview
+if executable("vmd")
+  autocmd FileType markdown nnoremap mdp :!vmd <C-r>=shellescape(expand('%'), 1)<cr> &<cr>
+endif
 
 " javascript
 let g:javascript_plugin_jsdoc = 1
