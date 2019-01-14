@@ -5,7 +5,8 @@ let maplocalleader = ' '
 " Basic settings
 " ==============
 syntax enable
-set nu
+set nu rnu
+set number relativenumber
 set background=dark
 set visualbell
 set expandtab
