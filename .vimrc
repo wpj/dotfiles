@@ -139,13 +139,6 @@ Plug 'tpope/vim-rhubarb'
 Plug 'tpope/vim-surround'
 Plug 'tpope/vim-unimpaired'
 
-Plug 'vim-airline/vim-airline'
-let g:airline_powerline_fonts = 1
-let g:airline_theme = "luna"
-let g:airline#extensions#ale#enabled = 1
-
-Plug 'vim-airline/vim-airline-themes'
-
 Plug 'w0rp/ale'
 nmap <silent> <C-k> <Plug>(ale_previous_wrap)
 nmap <silent> <C-j> <Plug>(ale_next_wrap)
