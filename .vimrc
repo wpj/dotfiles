@@ -56,23 +56,35 @@ set nobackup
 set nowb
 set noswapfile
 
-
-" =======
-" Plugins
-" =======
 silent! if plug#begin('~/.vim/plugged')
 
+" neovim plugins
+" ==============
+
 if has('nvim')
+  Plug 'autozimu/LanguageClient-neovim', {
+      \ 'branch': 'next',
+      \ 'do': 'bash install.sh',
+      \ }
+  let g:LanguageClient_serverCommands = {
+      \ 'javascript': ['javascript-typescript-stdio'],
+      \ 'typescript': ['javascript-typescript-stdio'],
+      \ 'rust': ['~/.cargo/bin/rustup', 'run', 'stable', 'rls'],
+      \ }
+
   Plug 'Shougo/deoplete.nvim',  { 'do': ':UpdateRemotePlugins' }
-end
+else
+  Plug 'Shougo/deoplete.nvim'
+  Plug 'roxma/nvim-yarp'
+  Plug 'roxma/vim-hug-neovim-rpc'
+endif
+
 let g:deoplete#enable_at_startup = 1
 
-Plug 'airblade/vim-gitgutter'
+" vim plugins
+" ===========
 
-" Plug 'autozimu/LanguageClient-neovim',  { 'branch': 'next','do': 'bash install.sh' }
-" let g:LanguageClient_serverCommands = {
-"     \ 'rust': ['~/.cargo/bin/rustup', 'run', 'stable', 'rls'],
-"     \ }
+Plug 'airblade/vim-gitgutter'
 
 Plug 'editorconfig/editorconfig-vim'
 let g:EditorConfig_exclude_patterns = ['fugitive://.*', 'scp://.*']
@@ -168,13 +180,6 @@ nnoremap [t :tabp<cr>
 " circular window navigation
 nnoremap <tab>   <c-w>w
 nnoremap <S-tab> <c-w>W
-
-" Enable omni completion.
-autocmd FileType css setlocal omnifunc=csscomplete#CompleteCSS
-autocmd FileType html,markdown setlocal omnifunc=htmlcomplete#CompleteTags
-autocmd FileType javascript setlocal omnifunc=javascriptcomplete#CompleteJS
-autocmd FileType python setlocal omnifunc=pythoncomplete#Complete
-autocmd FileType xml setlocal omnifunc=xmlcomplete#CompleteTags
 
 " Enable spellcheck
 autocmd FileType markdown setlocal spell
