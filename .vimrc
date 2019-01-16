@@ -78,6 +78,12 @@ Plug 'editorconfig/editorconfig-vim'
 let g:EditorConfig_exclude_patterns = ['fugitive://.*', 'scp://.*']
 
 Plug 'fleischie/vim-styled-components', { 'for': ['javascript', 'javascript.jsx'] }
+
+Plug 'itchyny/lightline.vim'
+let g:lightline = {
+      \ 'colorscheme': 'seoul256',
+      \ }
+
 Plug 'jremmen/vim-ripgrep'
 Plug 'jiangmiao/auto-pairs'
 
