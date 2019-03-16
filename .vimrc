@@ -72,6 +72,15 @@ if has('nvim')
       \ 'rust': ['~/.cargo/bin/rustup', 'run', 'stable', 'rls'],
       \ }
 
+  function LanguageClient_maps()
+    if has_key(g:LanguageClient_serverCommands, &filetype)
+      nnoremap <buffer> <silent> K :call LanguageClient#textDocument_hover()<cr>
+      nnoremap <buffer> <silent> gd :call LanguageClient#textDocument_definition()<CR>
+    endif
+  endfunction
+
+  autocmd FileType * call LanguageClient_maps()
+
   Plug 'Shougo/deoplete.nvim',  { 'do': ':UpdateRemotePlugins' }
 else
   Plug 'Shougo/deoplete.nvim'
