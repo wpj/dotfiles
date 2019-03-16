@@ -89,7 +89,7 @@ Plug 'airblade/vim-gitgutter'
 Plug 'editorconfig/editorconfig-vim'
 let g:EditorConfig_exclude_patterns = ['fugitive://.*', 'scp://.*']
 
-Plug 'fleischie/vim-styled-components', { 'for': ['javascript', 'javascript.jsx'] }
+Plug 'styled-components/vim-styled-components', { 'for': ['javascript', 'javascript.jsx'] }
 
 Plug 'itchyny/lightline.vim'
 let g:lightline = {
@@ -133,11 +133,14 @@ let g:vim_markdown_folding_disabled = 1
 let g:vim_markdown_new_list_item_indent = 0 " disable auto-indent in lists
 let g:instant_markdown_autostart = 0
 
-Plug 'racer-rust/vim-racer',            { 'for': 'rust' }
-" let g:racer_experimental_completer = 1
+let prettier_filetypes = ['javascript', 'typescript', 'css', 'less', 'scss', 'json', 'graphql', 'markdown', 'vue', 'yaml', 'html']
+Plug 'prettier/vim-prettier', {
+  \ 'do': 'yarn install',
+  \ 'for': prettier_filetypes }
+autocmd FileType javascript,typescript,css,less,scss,json,graphql,markdown,vue,yaml,html nmap fmt <Plug>(Prettier)
 
-Plug 'sbdchd/neoformat'
-nnoremap fmt :Neoformat<cr>
+" Plug 'sbdchd/neoformat'
+" nnoremap fmt :Neoformat<cr>
 
 Plug 'sheerun/vim-polyglot'
 let g:polyglot_disabled = ['javascript', 'javascript.jsx']
