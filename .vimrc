@@ -93,6 +93,7 @@ let g:deoplete#enable_at_startup = 1
 " ===========
 
 Plug 'airblade/vim-gitgutter'
+Plug 'burner/vim-svelte'
 
 Plug 'editorconfig/editorconfig-vim'
 let g:EditorConfig_exclude_patterns = ['fugitive://.*', 'scp://.*']
