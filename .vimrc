@@ -7,7 +7,6 @@ let maplocalleader = ' '
 syntax enable
 set nu rnu
 set number relativenumber
-set background=dark
 set visualbell
 set expandtab
 set tabstop=2
@@ -98,7 +97,7 @@ Plug 'airblade/vim-gitgutter'
 Plug 'editorconfig/editorconfig-vim'
 let g:EditorConfig_exclude_patterns = ['fugitive://.*', 'scp://.*']
 
-Plug 'styled-components/vim-styled-components', { 'for': ['javascript', 'javascript.jsx'] }
+Plug 'styled-components/vim-styled-components', {  'branch': 'main', 'for': ['javascript', 'javascript.jsx'] }
 
 Plug 'itchyny/lightline.vim'
 let g:lightline = {
@@ -113,9 +112,7 @@ Plug 'junegunn/fzf.vim'
 map <Leader>p :FZF<CR>
 
 Plug 'junegunn/rainbow_parentheses.vim'
-
 Plug 'junegunn/seoul256.vim'
-let g:seoul256_background = 235
 
 Plug 'junegunn/vim-easy-align',         { 'on': ['<Plug>(EasyAlign)', 'EasyAlign'] }
 xmap ga <Plug>(EasyAlign)
@@ -142,11 +139,11 @@ let g:vim_markdown_folding_disabled = 1
 let g:vim_markdown_new_list_item_indent = 0 " disable auto-indent in lists
 let g:instant_markdown_autostart = 0
 
-let prettier_filetypes = ['javascript', 'typescript', 'css', 'less', 'scss', 'json', 'graphql', 'markdown', 'vue', 'yaml', 'html']
+let prettier_filetypes = ['javascript', 'javascript.jsx', 'typescript', 'typescript.jsx', 'jsx', 'css', 'less', 'scss', 'json', 'graphql', 'markdown', 'vue', 'yaml', 'html', 'svelte']
 Plug 'prettier/vim-prettier', {
   \ 'do': 'yarn install',
   \ 'for': prettier_filetypes }
-autocmd FileType javascript,typescript,css,less,scss,json,graphql,markdown,vue,yaml,html nmap fmt <Plug>(Prettier)
+autocmd FileType javascript,javascript.jsx,typescript,typescript.jsx,jsx,css,less,scss,json,graphql,markdown,vue,yaml,html,svelte nmap fmt <Plug>(Prettier)
 
 " Plug 'sbdchd/neoformat'
 " nnoremap fmt :Neoformat<cr>
@@ -207,7 +204,11 @@ let g:javascript_plugin_jsdoc = 1
 " rust
 let g:rustfmt_autosave = 1
 
-silent! colo seoul256
-
 vnoremap <C-j> :m '>+1<CR>gv=gv
 vnoremap <C-k> :m '<-2<CR>gv=gv
+
+" set color scheme
+colo seoul256
+set background=dark
+
+au FileType *.svelte set syntax=html
