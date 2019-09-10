@@ -153,12 +153,6 @@ autocmd FileType javascript,javascript.jsx,typescript,typescript.jsx,jsx,css,les
 Plug 'sheerun/vim-polyglot'
 let g:polyglot_disabled = ['javascript', 'javascript.jsx']
 
-Plug 'Shougo/neosnippet.vim'
-imap <C-k> <Plug>(neosnippet_expand_or_jump)
-smap <C-k> <Plug>(neosnippet_expand_or_jump)
-xmap <C-k> <Plug>(neosnippet_expand_target)
-
-Plug 'Shougo/neosnippet-snippets'
 Plug 'slashmili/alchemist.vim',         { 'for': 'elixir' }
 Plug 'tpope/vim-commentary'
 Plug 'tpope/vim-endwise'
