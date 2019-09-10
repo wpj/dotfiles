@@ -79,15 +79,7 @@ if has('nvim')
   endfunction
 
   autocmd FileType * call LanguageClient_maps()
-
-  Plug 'Shougo/deoplete.nvim',  { 'do': ':UpdateRemotePlugins' }
-else
-  Plug 'Shougo/deoplete.nvim'
-  Plug 'roxma/nvim-yarp'
-  Plug 'roxma/vim-hug-neovim-rpc'
 endif
-
-let g:deoplete#enable_at_startup = 1
 
 " vim plugins
 " ===========
@@ -97,8 +89,6 @@ Plug 'airblade/vim-rooter'
 
 Plug 'editorconfig/editorconfig-vim'
 let g:EditorConfig_exclude_patterns = ['fugitive://.*', 'scp://.*']
-
-Plug 'styled-components/vim-styled-components', {  'branch': 'main', 'for': ['javascript', 'javascript.jsx'] }
 
 Plug 'itchyny/lightline.vim'
 let g:lightline = {
@@ -114,25 +104,25 @@ map <Leader>p :FZF<CR>
 
 Plug 'junegunn/rainbow_parentheses.vim'
 Plug 'junegunn/seoul256.vim'
-
-Plug 'junegunn/vim-easy-align',         { 'on': ['<Plug>(EasyAlign)', 'EasyAlign'] }
-xmap ga <Plug>(EasyAlign)
-nmap ga <Plug>(EasyAlign)
-
 Plug 'justinmk/vim-dirvish'
 Plug 'jxnblk/vim-mdx-js'
 Plug 'machakann/vim-highlightedyank'
 Plug 'machakann/vim-sandwich'
-
-Plug 'majutsushi/tagbar'
-map <Leader>tt <esc>:TagbarToggle<cr>
-
 Plug 'mattn/emmet-vim'
+let g:user_emmet_leader_key='<C-Z>'
 
 Plug 'mxw/vim-jsx',                     { 'for': ['javascript.jsx'] }
 let g:jsx_ext_required = 0
 
 Plug 'nathanaelkane/vim-indent-guides'
+
+Plug 'ncm2/ncm2'
+autocmd BufEnter * call ncm2#enable_for_buffer()
+set completeopt=noinsert,menuone,noselect
+
+Plug 'ncm2/ncm2-bufword'
+Plug 'ncm2/ncm2-path'
+
 Plug 'othree/es.next.syntax.vim',       { 'for': ['javascript', 'javascript.jsx'] }
 Plug 'othree/yajs.vim',                 { 'for': ['javascript', 'javascript.jsx'] }
 
@@ -147,13 +137,13 @@ Plug 'prettier/vim-prettier', {
   \ 'for': prettier_filetypes }
 autocmd FileType javascript,javascript.jsx,typescript,typescript.jsx,jsx,css,less,scss,json,graphql,markdown,vue,yaml,html,svelte nmap fmt <Plug>(Prettier)
 
-" Plug 'sbdchd/neoformat'
-" nnoremap fmt :Neoformat<cr>
+Plug 'roxma/nvim-yarp'
 
 Plug 'sheerun/vim-polyglot'
 let g:polyglot_disabled = ['javascript', 'javascript.jsx']
 
 Plug 'slashmili/alchemist.vim',         { 'for': 'elixir' }
+Plug 'styled-components/vim-styled-components', {  'branch': 'main', 'for': ['javascript', 'javascript.jsx'] }
 Plug 'tpope/vim-commentary'
 Plug 'tpope/vim-endwise'
 Plug 'tpope/vim-fugitive'
@@ -174,18 +164,6 @@ endif
 " Mappings
 " ========
 
-" buffers
-nnoremap ]b :bnext<cr>
-nnoremap [b :bprev<cr>
-
-" tabs
-nnoremap ]t :tabn<cr>
-nnoremap [t :tabp<cr>
-
-" circular window navigation
-nnoremap <tab>   <c-w>w
-nnoremap <S-tab> <c-w>W
-
 " Enable spellcheck
 autocmd FileType markdown setlocal spell
 
@@ -199,9 +177,6 @@ let g:javascript_plugin_jsdoc = 1
 
 " rust
 let g:rustfmt_autosave = 1
-
-vnoremap <C-j> :m '>+1<CR>gv=gv
-vnoremap <C-k> :m '<-2<CR>gv=gv
 
 " set color scheme
 colo seoul256
