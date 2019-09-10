@@ -121,6 +121,7 @@ nmap ga <Plug>(EasyAlign)
 Plug 'justinmk/vim-dirvish'
 Plug 'jxnblk/vim-mdx-js'
 Plug 'machakann/vim-highlightedyank'
+Plug 'machakann/vim-sandwich'
 
 Plug 'majutsushi/tagbar'
 map <Leader>tt <esc>:TagbarToggle<cr>
@@ -163,8 +164,8 @@ Plug 'tpope/vim-endwise'
 Plug 'tpope/vim-fugitive'
 Plug 'tpope/vim-repeat'
 Plug 'tpope/vim-rhubarb'
-Plug 'tpope/vim-surround'
 Plug 'tpope/vim-unimpaired'
+Plug 'wellle/targets.vim'
 
 Plug 'w0rp/ale'
 nmap <silent> <C-k> <Plug>(ale_previous_wrap)
