@@ -55,6 +55,10 @@ set nobackup
 set nowb
 set noswapfile
 
+" permanent undo
+set undodir=~/.vimdid
+set undofile
+
 silent! if plug#begin('~/.vim/plugged')
 
 " neovim plugins
