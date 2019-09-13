@@ -163,10 +163,7 @@ Plug 'tpope/vim-repeat'
 Plug 'tpope/vim-rhubarb'
 Plug 'tpope/vim-unimpaired'
 Plug 'wellle/targets.vim'
-
 Plug 'w0rp/ale'
-nmap <silent> <C-k> <Plug>(ale_previous_wrap)
-nmap <silent> <C-j> <Plug>(ale_next_wrap)
 
 call plug#end()
 endif
@@ -175,6 +172,12 @@ endif
 " ========
 " Mappings
 " ========
+
+" Easier split navigation
+nnoremap <C-J> <C-W><C-J>
+nnoremap <C-K> <C-W><C-K>
+nnoremap <C-L> <C-W><C-L>
+nnoremap <C-H> <C-W><C-H>
 
 " Enable spellcheck
 autocmd FileType markdown setlocal spell
