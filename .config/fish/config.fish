@@ -1,9 +1,16 @@
+set -x GOPATH $HOME/.go
+set -x PATH $PATH $HOME/{.cargo,.local}/bin $GOPATH/bin
+
 if type -q starship
   eval (starship init fish)
 end
 
 if type -q thefuck
   thefuck --alias | source
+end
+
+if type -q yarn
+  set -x PATH $PATH (yarn global bin)
 end
 
 if type -q exa
@@ -32,3 +39,12 @@ abbr -a vi. 'vi .'
 abbr -a n 'env NNN_USE_EDITOR=1 nnn'
 
 [ -f /usr/local/share/autojump/autojump.fish ]; and source /usr/local/share/autojump/autojump.fish
+
+if type -q direnv
+  direnv hook fish | source
+end
+
+# For stuff not checked into git
+if test -e "$HOME/.config/fish/.secret.fish";
+  source ~/.config/fish/.secret.fish
+end
