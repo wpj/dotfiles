@@ -170,13 +170,11 @@ font:
 # If `true`, bold text is drawn using the bright color variants.
 draw_bold_text_with_bright_colors: true
 
-schemes:
+color_schemes:
   seoul256: &color_scheme
     primary:
       background: '0x3a3a3a'
       foreground: '0xd0d0d0'
-
-    # Normal colors
     normal:
       black:   '0x4e4e4e'
       red:     '0xd68787'
@@ -186,8 +184,6 @@ schemes:
       magenta: '0xd7afaf'
       cyan:    '0x87afaf'
       white:   '0xd0d0d0'
-
-    # Bright colors
     bright:
       black:   '0x626262'
       red:     '0xd75f87'
@@ -197,13 +193,11 @@ schemes:
       magenta: '0xffafaf'
       cyan:    '0x87d7d7'
       white:   '0xe4e4e4'
+
   nord:
-    # Default colors
     primary:
       background: '0x2E3440'
       foreground: '0xD8DEE9'
-
-    # Normal colors
     normal:
       black:   '0x3B4252'
       red:     '0xBF616A'
@@ -213,8 +207,6 @@ schemes:
       magenta: '0xB48EAD'
       cyan:    '0x88C0D0'
       white:   '0xE5E9F0'
-
-    # Bright colors
     bright:
       black:   '0x4C566A'
       red:     '0xBF616A'
@@ -226,16 +218,12 @@ schemes:
       white:   '0xECEFF4'
 
   nova:
-    # Default colors
     primary:
       background: "0x3C4C55"
       foreground: "0xC5D4DD"
-
     cursor:
       text: "0x212121"
       cursor: "0xC0C5CE"
-
-    # Normal colors
     normal:
       black: "0x3C4C55"
       red: "0xDF8C8C"
@@ -245,8 +233,6 @@ schemes:
       magenta: "0x9A93E1"
       cyan: "0x7FC1CA"
       white: "0xC5D4DD"
-
-    # Bright colors
     bright:
       black: "0x899BA6"
       red: "0xF2C38F"
@@ -256,6 +242,52 @@ schemes:
       magenta: "0xD18EC2"
       cyan: "0x7FC1CA"
       white: "0xE6EEF3"
+
+  one_half_light:
+    primary:
+      background: '0xfafafa'
+      foreground: '0x383a42'
+    normal:
+      black: '0x383a42'
+      red: '0xe45649'
+      green: '0x50a14f'
+      yellow: '0xc18401'
+      blue: '0x0184bc'
+      magenta: '0xa626a4'
+      cyan: '0x0997b3'
+      white: '0xfafafa'
+    bright:
+      black: '0x383a42'
+      red: '0xe45649'
+      green: '0x50a14f'
+      yellow: '0xc18401'
+      blue: '0x0184bc'
+      magenta: '0xa626a4'
+      cyan: '0x0997b3'
+      white: '0xfafafa'
+
+  one_half_dark:
+    primary:
+      background: '0x282c34'
+      foreground: '0xdcdfe4'
+    normal:
+      black: '0x282c34'
+      red: '0xe06c75'
+      green: '0x98c379'
+      yellow: '0xe5c07b'
+      blue: '0x61afef'
+      magenta: '0xc678dd'
+      cyan: '0x56b6c2'
+      white: '0xdcdfe4'
+    bright:
+      black: '0x282c34'
+      red: '0xe06c75'
+      green: '0x98c379'
+      yellow: '0xe5c07b'
+      blue: '0x61afef'
+      magenta: '0xc678dd'
+      cyan: '0x56b6c2'
+      white: '0xdcdfe4'
 
 colors: *color_scheme
 
