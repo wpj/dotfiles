@@ -1,3 +1,5 @@
+set shell=/bin/bash
+
 let mapleader = ' '
 let maplocalleader = ' '
 
@@ -8,6 +10,7 @@ syntax enable
 set nu rnu
 set number relativenumber
 set visualbell
+set cursorline
 set expandtab
 set tabstop=2
 set shiftwidth=2
