@@ -1,3 +1,5 @@
+set -x EDITOR nvim
+
 set -x GOPATH $HOME/.go
 set -x PATH $PATH $HOME/{.cargo,.local}/bin $GOPATH/bin
 
