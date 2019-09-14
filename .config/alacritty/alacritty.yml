@@ -576,6 +576,15 @@ key_bindings:
   #- { key: W,      mods: Command,         action: Quit             }
   #- { key: F,      mods: Command|Control, action: ToggleFullscreen }
 
+  # Custom key bindings
+  # ===================
+
+  # Make <C-6> work for toggling buffers in vim
+  - { key: Key6,     mods: Control, chars: "\x1e"                            }
+
+  # Default key bindings
+  # ====================
+
   - { key: Paste,                   action: Paste                            }
   - { key: Copy,                    action: Copy                             }
   - { key: L,        mods: Control, action: ClearLogNotice                   }
