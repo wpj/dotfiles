@@ -30,6 +30,8 @@ if type -q bat
   abbr -a cat 'bat'
 end
 
+abbr -a c 'cargo'
+abbr -a z 'j'
 abbr -a open. 'open .'
 abbr -a gaa 'git add --all'
 abbr -a g 'git'
