@@ -127,14 +127,7 @@ Plug 'mxw/vim-jsx',                     { 'for': ['javascript.jsx'] }
 let g:jsx_ext_required = 0
 
 Plug 'nathanaelkane/vim-indent-guides'
-
-Plug 'ncm2/ncm2'
-autocmd BufEnter * call ncm2#enable_for_buffer()
-set completeopt=noinsert,menuone,noselect
-
-Plug 'ncm2/ncm2-bufword'
-Plug 'ncm2/ncm2-path'
-
+Plug 'neoclide/coc.nvim', {'branch': 'release'}
 Plug 'othree/es.next.syntax.vim',       { 'for': ['javascript', 'javascript.jsx'] }
 Plug 'othree/yajs.vim',                 { 'for': ['javascript', 'javascript.jsx'] }
 
@@ -148,8 +141,6 @@ Plug 'prettier/vim-prettier', {
   \ 'do': 'yarn install',
   \ 'for': prettier_filetypes }
 autocmd FileType javascript,javascript.jsx,typescript,typescript.jsx,jsx,css,less,scss,json,graphql,markdown,vue,yaml,html,svelte nmap fmt <Plug>(Prettier)
-
-Plug 'roxma/nvim-yarp'
 
 Plug 'sheerun/vim-polyglot'
 let g:polyglot_disabled = ['javascript', 'javascript.jsx']
