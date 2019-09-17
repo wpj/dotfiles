@@ -39,8 +39,6 @@
 	newHighlight = green bold 22
 [rebase]
 	autosquash = true
-[commit]
-	gpgsign = true
 [color "diff"]
 	meta = yellow
 	frag = magenta bold
