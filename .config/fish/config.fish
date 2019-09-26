@@ -11,10 +11,6 @@ if type -q thefuck
   thefuck --alias | source
 end
 
-if type -q yarn
-  set -x PATH $PATH (yarn global bin)
-end
-
 if type -q exa
 	abbr -a l 'exa'
 	abbr -a ls 'exa'
@@ -52,3 +48,8 @@ end
 if test -e "$HOME/.config/fish/.secret.fish";
   source ~/.config/fish/.secret.fish
 end
+
+set -gx VOLTA_HOME "$HOME/.volta"
+test -s "$VOLTA_HOME/load.fish"; and source "$VOLTA_HOME/load.fish"
+
+string match -r ".volta" "$PATH" > /dev/null; or set -gx PATH "$VOLTA_HOME/bin" $PATH
