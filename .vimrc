@@ -128,8 +128,8 @@ let g:jsx_ext_required = 0
 
 Plug 'nathanaelkane/vim-indent-guides'
 Plug 'neoclide/coc.nvim', {'branch': 'release'}
-Plug 'neoclide/coc-rls'
-Plug 'neoclide/coc-tsserver'
+Plug 'neoclide/coc-rls', {'do': 'yarn install --frozen-lockfile'}
+Plug 'neoclide/coc-tsserver', {'do': 'yarn install --frozen-lockfile'}
 Plug 'othree/es.next.syntax.vim',       { 'for': ['javascript', 'javascript.jsx'] }
 Plug 'othree/yajs.vim',                 { 'for': ['javascript', 'javascript.jsx'] }
 
