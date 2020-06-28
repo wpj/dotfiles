@@ -125,29 +125,29 @@ Plug 'machakann/vim-sandwich'
 Plug 'mattn/emmet-vim'
 let g:user_emmet_leader_key='<C-Z>'
 
-Plug 'mxw/vim-jsx',                     { 'for': ['javascript.jsx'] }
+Plug 'mxw/vim-jsx',                     { 'for': ['jsx'] }
 let g:jsx_ext_required = 0
 
 Plug 'nathanaelkane/vim-indent-guides'
 Plug 'neoclide/coc.nvim', {'branch': 'release'}
 Plug 'neoclide/coc-rls', {'do': 'yarn install --frozen-lockfile'}
 Plug 'neoclide/coc-tsserver', {'do': 'yarn install --frozen-lockfile'}
-Plug 'othree/es.next.syntax.vim',       { 'for': ['javascript', 'javascript.jsx'] }
-Plug 'othree/yajs.vim',                 { 'for': ['javascript', 'javascript.jsx'] }
+Plug 'othree/es.next.syntax.vim',       { 'for': ['javascript', 'jsx'] }
+Plug 'othree/yajs.vim',                 { 'for': ['javascript', 'jsx'] }
 
 Plug 'plasticboy/vim-markdown',         { 'for': 'markdown' }
 let g:vim_markdown_folding_disabled = 1
 let g:vim_markdown_new_list_item_indent = 0 " disable auto-indent in lists
 let g:instant_markdown_autostart = 0
 
-let prettier_filetypes = ['javascript', 'javascript.jsx', 'typescript', 'typescript.jsx', 'jsx', 'css', 'less', 'scss', 'json', 'graphql', 'markdown', 'vue', 'yaml', 'html', 'svelte']
+let prettier_filetypes = ['javascript', 'jsx', 'typescript', 'tsx', 'css', 'less', 'scss', 'json', 'graphql', 'markdown', 'vue', 'yaml', 'html', 'svelte']
 Plug 'prettier/vim-prettier', {
   \ 'do': 'yarn install',
   \ 'for': prettier_filetypes }
-autocmd FileType javascript,javascript.jsx,typescript,typescript.jsx,jsx,css,less,scss,json,graphql,markdown,vue,yaml,html,svelte nmap fmt <Plug>(Prettier)
+autocmd FileType javascript,jsx,typescript,tsx,css,less,scss,json,graphql,markdown,vue,yaml,html,svelte nmap <Leader>cf <Plug>(Prettier)
 
 Plug 'sheerun/vim-polyglot'
-let g:polyglot_disabled = ['javascript', 'javascript.jsx']
+let g:polyglot_disabled = ['javascript', 'jsx']
 
 Plug 'slashmili/alchemist.vim',         { 'for': 'elixir' }
 Plug 'styled-components/vim-styled-components', {  'branch': 'main', 'for': ['javascript', 'javascript.jsx'] }
