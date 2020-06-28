@@ -42,7 +42,11 @@ set noshowmode
 set cmdheight=2                " height of command bar
 set hidden                     " hides buffers when they're abandoned
 set mat=2                      " blink matching brackets for 2/10 second
-set diffopt+=vertical          " Force diff to use vertical split
+
+if has('nvim')
+  set diffopt+=vertical          " Force diff to use vertical split
+endif
+
 if exists('+termguicolors')
   let &t_8f = "\<Esc>[38;2;%lu;%lu;%lum"
   let &t_8b = "\<Esc>[48;2;%lu;%lu;%lum"
