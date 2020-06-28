@@ -12,11 +12,11 @@ set number relativenumber
 set visualbell
 set cursorline
 set expandtab
-set tabstop=2
+" set tabstop=2
 set shiftwidth=2
 set softtabstop=2
 set autoindent
-set smartindent
+" set smartindent
 set nowrap
 set title
 set encoding=utf-8
@@ -29,7 +29,6 @@ if has('nvim')                 " enable live substitution in neovim
   set inccommand=nosplit
 endif
 set nostartofline
-set nocompatible
 set autoread                   " read changes to file made externally
 set wildmenu
 set backspace=indent,eol,start " make backspace function as it should
