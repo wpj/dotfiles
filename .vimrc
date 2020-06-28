@@ -150,7 +150,6 @@ Plug 'sheerun/vim-polyglot'
 let g:polyglot_disabled = ['javascript', 'jsx']
 
 Plug 'slashmili/alchemist.vim',         { 'for': 'elixir' }
-Plug 'styled-components/vim-styled-components', {  'branch': 'main', 'for': ['javascript', 'javascript.jsx'] }
 Plug 'tpope/vim-commentary'
 Plug 'tpope/vim-endwise'
 Plug 'tpope/vim-fugitive'
