@@ -49,4 +49,6 @@
 [color]
 	ui = true
 [init]
-	templateDir = ~/.config/git/template
+	defaultBranch = main
+[pull]
+	ff = only
