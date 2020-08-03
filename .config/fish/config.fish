@@ -3,6 +3,8 @@ set -x EDITOR nvim
 set -x GOPATH $HOME/.go
 set -x PATH $PATH $HOME/{.cargo,.local}/bin $GOPATH/bin
 
+set -x PATH $PATH (python3 -c 'import site; print(site.USER_BASE)')/bin
+
 if type -q starship
   eval (starship init fish)
 end
