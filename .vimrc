@@ -71,33 +71,6 @@ set undofile
 
 silent! if plug#begin('~/.vim/plugged')
 
-" neovim plugins
-" ==============
-
-if has('nvim')
-  Plug 'autozimu/LanguageClient-neovim', {
-      \ 'branch': 'next',
-      \ 'do': 'bash install.sh',
-      \ }
-  let g:LanguageClient_serverCommands = {
-      \ 'javascript': ['javascript-typescript-stdio'],
-      \ 'typescript': ['javascript-typescript-stdio'],
-      \ 'rust': ['~/.cargo/bin/rustup', 'run', 'stable', 'rls'],
-      \ }
-
-  function LanguageClient_maps()
-    if has_key(g:LanguageClient_serverCommands, &filetype)
-      nnoremap <buffer> <silent> K :call LanguageClient#textDocument_hover()<cr>
-      nnoremap <buffer> <silent> gd :call LanguageClient#textDocument_definition()<CR>
-    endif
-  endfunction
-
-  autocmd FileType * call LanguageClient_maps()
-endif
-
-" vim plugins
-" ===========
-
 Plug 'airblade/vim-gitgutter'
 Plug 'airblade/vim-rooter'
 
@@ -115,13 +88,14 @@ Plug 'jiangmiao/auto-pairs'
 Plug 'junegunn/fzf',                    { 'dir': '~/.fzf', 'do': './install --all' }
 Plug 'junegunn/fzf.vim'
 map <Leader>p :FZF<CR>
+imap <c-x><c-f> <plug>(fzf-complete-path)
 
 Plug 'junegunn/rainbow_parentheses.vim'
 Plug 'junegunn/seoul256.vim'
 Plug 'justinmk/vim-dirvish'
 Plug 'jxnblk/vim-mdx-js'
 Plug 'machakann/vim-highlightedyank'
-Plug 'machakann/vim-sandwich'
+" Plug 'machakann/vim-sandwich'
 Plug 'mattn/emmet-vim'
 let g:user_emmet_leader_key='<C-Z>'
 
@@ -129,9 +103,7 @@ Plug 'mxw/vim-jsx',                     { 'for': ['jsx'] }
 let g:jsx_ext_required = 0
 
 Plug 'nathanaelkane/vim-indent-guides'
-Plug 'neoclide/coc.nvim', {'branch': 'release'}
-Plug 'neoclide/coc-rls', {'do': 'yarn install --frozen-lockfile'}
-Plug 'neoclide/coc-tsserver', {'do': 'yarn install --frozen-lockfile'}
+
 Plug 'othree/es.next.syntax.vim',       { 'for': ['javascript', 'jsx'] }
 Plug 'othree/yajs.vim',                 { 'for': ['javascript', 'jsx'] }
 
@@ -152,12 +124,9 @@ let g:polyglot_disabled = ['javascript', 'jsx']
 Plug 'slashmili/alchemist.vim',         { 'for': 'elixir' }
 Plug 'tpope/vim-commentary'
 Plug 'tpope/vim-endwise'
-Plug 'tpope/vim-fugitive'
 Plug 'tpope/vim-repeat'
-Plug 'tpope/vim-rhubarb'
 Plug 'tpope/vim-unimpaired'
 Plug 'wellle/targets.vim'
-Plug 'w0rp/ale'
 
 call plug#end()
 endif
