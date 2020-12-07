@@ -5,6 +5,8 @@ set -x PATH $PATH $HOME/{.cargo,.local}/bin $GOPATH/bin
 
 set -x PATH $PATH (python3 -c 'import site; print(site.USER_BASE)')/bin
 
+set -x RIPGREP_CONFIG_PATH $HOME/.config/ripgrep/.ripgreprc
+
 if type -q starship
   starship init fish | source
 end

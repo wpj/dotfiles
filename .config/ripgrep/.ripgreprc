@@ -1,0 +1,9 @@
+# ==========
+# File types
+# ==========
+
+--type-add
+svelte:*.svelte
+
+--type-add
+vue:*.vue
