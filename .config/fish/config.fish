@@ -8,26 +8,26 @@ set -x PATH $PATH (python3 -c 'import site; print(site.USER_BASE)')/bin
 set -x RIPGREP_CONFIG_PATH $HOME/.config/ripgrep/.ripgreprc
 
 if type -q starship
-  starship init fish | source
+    starship init fish | source
 end
 
 if type -q thefuck
-  thefuck --alias | source
+    thefuck --alias | source
 end
 
 if type -q exa
-	abbr -a l 'exa'
-	abbr -a ls 'exa'
-	abbr -a ll 'exa -l'
-	abbr -a lll 'exa -la'
+    abbr -a l 'exa'
+    abbr -a ls 'exa'
+    abbr -a ll 'exa -l'
+    abbr -a lll 'exa -la'
 else
-	abbr -a l 'ls'
-	abbr -a ll 'ls -l'
-	abbr -a lll 'ls -la'
+    abbr -a l 'ls'
+    abbr -a ll 'ls -l'
+    abbr -a lll 'ls -la'
 end
 
 if type -q bat
-  abbr -a cat 'bat'
+    abbr -a cat 'bat'
 end
 
 abbr -a c 'cargo'
@@ -45,15 +45,15 @@ abbr -a n 'env NNN_USE_EDITOR=1 nnn'
 [ -f /usr/local/share/autojump/autojump.fish ]; and source /usr/local/share/autojump/autojump.fish
 
 if type -q direnv
-  direnv hook fish | source
+    direnv hook fish | source
 end
 
 # For stuff not checked into git
-if test -e "$HOME/.config/fish/.secret.fish";
-  source ~/.config/fish/.secret.fish
+if test -e "$HOME/.config/fish/.secret.fish"
+    source ~/.config/fish/.secret.fish
 end
 
 set -gx VOLTA_HOME "$HOME/.volta"
 test -s "$VOLTA_HOME/load.fish"; and source "$VOLTA_HOME/load.fish"
 
-string match -r ".volta" "$PATH" > /dev/null; or set -gx PATH "$VOLTA_HOME/bin" $PATH
+string match -r ".volta" "$PATH" >/dev/null; or set -gx PATH "$VOLTA_HOME/bin" $PATH
