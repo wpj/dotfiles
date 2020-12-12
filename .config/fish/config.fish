@@ -15,6 +15,10 @@ if type -q thefuck
     thefuck --alias | source
 end
 
+if type -q pyenv
+	pyenv init - | source
+end
+
 if type -q exa
     abbr -a l 'exa'
     abbr -a ls 'exa'
