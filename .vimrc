@@ -87,7 +87,7 @@ Plug 'jiangmiao/auto-pairs'
 
 Plug 'junegunn/fzf',                    { 'dir': '~/.fzf', 'do': './install --all' }
 Plug 'junegunn/fzf.vim'
-map <Leader>p :FZF<CR>
+map <Leader><Leader> :FZF<CR>
 imap <c-x><c-f> <plug>(fzf-complete-path)
 
 Plug 'junegunn/rainbow_parentheses.vim'

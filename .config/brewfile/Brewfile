@@ -20,7 +20,7 @@ brew "direnv"
 brew "doctl"
 brew "dust"
 brew "editorconfig"
-brew "emacs-plus"
+brew "emacs-plus", args: ["with-modern-sexy-v1-icon"]
 brew "exa"
 brew "fd"
 brew "ffmpeg"
