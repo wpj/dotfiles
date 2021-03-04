@@ -81,7 +81,6 @@ brew "wxmac"
 brew "youtube-dl"
 
 cask "alacritty"
-cask "bartender"
 cask "bitwarden"
 cask "docker"
 cask "dropbox"
@@ -91,7 +90,6 @@ cask "font-inconsolata-for-powerline"
 cask "gas-mask"
 cask "google-chrome"
 cask "insomnia"
-cask "karabiner-elements"
 cask "kitematic"
 cask "kitty"
 cask "licecap"
@@ -103,7 +101,6 @@ cask "spotify"
 cask "transmit"
 cask "visual-studio-code"
 cask "vlc"
-cask "whatsapp"
 
 mas "Lungo", id: 1263070803
 mas "Pages", id: 409201541
