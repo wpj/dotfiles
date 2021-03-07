@@ -8,12 +8,12 @@
 
 (setq doom-font (font-spec :family "monospace" :size 16))
 
-(setq doom-theme 'doom-one)
+(setq doom-theme 'doom-vibrant)
 
 (setq org-directory "~/workspace/org")
 (setq org-agenda-files '("~/workspace/org"))
 
-(setq display-line-numbers-type 'relative)
+;; (setq display-line-numbers-type 'relative)
 
 ;; Write completion time when org tasks are marked done.
 (setq org-log-done 'time)
@@ -25,10 +25,18 @@
 (after! rust-mode
   (set-company-backend! 'rust-mode 'company-lsp 'company-yasnippet))
 
+;; use mspyls
+(after! lsp-python-ms
+  (set-lsp-priority! 'mspyls 1))
+
 (setq
  org-roam-directory "~/workspace/org"
  org-roam-graph-viewer "/Applications/Firefox Developer Edition.app/Contents/MacOS/firefox")
 
+;; Workaround for vs-gutter display issue.
+(setq +vc-gutter-default-style nil)
+
+(setq lsp-headerline-breadcrumb-enable nil)
 
 ;; deft setup
 (setq deft-directory "~/workspace/org")
@@ -36,7 +44,53 @@
 (add-hook! 'text-mode-hook #'auto-fill-mode)
 
 ;; Disable lsp formatting
-(setq-hook! '(js2-mode-hook typescript-mode-hook) +format-with-lsp nil)
+(setq-hook! '(js2-mode-hook typescript-mode-hook typescript-tsx-mode-hook) +format-with-lsp nil)
+
+;; (setq-hook! 'html-mode-hook +format-with 'prettier)
+
+(set-formatter! 'bean-format "bean-format" :modes '(beancount-mode))
+
+;; (after! (:and lsp-mode flycheck)
+;;   (flycheck-add-next-checker 'lsp 'javascript-eslint))
+
+
+;; (defun js-flycheck-setup ()
+;;   (flycheck-add-next-checker 'lsp 'javascript-eslint))
+
+;; (after! (:and lsp-mode flycheck-mode) )
+
+(defun js-flycheck-setup ()
+  (flycheck-add-next-checker 'lsp 'javascript-eslint))
+
+(add-hook! 'flycheck-mode-hook #'js-flycheck-setup)
+
+
+;; Don't write to default register when using the system clipboard
+;; (setq select-enable-clipboard nil)
+
+(use-package! graphql-mode
+  :mode ("\\.gql\\'" "\\.graphql\\'")
+  :config (setq-hook! 'graphql-mode-hook tab-width graphql-indent-level))
+
+(use-package! beancount
+  :mode ("\\.beancount\\'" . beancount-mode)
+  :init
+  (after! all-the-icons
+    (add-to-list 'all-the-icons-icon-alist
+                 '("\\.beancount\\'" all-the-icons-material "attach_money" :face all-the-icons-lblue))
+    (add-to-list 'all-the-icons-mode-icon-alist
+                 '(beancount-mode all-the-icons-material "attach_money" :face all-the-icons-lblue)))
+  :config
+  (setq beancount-electric-currency t)
+  (defun beancount-bal ()
+    "Run bean-report bal."
+    (interactive)
+    (let ((compilation-read-command nil))
+      (beancount--run "bean-report"
+                      (file-relative-name buffer-file-name) "bal")))
+  (map! :map beancount-mode-map
+        :n "TAB" #'beancount-align-to-previous-number
+        :i "RET" (cmd! (newline-and-indent) (beancount-align-to-previous-number))))
 
 ;; Here are some additional functions/macros that could help you configure Doom:
 ;;
