@@ -19,6 +19,8 @@ if type -q pyenv
 	pyenv init - | source
 end
 
+alias e '$EDITOR'
+
 if type -q exa
     abbr -a l 'exa'
     abbr -a ls 'exa'
