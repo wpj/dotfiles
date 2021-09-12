@@ -99,16 +99,18 @@ require('packer').startup(function()
     'neovim/nvim-lspconfig',
     config = function()
       local nvim_lsp = require('lspconfig')
-      nvim_lsp.rls.setup{}
-      -- nvim_lsp.denols.setup{}
-      nvim_lsp.tsserver.setup{}
 
+      local enabled_servers = {
+        'rls',
+        'tsserver',
+        'svelte',
+        'vuels',
+        'gopls'
+      }
 
-      -- map('n', 'K', ':Lspsaga hover_doc<cr>', default_opts)
-      -- map('n', '<C-F>', '<cmd>lua require('lspsaga.action').smart_scroll_with_saga(1)<cr>', default_opts)
-      -- map('n', '<C-B>', '<cmd>lua require('lspsaga.action').smart_scroll_with_saga(-1)<cr>', default_opts)
-
-      -- map('n', 'gd', ':Lspsaga preview_definition<cr>', default_opts)
+      for _, server in ipairs(enabled_servers) do
+        nvim_lsp[server].setup{}
+      end
     end
   }
   use {
@@ -117,7 +119,15 @@ require('packer').startup(function()
   }
   use {
     'nvim-treesitter/nvim-treesitter',
-    run = ':TSUpdate'
+    run = ':TSUpdate',
+    config = function()
+      require'nvim-treesitter.configs'.setup {
+        ensure_installed = 'maintained',
+        highlight = {
+          enable = true,
+        },
+      }
+    end,
   }
   use 'tpope/vim-commentary'
   use 'tpope/vim-endwise'
