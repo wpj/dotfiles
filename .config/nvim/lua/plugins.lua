@@ -129,6 +129,14 @@ require('packer').startup(function()
       }
     end,
   }
+  use {
+    'prettier/vim-prettier',
+    run = 'yarn install',
+    ft = {'javascript',  'javascriptreact', 'typescript', 'typescriptreact', 'css', 'less', 'scss', 'json', 'graphql', 'markdown', 'vue', 'svelte', 'yaml', 'html'},
+    config = function()
+      g['prettier#exec_cmd_async'] = true
+    end
+  }
   use 'tpope/vim-commentary'
   use 'tpope/vim-endwise'
   use 'tpope/vim-repeat'
@@ -149,3 +157,8 @@ map("n", "gD", ":Lspsaga preview_definition<cr>", default_mapping_opts)
 map("n", "<leader>cd", ":Lspsaga show_line_diagnostics<cr>", default_mapping_opts)
 map("n", "[d", ":Lspsaga diagnostic_jump_prev<cr>", default_mapping_opts)
 map("n", "]d", ":Lspsaga diagnostic_jump_next<cr>", default_mapping_opts)
+
+map('n', '<leader>cf', ':Prettier<cr>', default_mapping_opts)
+
+vim.opt.foldmethod = 'expr'
+vim.opt.foldexpr = 'nvim_treesitter#foldexpr()'
