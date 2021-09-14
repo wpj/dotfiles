@@ -1,22 +1,16 @@
-local cmd = vim.cmd
-local exists = vim.fn.exists
-local g = vim.g
-local fn = vim.fn
-local opt = vim.opt
-local map = vim.api.nvim_set_keymap
+-- NOTE: Because packer precompiles config/setup functions, variables declared
+-- within the scope of those functions.
 
-local default_mapping_opts = {noremap = true, silent = true}
-
-local install_path = fn.stdpath('data')..'/site/pack/packer/start/packer.nvim'
-if fn.empty(fn.glob(install_path)) > 0 then
-  fn.system({
+local install_path = vim.fn.stdpath('data')..'/site/pack/packer/start/packer.nvim'
+if vim.fn.empty(vim.fn.glob(install_path)) > 0 then
+  vim.fn.system({
     'git',
     'clone',
     '--depth', '1',
     'https://github.com/wbthomason/packer.nvim',
     install_path,
   })
-  cmd 'packadd packer.nvim'
+  vim.cmd 'packadd packer.nvim'
 end
 
 require('packer').startup(function()
@@ -38,7 +32,20 @@ require('packer').startup(function()
       require('which-key').setup({})
     end
   }
-  use 'glepnir/lspsaga.nvim'
+  use {
+    'glepnir/lspsaga.nvim',
+    config = function()
+      local nmap = require('utils').nmap
+      nmap("gh", ":Lspsaga lsp_finder<cr>")
+      nmap("<leader>ca", ":Lspsaga code_action<cr>")
+      nmap("gs", ":Lspsaga signature_help<cr>")
+      nmap("gr", ":Lspsaga rename<cr>")
+      nmap("gD", ":Lspsaga preview_definition<cr>")
+      nmap("<leader>cd", ":Lspsaga show_line_diagnostics<cr>")
+      nmap("[d", ":Lspsaga diagnostic_jump_prev<cr>")
+      nmap("]d", ":Lspsaga diagnostic_jump_next<cr>")
+    end
+  }
   use {
     'hoob3rt/lualine.nvim',
     requires = {'kyazdani42/nvim-web-devicons', opt = true},
@@ -111,11 +118,21 @@ require('packer').startup(function()
       for _, server in ipairs(enabled_servers) do
         nvim_lsp[server].setup{}
       end
+
+      local nmap = require('utils').nmap
+      nmap('K', '<cmd>lua vim.lsp.buf.hover()<cr>')
+      nmap('gd', '<cmd>lua vim.lsp.buf.definition()<cr>')
+      nmap('g0', '<cmd>lua vim.lsp.buf.document_symbol()<cr>')
+      nmap('gf', '<cmd>lua vim.lsp.buf.formatting()<cr>')
     end
   }
   use {
     'nvim-telescope/telescope.nvim',
-    requires = { {'nvim-lua/plenary.nvim'} }
+    requires = { {'nvim-lua/plenary.nvim'} },
+    config = function()
+      require('utils').nmap('<leader>/', '<cmd>Telescope live_grep<cr>')
+      require('utils').map('', '<leader><leader>', '<cmd>Telescope find_files<cr>')
+    end
   }
   use {
     'nvim-treesitter/nvim-treesitter',
@@ -127,6 +144,9 @@ require('packer').startup(function()
           enable = true,
         },
       }
+
+      vim.opt.foldmethod = 'expr'
+      vim.opt.foldexpr = 'nvim_treesitter#foldexpr()'
     end,
   }
   use {
@@ -134,31 +154,13 @@ require('packer').startup(function()
     run = 'yarn install',
     ft = {'javascript',  'javascriptreact', 'typescript', 'typescriptreact', 'css', 'less', 'scss', 'json', 'graphql', 'markdown', 'vue', 'svelte', 'yaml', 'html'},
     config = function()
-      g['prettier#exec_cmd_async'] = true
+      require('utils').nmap('<leader>cf', ':Prettier<cr>')
     end
   }
   use 'tpope/vim-commentary'
   use 'tpope/vim-endwise'
+  use 'tpope/vim-fugitive'
   use 'tpope/vim-repeat'
   use 'tpope/vim-unimpaired'
   use 'wellle/targets.vim'
 end) 
-
-map('n', 'K', '<cmd>lua vim.lsp.buf.hover()<cr>', default_mapping_opts)
-map('n', 'gd', '<cmd>lua vim.lsp.buf.definition()<cr>', default_mapping_opts)
-map('n', 'g0', '<cmd>lua vim.lsp.buf.document_symbol()<cr>', default_mapping_opts)
-map('n', 'gf', '<cmd>lua vim.lsp.buf.formatting()<cr>', default_mapping_opts)
-
-map("n", "gh", ":Lspsaga lsp_finder<cr>", default_mapping_opts)
-map("n", "<leader>ca", ":Lspsaga code_action<cr>", default_mapping_opts)
-map("n", "gs", ":Lspsaga signature_help<cr>", default_mapping_opts)
-map("n", "gr", ":Lspsaga rename<cr>", default_mapping_opts)
-map("n", "gD", ":Lspsaga preview_definition<cr>", default_mapping_opts)
-map("n", "<leader>cd", ":Lspsaga show_line_diagnostics<cr>", default_mapping_opts)
-map("n", "[d", ":Lspsaga diagnostic_jump_prev<cr>", default_mapping_opts)
-map("n", "]d", ":Lspsaga diagnostic_jump_next<cr>", default_mapping_opts)
-
-map('n', '<leader>cf', ':Prettier<cr>', default_mapping_opts)
-
-vim.opt.foldmethod = 'expr'
-vim.opt.foldexpr = 'nvim_treesitter#foldexpr()'
