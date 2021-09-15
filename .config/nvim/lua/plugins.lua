@@ -159,7 +159,12 @@ require('packer').startup(function()
   }
   use 'tpope/vim-commentary'
   use 'tpope/vim-endwise'
-  use 'tpope/vim-fugitive'
+  use {
+    'tpope/vim-fugitive',
+    config = function()
+      require('utils').nmap('<leader>gg', ':Git<cr>')
+    end
+  }
   use 'tpope/vim-repeat'
   use 'tpope/vim-unimpaired'
   use 'wellle/targets.vim'
