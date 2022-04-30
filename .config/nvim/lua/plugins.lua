@@ -83,21 +83,25 @@ require('packer').startup(function()
         completion = {
           completeopt = 'menu,menuone,noinsert',
         },
-        mapping = {
-          ['<C-y>'] = cmp.mapping.confirm({
-            behavior = cmp.ConfirmBehavior.Replace,
-            select = true,
-          })
-        },
+        mapping = cmp.mapping.preset.insert({
+          ['<C-b>'] = cmp.mapping.scroll_docs(-4),
+          ['<C-f>'] = cmp.mapping.scroll_docs(4),
+          ['<C-Space>'] = cmp.mapping.complete(),
+          ['<C-e>'] = cmp.mapping.abort(),
+          ['<C-y>'] = cmp.mapping.confirm({ select = true })
+        }),
         snippet = {
           expand = function(args)
             vim.fn['vsnip#anonymous'](args.body)
           end,
         },
-        sources = {
+        sources = cmp.config.sources({
           { name = 'nvim_lsp' },
-          { name = 'nvim_lua' },
-        },
+          { name = 'vsnip' },
+        }, {
+          { name = 'buffer' },
+        })
+
       })
     end
   }
