@@ -179,7 +179,22 @@ require('packer').startup(function()
   use {
     'prettier/vim-prettier',
     run = 'yarn install',
-    ft = {'javascript',  'javascriptreact', 'typescript', 'typescriptreact', 'css', 'less', 'scss', 'json', 'graphql', 'markdown', 'vue', 'svelte', 'yaml', 'html'},
+    ft = {
+      'css',
+      'graphql',
+      'html',
+      'javascript',
+      'javascriptreact',
+      'json',
+      'less',
+      'markdown',
+      'scss',
+      'svelte',
+      'typescript',
+      'typescriptreact',
+      'vue',
+      'yaml',
+    },
     config = function()
       require('utils').nmap('<leader>cf', ':Prettier<cr>')
     end
