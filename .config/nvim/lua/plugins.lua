@@ -1,5 +1,5 @@
--- NOTE: Because packer precompiles config/setup functions, variables declared
--- within the scope of those functions.
+-- NOTE: Because packer precompiles config/setup functions, variables must be
+-- declared within the scope of those functions.
 
 local install_path = vim.fn.stdpath('data')..'/site/pack/packer/start/packer.nvim'
 if vim.fn.empty(vim.fn.glob(install_path)) > 0 then
