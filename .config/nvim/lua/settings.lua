@@ -40,6 +40,7 @@ opt.softtabstop = 2
 opt.splitbelow = true
 opt.splitright = true
 opt.startofline = false
+opt.tabstop = 2
 opt.title = true
 opt.visualbell = true
 opt.wildmenu = true
