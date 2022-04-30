@@ -17,6 +17,16 @@ require('packer').startup(function()
   use 'wbthomason/packer.nvim'
 
   use 'airblade/vim-rooter'
+
+  use {
+    'b3nj5m1n/kommentary',
+    config = function()
+      require('kommentary.config').configure_language('rust', {
+          prefer_single_line_comments = true,
+      })
+    end
+  }
+
   use 'editorconfig/editorconfig-vim'
   use {
     'folke/trouble.nvim',
@@ -157,7 +167,6 @@ require('packer').startup(function()
       require('utils').nmap('<leader>cf', ':Prettier<cr>')
     end
   }
-  use 'tpope/vim-commentary'
   use 'tpope/vim-endwise'
   use {
     'tpope/vim-fugitive',
