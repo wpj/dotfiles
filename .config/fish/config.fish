@@ -1,11 +1,36 @@
 set -x EDITOR nvim
 
 set -x GOPATH $HOME/.go
-set -x PATH $PATH $HOME/{.cargo,.local}/bin $GOPATH/bin
 
-set -x PATH $PATH (python3 -c 'import site; print(site.USER_BASE)')/bin
+set -gx VOLTA_HOME "$HOME/.volta"
 
 set -x RIPGREP_CONFIG_PATH $HOME/.config/ripgrep/.ripgreprc
+
+set -l HOMEBREW_BASE
+if test (uname -m) = 'arm64'
+	set HOMEBREW_BASE /opt/homebrew
+else
+	set HOMEBREW_BASE /usr/local
+end
+
+fish_add_path -g \
+	$HOMEBREW_BASE/{bin,sbin} \
+	$HOME/{.cargo,.local}/bin \
+	$GOPATH/bin \
+	(python3 -c 'import site; print(site.USER_BASE)')/bin \
+	$VOLTA_HOME/bin \
+	$HOME/.emacs.d/bin
+
+if type -q brew
+	fish_add_path -g \
+		(brew --prefix curl)/bin
+
+	[ -f (brew --prefix)/share/autojump/autojump.fish ]; and source (brew --prefix)/share/autojump/autojump.fish
+end
+
+if type -q pnpm
+	fish_add_path -g (pnpm bin --global)
+end
 
 if type -q starship
     starship init fish | source
@@ -16,7 +41,7 @@ if type -q thefuck
 end
 
 if type -q pyenv
-	pyenv init - | source
+    status is-login; and pyenv init --path | source
 end
 
 alias e '$EDITOR'
@@ -36,6 +61,14 @@ if type -q bat
     abbr -a cat 'bat'
 end
 
+if type -q direnv
+    direnv hook fish | source
+end
+
+if type -q helm
+	helm completion fish | source
+end
+
 abbr -a c 'cargo'
 abbr -a z 'j'
 abbr -a open. 'open .'
@@ -48,21 +81,13 @@ abbr -a open. 'open .'
 abbr -a vi. 'vi .'
 abbr -a n 'env NNN_USE_EDITOR=1 nnn'
 
-[ -f /usr/local/share/autojump/autojump.fish ]; and source /usr/local/share/autojump/autojump.fish
-
-if type -q direnv
-    direnv hook fish | source
-end
-
 # For stuff not checked into git
 if test -e "$HOME/.config/fish/.secret.fish"
     source ~/.config/fish/.secret.fish
 end
 
-
+alias ibrew 'arch -x86_64 /usr/local/bin/brew'
 
 # Let compilers find keg-only zlib/bzip2
-set -gx LDFLAGS "-L/usr/local/opt/zlib/lib -L/usr/local/opt/bzip2/lib"
-set -gx CPPFLAGS "-I/usr/local/opt/zlib/include -I/usr/local/opt/bzip2/include"
-set -gx VOLTA_HOME "$HOME/.volta"
-set -gx PATH "$VOLTA_HOME/bin" $PATH
+set -gx LDFLAGS "-L"(brew --prefix)"/opt/zlib/lib -L"(brew --prefix)"/opt/bzip2/lib"
+set -gx CPPFLAGS "-I"(brew --prefix)"/opt/zlib/include -I"(brew --prefix)"/opt/bzip2/include"
