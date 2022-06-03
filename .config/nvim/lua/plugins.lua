@@ -250,6 +250,7 @@ require('packer').startup(function()
     end
   }
   use 'tpope/vim-repeat'
+  use 'tpope/vim-rhubarb'
   use 'tpope/vim-unimpaired'
   use 'wellle/targets.vim'
 end) 
