@@ -155,6 +155,41 @@ require("packer").startup(function()
 	use("liuchengxu/vista.vim")
 	use("mattn/emmet-vim")
 	use({
+		"mhartington/formatter.nvim",
+		config = function()
+			local prettier = require("formatter.filetypes.javascript").prettier
+			local prettiereslint = require("formatter.filetypes.javascript").prettiereslint
+
+			local js_formatter
+			if vim.env.NVIM_USE_PRETTIER_ESLINT ~= nil then
+				js_formatter = require("formatter.filetypes.javascript").prettiereslint
+			else
+				js_formatter = require("formatter.filetypes.javascript").prettier
+			end
+
+			require("formatter").setup({
+				filetype = {
+					css = { prettier },
+					html = { prettier },
+					javascript = { js_formatter },
+					javascriptreact = { js_formatter },
+					json = { prettier },
+					less = { prettier },
+					lua = { require("formatter.filetypes.lua").stylua },
+					markdown = { prettier },
+					scss = { prettier },
+					svelte = { prettier },
+					typescript = { js_formatter },
+					typescriptreact = { js_formatter },
+					vue = { js_formatter },
+					yaml = { prettier },
+				},
+			})
+
+			require("utils").nmap("<leader>cf", ":Format<cr>")
+		end,
+	})
+	use({
 		"neovim/nvim-lspconfig",
 		config = function()
 			local nvim_lsp = require("lspconfig")
@@ -220,29 +255,6 @@ require("packer").startup(function()
 					enable = true,
 				},
 			})
-		end,
-	})
-	use({
-		"prettier/vim-prettier",
-		run = "yarn install",
-		ft = {
-			"css",
-			"graphql",
-			"html",
-			"javascript",
-			"javascriptreact",
-			"json",
-			"less",
-			"markdown",
-			"scss",
-			"svelte",
-			"typescript",
-			"typescriptreact",
-			"vue",
-			"yaml",
-		},
-		config = function()
-			require("utils").nmap("<leader>cf", ":Prettier<cr>")
 		end,
 	})
 	use("tpope/vim-endwise")
