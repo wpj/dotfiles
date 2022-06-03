@@ -1,5 +1,5 @@
 vim.defer_fn(function()
-  require('plugins')
+	require("plugins")
 end, 0)
-require('settings')
-require('mappings')
+require("settings")
+require("mappings")
