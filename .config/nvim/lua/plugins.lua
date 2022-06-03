@@ -21,9 +21,33 @@ require('packer').startup(function()
   use {
     'b3nj5m1n/kommentary',
     config = function()
-      require('kommentary.config').configure_language('rust', {
+      local kommentary_config = require('kommentary.config')
+
+      kommentary_config.configure_language('rust', {
           prefer_single_line_comments = true,
       })
+
+      kommentary_config.configure_language('less', {
+          prefer_multi_line_comments = true,
+      })
+
+      local update_commentstring = require('ts_context_commentstring.internal').update_commentstring
+
+      local update_commentstring_languages = {
+        'html',
+        'javascriptreact',
+        'svelte',
+        'typescriptreact',
+        'vue',
+      }
+      for _, lang in ipairs(update_commentstring_languages) do
+        -- See https://github.com/JoosepAlviste/nvim-ts-context-commentstring/blob/88343753dbe81c227a1c1fd2c8d764afb8d36269/README.md#kommentary.
+        kommentary_config.configure_language(lang, {
+          single_line_comment_string = 'auto',
+          multi_line_comment_strings = 'auto',
+          hook_function = update_commentstring,
+        })
+      end
     end
   }
 
@@ -106,6 +130,7 @@ require('packer').startup(function()
     end
   }
   use 'jiangmiao/auto-pairs'
+  use 'JoosepAlviste/nvim-ts-context-commentstring'
   use 'jremmen/vim-ripgrep'
   use 'junegunn/rainbow_parentheses.vim'
   use 'junegunn/seoul256.vim'
@@ -153,6 +178,10 @@ require('packer').startup(function()
     run = ':TSUpdate',
     config = function()
       require'nvim-treesitter.configs'.setup {
+        context_commentstring = {
+          enable = true,
+          enable_autocmd = false,
+        },
         ensure_installed = {
           'bash',
           'css',
