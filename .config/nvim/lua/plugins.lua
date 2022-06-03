@@ -131,6 +131,16 @@ require('packer').startup(function()
   }
   use 'jiangmiao/auto-pairs'
   use 'JoosepAlviste/nvim-ts-context-commentstring'
+  use {
+    'jose-elias-alvarez/null-ls.nvim',
+    config = function ()
+      require('null-ls').setup({
+        sources = {
+          require("null-ls").builtins.diagnostics.eslint,
+        },
+      })
+    end
+  }
   use 'jremmen/vim-ripgrep'
   use 'junegunn/rainbow_parentheses.vim'
   use 'junegunn/seoul256.vim'
