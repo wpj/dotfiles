@@ -64,23 +64,47 @@ require("packer").startup(function()
 	use({
 		"folke/which-key.nvim",
 		config = function()
-			require("which-key").setup({})
+			local wk = require("which-key")
+
+			wk.setup({})
+
+			wk.register({
+				c = {
+					name = "code",
+
+          d = { "<cmd>lua vim.lsp.buf.definition()<cr>", "Go to definition" },
+          
+					-- glepnir/lspsaga.nvim
+					a = { "<cmd> Lspsaga code_action<cr>", "Code actions" },
+					D = { "<cmd> Lspsaga preview_definition<cr>", "Preview definition" },
+					e = { "<cmd> Lspsaga show_line_diagnostics<cr>", "Show line diagnostics" },
+          h = { "<cmd> Lspsaga lsp_finder<cr>", "Find references" },
+					r = { "<cmd> Lspsaga rename<cr>", "Rename" },
+					s = { "<cmd> Lspsaga signature_help<cr>", "Show signature" },
+
+					-- mhartington/formatter.nvim
+					f = { "<cmd> Format<cr>", "Format code" },
+				},
+
+				-- nvim-telescope/telescope.nvim
+				["/"] = { "<cmd>Telescope live_grep<cr>", "Search project files" },
+				["<leader>"] = { "<cmd>Telescope find_files<cr>", "Find file in project" },
+
+        -- tpope/vim-fugitive
+        g = {
+          name = "git",
+          g = { "<cmd> Git<cr>", "Git" },
+        }
+			}, { prefix = "<leader>" })
+
+			-- glepnir/lspsaga.nvim
+			wk.register({
+				["[d"] = { "<cmd> Lspsaga diagnostic_jump_prev<cr>", "Previous diagnostic" },
+				["]d"] = { "<cmd> Lspsaga diagnostic_jump_next<cr>", "Next diagnostic" },
+			})
 		end,
 	})
-	use({
-		"glepnir/lspsaga.nvim",
-		config = function()
-			local nmap = require("utils").nmap
-			nmap("gh", ":Lspsaga lsp_finder<cr>")
-			nmap("<leader>ca", ":Lspsaga code_action<cr>")
-			nmap("gs", ":Lspsaga signature_help<cr>")
-			nmap("gr", ":Lspsaga rename<cr>")
-			nmap("gD", ":Lspsaga preview_definition<cr>")
-			nmap("<leader>cd", ":Lspsaga show_line_diagnostics<cr>")
-			nmap("[d", ":Lspsaga diagnostic_jump_prev<cr>")
-			nmap("]d", ":Lspsaga diagnostic_jump_next<cr>")
-		end,
-	})
+	use("glepnir/lspsaga.nvim")
 	use({
 		"hoob3rt/lualine.nvim",
 		requires = { "kyazdani42/nvim-web-devicons", opt = true },
@@ -185,8 +209,6 @@ require("packer").startup(function()
 					yaml = { prettier },
 				},
 			})
-
-			require("utils").nmap("<leader>cf", ":Format<cr>")
 		end,
 	})
 	use({
@@ -205,21 +227,11 @@ require("packer").startup(function()
 			for _, server in ipairs(enabled_servers) do
 				nvim_lsp[server].setup({})
 			end
-
-			local nmap = require("utils").nmap
-			nmap("K", "<cmd>lua vim.lsp.buf.hover()<cr>")
-			nmap("gd", "<cmd>lua vim.lsp.buf.definition()<cr>")
-			nmap("g0", "<cmd>lua vim.lsp.buf.document_symbol()<cr>")
-			nmap("gf", "<cmd>lua vim.lsp.buf.formatting()<cr>")
 		end,
 	})
 	use({
 		"nvim-telescope/telescope.nvim",
 		requires = { { "nvim-lua/plenary.nvim" } },
-		config = function()
-			require("utils").nmap("<leader>/", "<cmd>Telescope live_grep<cr>")
-			require("utils").map("", "<leader><leader>", "<cmd>Telescope find_files<cr>")
-		end,
 	})
 	use({
 		"nvim-treesitter/nvim-treesitter",
@@ -258,12 +270,7 @@ require("packer").startup(function()
 		end,
 	})
 	use("tpope/vim-endwise")
-	use({
-		"tpope/vim-fugitive",
-		config = function()
-			require("utils").nmap("<leader>gg", ":Git<cr>")
-		end,
-	})
+	use("tpope/vim-fugitive")
 	use("tpope/vim-repeat")
 	use("tpope/vim-rhubarb")
 	use("tpope/vim-unimpaired")
