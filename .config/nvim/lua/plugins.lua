@@ -72,13 +72,13 @@ require("packer").startup(function()
 				c = {
 					name = "code",
 
-          d = { "<cmd>lua vim.lsp.buf.definition()<cr>", "Go to definition" },
-          
+					d = { "<cmd>lua vim.lsp.buf.definition()<cr>", "Go to definition" },
+
 					-- glepnir/lspsaga.nvim
 					a = { "<cmd> Lspsaga code_action<cr>", "Code actions" },
 					D = { "<cmd> Lspsaga preview_definition<cr>", "Preview definition" },
 					e = { "<cmd> Lspsaga show_line_diagnostics<cr>", "Show line diagnostics" },
-          h = { "<cmd> Lspsaga lsp_finder<cr>", "Find references" },
+					h = { "<cmd> Lspsaga lsp_finder<cr>", "Find references" },
 					r = { "<cmd> Lspsaga rename<cr>", "Rename" },
 					s = { "<cmd> Lspsaga signature_help<cr>", "Show signature" },
 
@@ -90,11 +90,11 @@ require("packer").startup(function()
 				["/"] = { "<cmd>Telescope live_grep<cr>", "Search project files" },
 				["<leader>"] = { "<cmd>Telescope find_files<cr>", "Find file in project" },
 
-        -- tpope/vim-fugitive
-        g = {
-          name = "git",
-          g = { "<cmd> Git<cr>", "Git" },
-        }
+				-- tpope/vim-fugitive
+				g = {
+					name = "git",
+					g = { "<cmd> Git<cr>", "Git" },
+				},
 			}, { prefix = "<leader>" })
 
 			-- glepnir/lspsaga.nvim
