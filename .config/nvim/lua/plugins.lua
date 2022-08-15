@@ -95,6 +95,8 @@ require("packer").startup(function()
 					name = "git",
 					g = { "<cmd> Git<cr>", "Git" },
 				},
+
+                ["?"] = { "<cmd> WhichKey<cr>", "Show key bindings" },
 			}, { prefix = "<leader>" })
 
 			-- glepnir/lspsaga.nvim
