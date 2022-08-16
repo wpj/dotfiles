@@ -196,6 +196,7 @@ require("packer").startup(function()
 			require("formatter").setup({
 				filetype = {
 					css = { prettier },
+                    go = { require("formatter.filetypes.go").gofmt },
 					html = { prettier },
 					javascript = { js_formatter },
 					javascriptreact = { js_formatter },
