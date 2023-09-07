@@ -1,25 +1,19 @@
--- NOTE: Because packer precompiles config/setup functions, variables must be
--- declared within the scope of those functions.
-
-local install_path = vim.fn.stdpath("data") .. "/site/pack/packer/start/packer.nvim"
-if vim.fn.empty(vim.fn.glob(install_path)) > 0 then
+local lazypath = vim.fn.stdpath("data") .. "/lazy/lazy.nvim"
+if not vim.loop.fs_stat(lazypath) then
     vim.fn.system({
         "git",
         "clone",
-        "--depth",
-        "1",
-        "https://github.com/wbthomason/packer.nvim",
-        install_path,
+        "--filter=blob:none",
+        "https://github.com/folke/lazy.nvim.git",
+        "--branch=stable", -- latest stable release
+        lazypath,
     })
-    vim.cmd("packadd packer.nvim")
 end
+vim.opt.rtp:prepend(lazypath)
 
-require("packer").startup(function()
-    use("wbthomason/packer.nvim")
-
-    use("airblade/vim-rooter")
-
-    use({
+require("lazy").setup({
+    "airblade/vim-rooter",
+    {
         "b3nj5m1n/kommentary",
         config = function()
             local kommentary_config = require("kommentary.config")
@@ -62,20 +56,16 @@ require("packer").startup(function()
                 })
             end
         end,
-    })
-
-    use("browserslist/vim-browserslist")
-
-    use("editorconfig/editorconfig-vim")
-    use({
+    },
+    "browserslist/vim-browserslist",
+    "editorconfig/editorconfig-vim",
+    {
         "folke/trouble.nvim",
-        requires = "nvim-tree/nvim-web-devicons",
-        config = function()
-            require("trouble").setup({})
-        end,
-    })
-    use("folke/tokyonight.nvim")
-    use({
+        dependencies = { "nvim-tree/nvim-web-devicons" },
+        config = true,
+    },
+    "folke/tokyonight.nvim",
+    {
         "folke/which-key.nvim",
         config = function()
             local wk = require("which-key")
@@ -129,23 +119,21 @@ require("packer").startup(function()
                 ["<C-k>"] = require("telescope.actions").cycle_history_prev,
             })
         end,
-    })
-    use({
+    },
+    {
         "glepnir/lspsaga.nvim",
-        opt = true,
+        lazy = true,
         branch = "main",
         event = "LspAttach",
-        config = function()
-            require("lspsaga").setup({})
-        end,
-        requires = {
-            { "nvim-tree/nvim-web-devicons" },
-            { "nvim-treesitter/nvim-treesitter" },
+        config = true,
+        dependencies = {
+            "nvim-tree/nvim-web-devicons",
+            "nvim-treesitter/nvim-treesitter",
         },
-    })
-    use({
+    },
+    {
         "hoob3rt/lualine.nvim",
-        requires = { "nvim-tree/nvim-web-devicons", opt = true },
+        dependencies = { "nvim-tree/nvim-web-devicons" },
         config = function()
             require("lualine").setup({
                 options = {
@@ -154,10 +142,10 @@ require("packer").startup(function()
                 },
             })
         end,
-    })
-    use({
+    },
+    {
         "hrsh7th/nvim-cmp",
-        requires = {
+        dependencies = {
             "hrsh7th/cmp-nvim-lsp",
             "hrsh7th/vim-vsnip",
             "hrsh7th/cmp-buffer",
@@ -190,10 +178,10 @@ require("packer").startup(function()
                 }),
             })
         end,
-    })
-    use("jiangmiao/auto-pairs")
-    use("JoosepAlviste/nvim-ts-context-commentstring")
-    use({
+    },
+    "jiangmiao/auto-pairs",
+    "JoosepAlviste/nvim-ts-context-commentstring",
+    {
         "jose-elias-alvarez/null-ls.nvim",
         config = function()
             require("null-ls").setup({
@@ -202,21 +190,25 @@ require("packer").startup(function()
                 },
             })
         end,
-    })
-    use("jremmen/vim-ripgrep")
-    use("junegunn/rainbow_parentheses.vim")
-    use("junegunn/seoul256.vim")
-    use("justinmk/vim-dirvish")
-    use({
-        "lewis6991/gitsigns.nvim",
-        requires = { "nvim-lua/plenary.nvim" },
+    },
+    "jremmen/vim-ripgrep",
+    "junegunn/rainbow_parentheses.vim",
+    {
+        "junegunn/seoul256.vim",
+        lazy = false,
         config = function()
-            require("gitsigns").setup()
+            vim.cmd([[colorscheme seoul256]])
         end,
-    })
-    use("liuchengxu/vista.vim")
-    use("mattn/emmet-vim")
-    use({
+    },
+    "justinmk/vim-dirvish",
+    {
+        "lewis6991/gitsigns.nvim",
+        dependencies = { "nvim-lua/plenary.nvim" },
+        config = true
+    },
+    "liuchengxu/vista.vim",
+    "mattn/emmet-vim",
+    {
         "mhartington/formatter.nvim",
         config = function()
             local prettier = require("formatter.filetypes.javascript").prettier
@@ -249,8 +241,8 @@ require("packer").startup(function()
                 },
             })
         end,
-    })
-    use({
+    },
+    {
         "neovim/nvim-lspconfig",
         config = function()
             local nvim_lsp = require("lspconfig")
@@ -267,14 +259,14 @@ require("packer").startup(function()
                 nvim_lsp[server].setup({})
             end
         end,
-    })
-    use({
+    },
+    {
         "nvim-telescope/telescope.nvim",
-        requires = { { "nvim-lua/plenary.nvim" } },
-    })
-    use({
+        dependencies = { "nvim-lua/plenary.nvim" },
+    },
+    {
         "nvim-treesitter/nvim-treesitter",
-        run = ":TSUpdate",
+        build = ":TSUpdate",
         config = function()
             require("nvim-treesitter.configs").setup({
                 context_commentstring = {
@@ -307,11 +299,11 @@ require("packer").startup(function()
                 },
             })
         end,
-    })
-    use("tpope/vim-endwise")
-    use("tpope/vim-fugitive")
-    use("tpope/vim-repeat")
-    use("tpope/vim-rhubarb")
-    use("tpope/vim-unimpaired")
-    use("wellle/targets.vim")
-end)
+    },
+    "tpope/vim-endwise",
+    "tpope/vim-fugitive",
+    "tpope/vim-repeat",
+    "tpope/vim-rhubarb",
+    "tpope/vim-unimpaired",
+    "wellle/targets.vim",
+})

@@ -83,7 +83,6 @@ opt.swapfile = false
 -- g.tokyonight_sidebars = { "qf", "vista_kind", "terminal", "packer" }
 -- opt.background = 'dark'
 
-cmd([[colorscheme seoul256]])
 cmd("syntax enable")
 
 g.user_emmet_leader_key = "<C-Z>"
