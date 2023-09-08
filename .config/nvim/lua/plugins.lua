@@ -67,6 +67,11 @@ require("lazy").setup({
     "folke/tokyonight.nvim",
     {
         "folke/which-key.nvim",
+        event = "VeryLazy",
+        init = function()
+            vim.o.timeout = true
+            vim.o.timeoutlen = 300
+        end,
         config = function()
             local wk = require("which-key")
 
@@ -196,6 +201,7 @@ require("lazy").setup({
     {
         "junegunn/seoul256.vim",
         lazy = false,
+        priority = 1000,
         config = function()
             vim.cmd([[colorscheme seoul256]])
         end,
@@ -204,7 +210,7 @@ require("lazy").setup({
     {
         "lewis6991/gitsigns.nvim",
         dependencies = { "nvim-lua/plenary.nvim" },
-        config = true
+        config = true,
     },
     "liuchengxu/vista.vim",
     "mattn/emmet-vim",
@@ -306,4 +312,8 @@ require("lazy").setup({
     "tpope/vim-rhubarb",
     "tpope/vim-unimpaired",
     "wellle/targets.vim",
+}, {
+    install = {
+        colorscheme = { "seoul256", "habamax" },
+    },
 })
