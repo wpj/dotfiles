@@ -1,4 +1,4 @@
 vim.defer_fn(function()
-	require("plugins")
+  require("plugins")
 end, 0)
 require("settings")
