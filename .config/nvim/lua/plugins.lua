@@ -13,6 +13,7 @@ vim.opt.rtp:prepend(lazypath)
 
 require("lazy").setup({
     "airblade/vim-rooter",
+    "andymass/vim-matchup",
     {
         "b3nj5m1n/kommentary",
         config = function()
