@@ -40,6 +40,7 @@ brew "htop"
 brew "httpie"
 brew "jq"
 brew "kubernetes-cli"
+brew "lua-language-server"
 brew "mas"
 brew "moreutils"
 brew "mtr"
@@ -101,6 +102,7 @@ cask "spotify"
 cask "transmit"
 cask "visual-studio-code"
 cask "vlc"
+cask "wezterm"
 
 mas "Lungo", id: 1263070803
 mas "Pages", id: 409201541
