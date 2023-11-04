@@ -64,16 +64,12 @@ require("lazy").setup({
     {
         "folke/trouble.nvim",
         dependencies = { "nvim-tree/nvim-web-devicons" },
-        config = true,
     },
     {
 
         "folke/tokyonight.nvim",
         lazy = false,
         priority = 1000,
-        config = function()
-            vim.cmd([[colorscheme tokyonight]])
-        end,
     },
     {
         "folke/which-key.nvim",
@@ -318,6 +314,6 @@ require("lazy").setup({
     "wellle/targets.vim",
 }, {
     install = {
-        colorscheme = { "seoul256", "habamax" },
+        colorscheme = { "tokyonight", "habamax" },
     },
 })

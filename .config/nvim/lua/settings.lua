@@ -4,7 +4,7 @@ local g = vim.g
 local opt = vim.opt
 
 if fn.executable("fish") then
-  vim.opt.shell = "fish"
+    vim.opt.shell = "fish"
 end
 
 g.mapleader = " "
@@ -49,7 +49,7 @@ opt.wrap = false
 
 local undodir = tostring(fn.stdpath("data")) .. "/undo"
 if fn.isdirectory(undodir) ~= 1 then
-  fn.mkdir(undodir, "p")
+    fn.mkdir(undodir, "p")
 end
 opt.undodir = undodir
 opt.undofile = true
@@ -58,7 +58,7 @@ opt.undofile = true
 opt.completeopt:remove("longest")
 
 if fn.exists("+termguicolors") == 1 then
-  opt.termguicolors = true
+    opt.termguicolors = true
 end
 
 -- filetype plugin indent on
@@ -79,6 +79,7 @@ opt.swapfile = false
 -- ------------
 -- color scheme
 -- ------------
+cmd([[colorscheme tokyonight]])
 -- g.tokyonight_style = "night"
 -- g.tokyonight_italic_functions = true
 -- g.tokyonight_sidebars = { "qf", "vista_kind", "terminal", "packer" }
