@@ -60,6 +60,10 @@ require("lazy").setup({
         end,
     },
     "browserslist/vim-browserslist",
+    {
+        "echasnovski/mini.pairs",
+        opts = {},
+    },
     "editorconfig/editorconfig-vim",
     {
         "folke/trouble.nvim",
@@ -190,7 +194,6 @@ require("lazy").setup({
             })
         end,
     },
-    "jiangmiao/auto-pairs",
     "JoosepAlviste/nvim-ts-context-commentstring",
     {
         "jose-elias-alvarez/null-ls.nvim",
