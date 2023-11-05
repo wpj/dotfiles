@@ -101,8 +101,8 @@ require("lazy").setup({
                     r = { "<cmd> Lspsaga rename<cr>", "Rename" },
                     s = { "<cmd> Lspsaga signature_help<cr>", "Show signature" },
 
-                    -- mhartington/formatter.nvim
-                    f = { "<cmd> Format<cr>", "Format code" },
+                    -- stevearc/conform.nvim
+                    f = { "<cmd>lua require('conform').format()<cr>", "Format code" },
                 },
 
                 f = {
@@ -217,40 +217,6 @@ require("lazy").setup({
     "liuchengxu/vista.vim",
     "mattn/emmet-vim",
     {
-        "mhartington/formatter.nvim",
-        config = function()
-            local prettier = require("formatter.filetypes.javascript").prettier
-            local prettiereslint = require("formatter.filetypes.javascript").prettiereslint
-
-            local js_formatter
-            if vim.env.NVIM_USE_PRETTIER_ESLINT ~= nil then
-                js_formatter = require("formatter.filetypes.javascript").prettiereslint
-            else
-                js_formatter = require("formatter.filetypes.javascript").prettier
-            end
-
-            require("formatter").setup({
-                filetype = {
-                    css = { prettier },
-                    go = { require("formatter.filetypes.go").gofmt },
-                    html = { prettier },
-                    javascript = { js_formatter },
-                    javascriptreact = { js_formatter },
-                    json = { prettier },
-                    less = { prettier },
-                    lua = { require("formatter.filetypes.lua").stylua },
-                    markdown = { prettier },
-                    scss = { prettier },
-                    svelte = { prettier },
-                    typescript = { js_formatter },
-                    typescriptreact = { js_formatter },
-                    vue = { js_formatter },
-                    yaml = { prettier },
-                },
-            })
-        end,
-    },
-    {
         "neovim/nvim-lspconfig",
         config = function()
             local nvim_lsp = require("lspconfig")
@@ -307,6 +273,35 @@ require("lazy").setup({
                     enable = true,
                 },
             })
+        end,
+    },
+    {
+        "stevearc/conform.nvim",
+        opts = function()
+            local js_formatter = "prettier"
+            if vim.env.nvim_use_prettier_eslint ~= nil then
+                js_formatter = "prettiereslint"
+            end
+
+            return {
+                formatters_by_ft = {
+                    css = { "prettier" },
+                    go = { "gofmt" },
+                    html = { "prettier" },
+                    javascript = { js_formatter },
+                    javascriptreact = { js_formatter },
+                    json = { "prettier" },
+                    less = { "prettier" },
+                    lua = { "stylua" },
+                    markdown = { "prettier" },
+                    scss = { "prettier" },
+                    svelte = { "prettier" },
+                    typescript = { js_formatter },
+                    typescriptreact = { js_formatter },
+                    vue = { js_formatter },
+                    yaml = { "prettier" },
+                },
+            }
         end,
     },
     "tpope/vim-endwise",
