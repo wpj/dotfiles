@@ -140,11 +140,11 @@ require("lazy").setup({
         lazy = true,
         branch = "main",
         event = "LspAttach",
-        config = true,
         dependencies = {
             "nvim-tree/nvim-web-devicons",
             "nvim-treesitter/nvim-treesitter",
         },
+        opts = {},
     },
     {
         "hoob3rt/lualine.nvim",
@@ -212,7 +212,7 @@ require("lazy").setup({
     {
         "lewis6991/gitsigns.nvim",
         dependencies = { "nvim-lua/plenary.nvim" },
-        config = true,
+        opts = {},
     },
     "liuchengxu/vista.vim",
     "mattn/emmet-vim",
