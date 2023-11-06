@@ -23,6 +23,13 @@ config.scrollback_lines = 10000
 -- Key mappings
 config.leader = { key = "a", mods = "CTRL", timeout_milliseconds = 1000 }
 config.keys = {
+    -- Send C-a when C-a is pressed twice.
+    {
+        key = "a",
+        mods = "LEADER|CTRL",
+        action = wezterm.action.SendKey({ key = "a", mods = "CTRL" }),
+    },
+
     { key = "c", mods = "LEADER", action = act.ActivateCopyMode },
     { key = "-", mods = "LEADER", action = act.SplitVertical({ domain = "CurrentPaneDomain" }) },
     { key = "|", mods = "LEADER", action = act.SplitHorizontal({ domain = "CurrentPaneDomain" }) },
