@@ -214,7 +214,6 @@ require("lazy").setup({
         dependencies = { "nvim-lua/plenary.nvim" },
         opts = {},
     },
-    "liuchengxu/vista.vim",
     "mattn/emmet-vim",
     {
         "neovim/nvim-lspconfig",
