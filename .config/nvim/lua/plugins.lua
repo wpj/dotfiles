@@ -66,6 +66,10 @@ require("lazy").setup({
     },
     "editorconfig/editorconfig-vim",
     {
+        "folke/neodev.nvim",
+        opts = {},
+    },
+    {
         "folke/trouble.nvim",
         dependencies = { "nvim-tree/nvim-web-devicons" },
     },
@@ -217,20 +221,36 @@ require("lazy").setup({
     "mattn/emmet-vim",
     {
         "neovim/nvim-lspconfig",
+        dependencies = {
+            "folke/neodev.nvim",
+        },
         config = function()
             local nvim_lsp = require("lspconfig")
 
-            local enabled_servers = {
-                "lua_ls",
-                "rls",
-                "tsserver",
-                "svelte",
-                "vuels",
-                "gopls",
+            local servers = {
+                lua_ls = {
+                    settings = {
+                        Lua = {
+                            workspace = {
+                                checkThirdParty = false,
+                            },
+                        },
+                    },
+                },
+                rls = {},
+                tsserver = {},
+                svelte = {},
+                vuels = {},
+                gopls = {},
             }
 
-            for _, server in ipairs(enabled_servers) do
-                nvim_lsp[server].setup({})
+            for server, opts in pairs(servers) do
+                -- neodev must be set up before lua_ls (https://github.com/folke/neodev.nvim/tree/80487e4f7bfa11c2ef2a1b461963db019aad6a73#-setup).
+                if server == "lua_ls" then
+                    require("neodev").setup({})
+                end
+
+                nvim_lsp[server].setup(opts)
             end
         end,
     },
