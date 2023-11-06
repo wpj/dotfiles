@@ -14,52 +14,19 @@ vim.opt.rtp:prepend(lazypath)
 require("lazy").setup({
     "airblade/vim-rooter",
     "andymass/vim-matchup",
-    {
-        "b3nj5m1n/kommentary",
-        config = function()
-            local kommentary_config = require("kommentary.config")
-
-            kommentary_config.configure_language("less", {
-                prefer_multi_line_comments = true,
-            })
-
-            local single_line_comment_languages = {
-                "go",
-                "javascript",
-                "javascriptreact",
-                "lua",
-                "rust",
-                "svelte",
-                "typescript",
-                "typescriptreact",
-                "vue",
-            }
-            for _, lang in ipairs(single_line_comment_languages) do
-                kommentary_config.configure_language(lang, {
-                    prefer_single_line_comments = true,
-                })
-            end
-
-            local update_commentstring = require("ts_context_commentstring.internal").update_commentstring
-
-            local update_commentstring_languages = {
-                "html",
-                "javascriptreact",
-                "svelte",
-                "typescriptreact",
-                "vue",
-            }
-            for _, lang in ipairs(update_commentstring_languages) do
-                -- See https://github.com/JoosepAlviste/nvim-ts-context-commentstring/blob/88343753dbe81c227a1c1fd2c8d764afb8d36269/README.md#kommentary.
-                kommentary_config.configure_language(lang, {
-                    single_line_comment_string = "auto",
-                    multi_line_comment_strings = "auto",
-                    hook_function = update_commentstring,
-                })
-            end
-        end,
-    },
     "browserslist/vim-browserslist",
+    {
+        "echasnovski/mini.comment",
+        event = "VeryLazy",
+        opts = {
+            options = {
+                custom_commentstring = function()
+                    return require("ts_context_commentstring.internal").calculate_commentstring()
+                        or vim.bo.commentstring
+                end,
+            },
+        },
+    },
     {
         "echasnovski/mini.pairs",
         opts = {},
@@ -198,7 +165,11 @@ require("lazy").setup({
             })
         end,
     },
-    "JoosepAlviste/nvim-ts-context-commentstring",
+    {
+        "JoosepAlviste/nvim-ts-context-commentstring",
+        lazy = true,
+        opts = {},
+    },
     {
         "jose-elias-alvarez/null-ls.nvim",
         config = function()
