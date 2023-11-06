@@ -42,7 +42,6 @@ opt.splitright = true
 opt.startofline = false
 opt.tabstop = 2
 opt.title = true
-opt.virtualedit = "all"
 opt.visualbell = true
 opt.wildmenu = true
 opt.wrap = false
