@@ -172,7 +172,6 @@ require("lazy").setup({
             })
         end,
     },
-    "jremmen/vim-ripgrep",
     {
         "junegunn/rainbow_parentheses.vim",
         cmd = "RainbowParentheses",
@@ -322,7 +321,6 @@ require("lazy").setup({
         },
     },
     "tpope/vim-repeat",
-    "tpope/vim-unimpaired",
     "wellle/targets.vim",
 }, {
     install = {
