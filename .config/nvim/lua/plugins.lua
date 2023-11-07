@@ -118,18 +118,6 @@ require("lazy").setup({
         opts = {},
     },
     {
-        "hoob3rt/lualine.nvim",
-        dependencies = { "nvim-tree/nvim-web-devicons" },
-        config = function()
-            require("lualine").setup({
-                options = {
-                    icons_enabled = true,
-                    theme = "tokyonight",
-                },
-            })
-        end,
-    },
-    {
         "hrsh7th/nvim-cmp",
         dependencies = {
             "hrsh7th/cmp-nvim-lsp",
@@ -224,6 +212,12 @@ require("lazy").setup({
                 nvim_lsp[server].setup(opts)
             end
         end,
+    },
+    {
+        "nvim-lualine/lualine.nvim",
+        event = "VeryLazy",
+        dependencies = { "nvim-tree/nvim-web-devicons" },
+        opts = {},
     },
     {
         "nvim-telescope/telescope.nvim",
