@@ -39,6 +39,7 @@ require("lazy").setup({
     },
     {
         "folke/trouble.nvim",
+        cmd = { "Trouble", "TroubleToggle" },
         dependencies = { "nvim-tree/nvim-web-devicons" },
     },
     {
@@ -120,6 +121,7 @@ require("lazy").setup({
     },
     {
         "hrsh7th/nvim-cmp",
+        event = "InsertEnter",
         dependencies = {
             "hrsh7th/cmp-nvim-lsp",
             "hrsh7th/vim-vsnip",
@@ -161,6 +163,7 @@ require("lazy").setup({
     },
     {
         "jose-elias-alvarez/null-ls.nvim",
+        event = "LspAttach",
         config = function()
             require("null-ls").setup({
                 sources = {
@@ -170,15 +173,36 @@ require("lazy").setup({
         end,
     },
     "jremmen/vim-ripgrep",
-    "junegunn/rainbow_parentheses.vim",
-    "junegunn/seoul256.vim",
+    {
+        "junegunn/rainbow_parentheses.vim",
+        cmd = "RainbowParentheses",
+    },
+    {
+        "junegunn/seoul256.vim",
+        lazy = true,
+    },
     "justinmk/vim-dirvish",
     {
         "lewis6991/gitsigns.nvim",
+        event = "VeryLazy",
         dependencies = { "nvim-lua/plenary.nvim" },
         opts = {},
     },
-    "mattn/emmet-vim",
+    {
+        "mattn/emmet-vim",
+        ft = {
+            "css",
+            "html",
+            "javascript",
+            "javascriptreact",
+            "jsx",
+            "svelte",
+            "tsx",
+            "typescript",
+            "typescriptreact",
+            "vue",
+        },
+    },
     {
         "neovim/nvim-lspconfig",
         dependencies = {
@@ -290,9 +314,14 @@ require("lazy").setup({
         end,
     },
     "tpope/vim-endwise",
-    "tpope/vim-fugitive",
+    {
+        "tpope/vim-fugitive",
+        cmd = "Git",
+        dependencies = {
+            "tpope/vim-rhubarb",
+        },
+    },
     "tpope/vim-repeat",
-    "tpope/vim-rhubarb",
     "tpope/vim-unimpaired",
     "wellle/targets.vim",
 }, {
