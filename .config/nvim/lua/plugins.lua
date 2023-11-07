@@ -29,6 +29,7 @@ require("lazy").setup({
     },
     {
         "echasnovski/mini.pairs",
+        event = "VeryLazy",
         opts = {},
     },
     "editorconfig/editorconfig-vim",
