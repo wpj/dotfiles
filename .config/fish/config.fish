@@ -4,6 +4,8 @@ set -x GOPATH $HOME/.go
 
 set -gx VOLTA_HOME "$HOME/.volta"
 
+set -gx PNPM_HOME $HOME/Library/pnpm
+
 set -x RIPGREP_CONFIG_PATH $HOME/.config/ripgrep/.ripgreprc
 
 set -l HOMEBREW_BASE
@@ -15,29 +17,20 @@ end
 
 fish_add_path -g \
 	$HOMEBREW_BASE/{bin,sbin} \
-	$HOME/{.cargo,.local}/bin \
+	$HOME/.cargo/bin \
+	# pip
+	$HOME/.local/bin \
 	$GOPATH/bin \
-	(python3 -c 'import site; print(site.USER_BASE)')/bin \
 	$VOLTA_HOME/bin \
-	$HOME/.emacs.d/bin
+	$HOME/.emacs.d/bin \
+	$PNPM_HOME
 
 if type -q brew
-	fish_add_path -g \
-		(brew --prefix curl)/bin
-
-	[ -f (brew --prefix)/share/autojump/autojump.fish ]; and source (brew --prefix)/share/autojump/autojump.fish
+	fish_add_path -g (brew --prefix curl)/bin
 end
 
-if type -q pnpm
-	fish_add_path -g (pnpm bin --global)
-end
-
-if type -q starship
-    starship init fish | source
-end
-
-if type -q thefuck
-    thefuck --alias | source
+if type -q zoxide
+	zoxide init fish | source
 end
 
 if type -q pyenv
@@ -65,12 +58,8 @@ if type -q direnv
     direnv hook fish | source
 end
 
-if type -q helm
-	helm completion fish | source
-end
-
 abbr -a c 'cargo'
-abbr -a z 'j'
+abbr -a j 'z'
 abbr -a open. 'open .'
 abbr -a gaa 'git add --all'
 abbr -a g 'git'
@@ -89,5 +78,6 @@ end
 alias ibrew 'arch -x86_64 /usr/local/bin/brew'
 
 # Let compilers find keg-only zlib/bzip2
-set -gx LDFLAGS "-L"(brew --prefix)"/opt/zlib/lib -L"(brew --prefix)"/opt/bzip2/lib"
-set -gx CPPFLAGS "-I"(brew --prefix)"/opt/zlib/include -I"(brew --prefix)"/opt/bzip2/include"
+set -l HOMEBREW_PREFIX (brew --prefix)
+set -gx LDFLAGS "-L$HOMEBREW_PREFIX/opt/zlib/lib -L$HOMEBREW_PREFIX/opt/bzip2/lib"
+set -gx CPPFLAGS "-I$HOMEBREW_PREFIX/opt/zlib/include -I$HOMEBREW_PREFIX/opt/bzip2/include"
