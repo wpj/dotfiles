@@ -39,15 +39,8 @@ end
 
 alias e '$EDITOR'
 
-if type -q exa
-    abbr -a l 'exa'
-    abbr -a ls 'exa'
-    abbr -a ll 'exa -l'
-    abbr -a lll 'exa -la'
-else
-    abbr -a l 'ls'
-    abbr -a ll 'ls -l'
-    abbr -a lll 'ls -la'
+if type -q lsd
+    abbr -a ls 'lsd'
 end
 
 if type -q bat
