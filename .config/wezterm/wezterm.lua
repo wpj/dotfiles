@@ -53,6 +53,16 @@ config.keys = {
     { key = "w", mods = "LEADER", action = act.ShowLauncherArgs({ flags = "FUZZY|WORKSPACES" }) },
 
     { key = "/", mods = "LEADER", action = act.Search("CurrentSelectionOrEmptyString") },
+
+    -- Clear the scrollback/viewport and send C-l to redraw the prompt.
+    {
+        key = "l",
+        mods = "CTRL",
+        action = act.Multiple({
+            act.ClearScrollback("ScrollbackAndViewport"),
+            act.SendKey({ key = "l", mods = "CTRL" }),
+        }),
+    },
 }
 
 config.key_tables = {
