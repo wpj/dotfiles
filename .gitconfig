@@ -12,6 +12,10 @@
   pager = delta
 [interactive]
   diffFilter = delta --color-only
+
+[delta]
+	syntax-theme = Monokai Extended
+
 [filter "media"]
 	required = true
 	clean = git media clean %f
