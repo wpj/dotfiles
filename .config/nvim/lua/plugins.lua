@@ -96,6 +96,9 @@ require("lazy").setup({
                 ["/"] = { "<cmd>Telescope live_grep<cr>", "Search project files" },
                 ["<leader>"] = { "<cmd>Telescope find_files<cr>", "Find file in project" },
 
+                -- stevearc/oil.nvim
+                ["-"] = { "<cmd>Oil<cr>", "Open file browser" },
+
                 ["?"] = { "<cmd> WhichKey<cr>", "Show key bindings" },
             }, { prefix = "<leader>" })
 
@@ -180,7 +183,6 @@ require("lazy").setup({
         "junegunn/seoul256.vim",
         lazy = true,
     },
-    "justinmk/vim-dirvish",
     {
         "lewis6991/gitsigns.nvim",
         event = "VeryLazy",
@@ -311,6 +313,11 @@ require("lazy").setup({
                 },
             }
         end,
+    },
+    {
+        "stevearc/oil.nvim",
+        opts = {},
+        dependencies = { "nvim-tree/nvim-web-devicons" },
     },
     "tpope/vim-endwise",
     {
