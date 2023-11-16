@@ -96,16 +96,18 @@ require("lazy").setup({
                 ["/"] = { "<cmd>Telescope live_grep<cr>", "Search project files" },
                 ["<leader>"] = { "<cmd>Telescope find_files<cr>", "Find file in project" },
 
-                -- stevearc/oil.nvim
-                ["-"] = { "<cmd>Oil<cr>", "Open file browser" },
-
                 ["?"] = { "<cmd> WhichKey<cr>", "Show key bindings" },
             }, { prefix = "<leader>" })
 
-            -- glepnir/lspsaga.nvim
             wk.register({
+                -- glepnir/lspsaga.nvim
                 ["[d"] = { "<cmd> Lspsaga diagnostic_jump_prev<cr>", "Previous diagnostic" },
                 ["]d"] = { "<cmd> Lspsaga diagnostic_jump_next<cr>", "Next diagnostic" },
+
+                -- stevearc/oil.nvim
+                ["-"] = { "<cmd>Oil<cr>", "Open file browser" },
+
+                -- nvim-telescope/telescope.nvim
                 ["<C-j>"] = require("telescope.actions").cycle_history_next,
                 ["<C-k>"] = require("telescope.actions").cycle_history_prev,
             })
