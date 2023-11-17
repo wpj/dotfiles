@@ -21,7 +21,7 @@ config.macos_window_background_blur = 20
 config.scrollback_lines = 10000
 
 -- Key mappings
-config.leader = { key = "a", mods = "CTRL", timeout_milliseconds = 1000 }
+config.leader = { key = "a", mods = "CTRL", timeout_milliseconds = 3000 }
 config.keys = {
     -- Send C-a when C-a is pressed twice.
     {
