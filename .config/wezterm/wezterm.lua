@@ -38,6 +38,7 @@ config.keys = {
     { key = "j", mods = "LEADER", action = act.ActivatePaneDirection("Down") },
     { key = "k", mods = "LEADER", action = act.ActivatePaneDirection("Up") },
     { key = "l", mods = "LEADER", action = act.ActivatePaneDirection("Right") },
+    { key = " ", mods = "LEADER", action = act.RotatePanes("Clockwise") },
 
     { key = "x", mods = "LEADER", action = act.CloseCurrentPane({ confirm = true }) },
 
