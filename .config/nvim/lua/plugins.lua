@@ -105,10 +105,6 @@ require("lazy").setup({
 
                 -- stevearc/oil.nvim
                 ["-"] = { "<cmd>Oil<cr>", "Open file browser" },
-
-                -- nvim-telescope/telescope.nvim
-                ["<C-j>"] = require("telescope.actions").cycle_history_next,
-                ["<C-k>"] = require("telescope.actions").cycle_history_prev,
             })
         end,
     },
@@ -259,6 +255,16 @@ require("lazy").setup({
     {
         "nvim-telescope/telescope.nvim",
         dependencies = { "nvim-lua/plenary.nvim" },
+        opts = {
+            defaults = {
+                mappings = {
+                    i = {
+                        ["<C-j>"] = "cycle_history_next",
+                        ["<C-k>"] = "cycle_history_prev",
+                    },
+                },
+            },
+        },
     },
     {
         "nvim-treesitter/nvim-treesitter",
