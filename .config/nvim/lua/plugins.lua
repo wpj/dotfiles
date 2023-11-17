@@ -12,7 +12,6 @@ end
 vim.opt.rtp:prepend(lazypath)
 
 require("lazy").setup({
-    "airblade/vim-rooter",
     "andymass/vim-matchup",
     "browserslist/vim-browserslist",
     {
