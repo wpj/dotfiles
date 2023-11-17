@@ -191,6 +191,16 @@ require("lazy").setup({
         opts = {},
     },
     {
+        "lukas-reineke/indent-blankline.nvim",
+        event = "VeryLazy",
+        opts = {
+            indent = {
+                char = "│",
+            },
+        },
+        main = "ibl",
+    },
+    {
         "mattn/emmet-vim",
         ft = {
             "css",
