@@ -103,6 +103,10 @@ require("lazy").setup({
                 ["[d"] = { "<cmd> Lspsaga diagnostic_jump_prev<cr>", "Previous diagnostic" },
                 ["]d"] = { "<cmd> Lspsaga diagnostic_jump_next<cr>", "Next diagnostic" },
 
+                -- quickfix
+                ["[q"] = { vim.cmd.cprevious, "Previous quickfix" },
+                ["]q"] = { vim.cmd.cnext, "Next quickfix" },
+
                 -- stevearc/oil.nvim
                 ["-"] = { "<cmd>Oil<cr>", "Open file browser" },
             })
