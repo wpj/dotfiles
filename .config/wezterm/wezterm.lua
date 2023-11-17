@@ -38,12 +38,12 @@ config.keys = {
     { key = "j", mods = "LEADER", action = act.ActivatePaneDirection("Down") },
     { key = "k", mods = "LEADER", action = act.ActivatePaneDirection("Up") },
     { key = "l", mods = "LEADER", action = act.ActivatePaneDirection("Right") },
-    { key = " ", mods = "LEADER", action = act.RotatePanes("Clockwise") },
 
     { key = "x", mods = "LEADER", action = act.CloseCurrentPane({ confirm = true }) },
 
     { key = "z", mods = "LEADER", action = act.TogglePaneZoomState },
 
+    { key = "p", mods = "LEADER", action = act.ActivateKeyTable({ name = "move_pane" }) },
     { key = "r", mods = "LEADER", action = act.ActivateKeyTable({ name = "resize_pane" }) },
 
     { key = "n", mods = "LEADER", action = act.SpawnTab("CurrentPaneDomain") },
@@ -72,6 +72,11 @@ config.key_tables = {
         { key = "j", action = act.AdjustPaneSize({ "Down", 1 }) },
         { key = "k", action = act.AdjustPaneSize({ "Up", 1 }) },
         { key = "l", action = act.AdjustPaneSize({ "Right", 1 }) },
+        { key = "Escape", action = "PopKeyTable" },
+    },
+    move_pane = {
+        { key = " ", action = act.RotatePanes("Clockwise") },
+        { key = "s", action = act.PaneSelect({ mode = "SwapWithActive" }) },
         { key = "Escape", action = "PopKeyTable" },
     },
 }
