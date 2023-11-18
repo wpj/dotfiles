@@ -61,7 +61,7 @@ require("lazy").setup({
 
                     d = { "<cmd>lua vim.lsp.buf.definition()<cr>", "Go to definition" },
 
-                    -- glepnir/lspsaga.nvim
+                    -- nvimdev/lspsaga.nvim
                     a = { "<cmd> Lspsaga code_action<cr>", "Code actions" },
                     D = { "<cmd> Lspsaga peek_definition<cr>", "Preview definition" },
                     e = { "<cmd> Lspsaga show_line_diagnostics<cr>", "Show line diagnostics" },
@@ -95,7 +95,7 @@ require("lazy").setup({
             }, { prefix = "<leader>" })
 
             wk.register({
-                -- glepnir/lspsaga.nvim
+                -- nvimdev/lspsaga.nvim
                 ["[d"] = { "<cmd> Lspsaga diagnostic_jump_prev<cr>", "Previous diagnostic" },
                 ["]d"] = { "<cmd> Lspsaga diagnostic_jump_next<cr>", "Next diagnostic" },
 
@@ -107,17 +107,6 @@ require("lazy").setup({
                 ["-"] = { "<cmd>Oil<cr>", "Open file browser" },
             })
         end,
-    },
-    {
-        "glepnir/lspsaga.nvim",
-        lazy = true,
-        branch = "main",
-        event = "LspAttach",
-        dependencies = {
-            "nvim-tree/nvim-web-devicons",
-            "nvim-treesitter/nvim-treesitter",
-        },
-        opts = {},
     },
     {
         "hrsh7th/nvim-cmp",
@@ -241,6 +230,15 @@ require("lazy").setup({
                 nvim_lsp[server].setup(opts)
             end
         end,
+    },
+    {
+        "nvimdev/lspsaga.nvim",
+        event = "LspAttach",
+        dependencies = {
+            "nvim-tree/nvim-web-devicons",
+            "nvim-treesitter/nvim-treesitter",
+        },
+        opts = {},
     },
     {
         "nvim-lualine/lualine.nvim",
