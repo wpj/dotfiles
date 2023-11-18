@@ -37,7 +37,7 @@ if type -q pyenv
     status is-login; and pyenv init --path | source
 end
 
-alias e '$EDITOR'
+abbr -a e $EDITOR
 
 if type -q lsd
     abbr -a ls 'lsd'
