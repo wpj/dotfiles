@@ -7,7 +7,6 @@ if fn.executable("fish") then
     vim.opt.shell = "fish"
 end
 
-g.mapleader = " "
 g.loaded_netrwPlugin = 1 -- no netrw
 g.netrw_dirhistmax = 0 -- no netrwhist
 
