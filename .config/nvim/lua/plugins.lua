@@ -133,6 +133,11 @@ return {
         end,
     },
     {
+        "kevinhwang91/nvim-bqf",
+        opts = {},
+        ft = "qf",
+    },
+    {
         "JoosepAlviste/nvim-ts-context-commentstring",
         lazy = true,
         opts = {},
