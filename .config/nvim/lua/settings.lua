@@ -59,8 +59,6 @@ if fn.exists("+termguicolors") == 1 then
     opt.termguicolors = true
 end
 
--- filetype plugin indent on
-
 opt.textwidth = 0
 
 opt.colorcolumn = "80"
@@ -70,18 +68,10 @@ opt.backup = false
 opt.writebackup = false
 opt.swapfile = false
 
--- permanent undo
--- opt.undodir = '~/.nvimdid'
--- opt.undofile = true
-
 -- ------------
 -- color scheme
 -- ------------
 cmd([[colorscheme tokyonight]])
--- g.tokyonight_style = "night"
--- g.tokyonight_italic_functions = true
--- g.tokyonight_sidebars = { "qf", "vista_kind", "terminal", "packer" }
--- opt.background = 'dark'
 
 cmd("syntax enable")
 
