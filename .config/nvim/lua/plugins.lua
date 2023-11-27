@@ -7,8 +7,7 @@ return {
         opts = {
             options = {
                 custom_commentstring = function()
-                    return require("ts_context_commentstring.internal").calculate_commentstring()
-                        or vim.bo.commentstring
+                    return require("ts_context_commentstring").calculate_commentstring() or vim.bo.commentstring
                 end,
             },
         },
@@ -140,7 +139,14 @@ return {
     {
         "JoosepAlviste/nvim-ts-context-commentstring",
         lazy = true,
-        opts = {},
+        init = function()
+            -- See https://github.com/JoosepAlviste/nvim-ts-context-commentstring/tree/b8ff464f2afc2000f6c72fa331a8fc090cb46b39
+            vim.g.skip_ts_context_commentstring_module = true
+        end,
+        opts = {
+            -- https://github.com/JoosepAlviste/nvim-ts-context-commentstring/wiki/Integrations#minicomment
+            enable_autocmd = false,
+        },
     },
     {
         "jose-elias-alvarez/null-ls.nvim",
@@ -257,10 +263,6 @@ return {
         build = ":TSUpdate",
         config = function()
             require("nvim-treesitter.configs").setup({
-                context_commentstring = {
-                    enable = true,
-                    enable_autocmd = false,
-                },
                 ensure_installed = {
                     "bash",
                     "css",
