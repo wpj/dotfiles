@@ -1,3 +1,4 @@
+---@type LazyConfig
 return {
     "andymass/vim-matchup",
     "browserslist/vim-browserslist",
@@ -11,6 +12,10 @@ return {
                 end,
             },
         },
+    },
+    {
+        "echasnovski/mini.files",
+        opts = {},
     },
     {
         "echasnovski/mini.pairs",
@@ -89,8 +94,12 @@ return {
                 ["[q"] = { vim.cmd.cprevious, "Previous quickfix" },
                 ["]q"] = { vim.cmd.cnext, "Next quickfix" },
 
-                -- stevearc/oil.nvim
-                ["-"] = { "<cmd>Oil<cr>", "Open file browser" },
+                ["-"] = {
+                    function()
+                        require("mini.files").open(vim.api.nvim_buf_get_name(0), true)
+                    end,
+                    "Open file browser",
+                },
             })
         end,
     },
@@ -358,11 +367,6 @@ return {
                 },
             }
         end,
-    },
-    {
-        "stevearc/oil.nvim",
-        opts = {},
-        dependencies = { "nvim-tree/nvim-web-devicons" },
     },
     "tpope/vim-endwise",
     {
