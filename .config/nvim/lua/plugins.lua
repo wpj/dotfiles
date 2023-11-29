@@ -61,7 +61,12 @@ return {
                     s = { "<cmd> Lspsaga signature_help<cr>", "Show signature" },
 
                     -- stevearc/conform.nvim
-                    f = { "<cmd>lua require('conform').format()<cr>", "Format code" },
+                    f = {
+                        function()
+                            require("conform").format({ timeout_ms = 3000 })
+                        end,
+                        "Format code",
+                    },
                 },
 
                 f = {
