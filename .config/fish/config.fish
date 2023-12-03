@@ -74,3 +74,6 @@ alias ibrew 'arch -x86_64 /usr/local/bin/brew'
 set -l HOMEBREW_PREFIX (brew --prefix)
 set -gx LDFLAGS "-L$HOMEBREW_PREFIX/opt/zlib/lib -L$HOMEBREW_PREFIX/opt/bzip2/lib"
 set -gx CPPFLAGS "-I$HOMEBREW_PREFIX/opt/zlib/include -I$HOMEBREW_PREFIX/opt/bzip2/include"
+
+# Disable fish greeting
+set -U fish_greeting
