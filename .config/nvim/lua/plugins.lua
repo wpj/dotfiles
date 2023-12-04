@@ -18,6 +18,18 @@ return {
         opts = {},
     },
     {
+        "echasnovski/mini.indentscope",
+        event = "VeryLazy",
+        opts = function()
+            return {
+                symbol = "│",
+                draw = {
+                    animation = require("mini.indentscope").gen_animation.cubic({ duration = 10 }),
+                },
+            }
+        end,
+    },
+    {
         "echasnovski/mini.pairs",
         event = "VeryLazy",
         opts = {},
@@ -186,16 +198,6 @@ return {
         event = "VeryLazy",
         dependencies = { "nvim-lua/plenary.nvim" },
         opts = {},
-    },
-    {
-        "lukas-reineke/indent-blankline.nvim",
-        event = "VeryLazy",
-        opts = {
-            indent = {
-                char = "│",
-            },
-        },
-        main = "ibl",
     },
     {
         "mattn/emmet-vim",
