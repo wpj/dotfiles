@@ -175,17 +175,6 @@ return {
         },
     },
     {
-        "jose-elias-alvarez/null-ls.nvim",
-        event = "LspAttach",
-        config = function()
-            require("null-ls").setup({
-                sources = {
-                    require("null-ls").builtins.diagnostics.eslint,
-                },
-            })
-        end,
-    },
-    {
         "junegunn/rainbow_parentheses.vim",
         cmd = "RainbowParentheses",
     },
@@ -215,6 +204,33 @@ return {
         },
         init = function()
             vim.g.user_emmet_leader_key = "<C-Z>"
+        end,
+    },
+    {
+        "mfussenegger/nvim-lint",
+        event = { "BufReadPre" },
+        opts = {
+            events = { "BufWritePost", "BufReadPost", "InsertLeave" },
+            linters_by_ft = {
+                javascript = { "eslint" },
+                javascriptreact = { "eslint" },
+                svelte = { "eslint" },
+                typescript = { "eslint" },
+                typescriptreact = { "eslint" },
+                vue = { "eslint" },
+            },
+        },
+        config = function(_, opts)
+            local lint = require("lint")
+
+            lint.linters_by_ft = opts.linters_by_ft
+
+            vim.api.nvim_create_autocmd(opts.events, {
+                group = vim.api.nvim_create_augroup("nvim-lint", { clear = true }),
+                callback = function()
+                    lint.try_lint()
+                end,
+            })
         end,
     },
     {
