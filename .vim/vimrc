@@ -7,7 +7,6 @@ let maplocalleader = ' '
 " Basic settings
 " ==============
 syntax enable
-set nu rnu
 set number relativenumber
 set visualbell
 set cursorline
@@ -55,20 +54,3 @@ endif
 set nobackup
 set nowb
 set noswapfile
-
-" permanent undo
-set undodir=~/.vimdid
-set undofile
-
-" ========
-" Mappings
-" ========
-
-" Easier split navigation
-nnoremap <C-J> <C-W><C-J>
-nnoremap <C-K> <C-W><C-K>
-nnoremap <C-L> <C-W><C-L>
-nnoremap <C-H> <C-W><C-H>
-
-" Enable spellcheck
-autocmd FileType markdown setlocal spell
