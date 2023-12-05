@@ -11,8 +11,8 @@ config.inactive_pane_hsb = {
     brightness = 0.7,
 }
 
-config.font = wezterm.font({ family = "Inconsolata Nerd Font" })
-config.font_size = 18.0
+config.font = wezterm.font({ family = "Berkeley Mono" })
+config.font_size = 16.0
 config.bold_brightens_ansi_colors = true
 
 config.window_background_opacity = 0.9
