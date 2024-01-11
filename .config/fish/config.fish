@@ -6,7 +6,7 @@ set -gx VOLTA_HOME "$HOME/.volta"
 
 set -gx PNPM_HOME $HOME/Library/pnpm
 
-set -x RIPGREP_CONFIG_PATH $HOME/.config/ripgrep/.ripgreprc
+set -x RIPGREP_CONFIG_PATH $HOME/.config/ripgrep/ripgreprc
 
 set -l HOMEBREW_BASE
 if test (uname -m) = 'arm64'
