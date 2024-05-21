@@ -262,10 +262,31 @@ return {
         end,
     },
     {
+        "williamboman/mason.nvim",
+        config = true,
+    },
+    {
+
+        "williamboman/mason-lspconfig.nvim",
+        opts = {
+            ensure_installed = {
+                "gopls",
+                "lua_ls",
+                "stylelint_lsp",
+                "tsserver",
+                "volar",
+            },
+        },
+    },
+    {
         "neovim/nvim-lspconfig",
         dependencies = {
-            -- neodev must be set up before lua_ls (https://github.com/folke/neodev.nvim/tree/80487e4f7bfa11c2ef2a1b461963db019aad6a73#-setup).
-            { "folke/neodev.nvim", opts = {} },
+            {
+                "hrsh7th/cmp-nvim-lsp",
+                -- neodev must be set up before lua_ls (https://github.com/folke/neodev.nvim/tree/80487e4f7bfa11c2ef2a1b461963db019aad6a73#-setup).
+                "folke/neodev.nvim",
+                opts = {},
+            },
         },
         config = function()
             local nvim_lsp = require("lspconfig")
@@ -274,7 +295,14 @@ return {
                 lua_ls = {
                     settings = {
                         Lua = {
+                            runtime = {
+                                -- Tell the language server which version of Lua you're using
+                                -- (most likely LuaJIT in the case of Neovim)
+                                version = "LuaJIT",
+                            },
                             workspace = {
+                                -- Make lua_ls recognize vim config files.
+                                library = vim.api.nvim_get_runtime_file("", true),
                                 checkThirdParty = false,
                             },
                         },
