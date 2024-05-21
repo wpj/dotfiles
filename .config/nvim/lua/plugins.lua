@@ -290,6 +290,51 @@ return {
         },
         config = function()
             local nvim_lsp = require("lspconfig")
+            local capabilities = require("cmp_nvim_lsp").default_capabilities()
+
+            local on_attach = function(_client, bufnr)
+                vim.api.nvim_create_autocmd("CursorHold", {
+                    buffer = bufnr,
+                    callback = function()
+                        local opts = {
+                            focusable = false,
+                            close_events = { "BufLeave", "CursorMoved", "InsertEnter", "FocusLost" },
+                            border = "rounded",
+                            source = "always",
+                            prefix = " ",
+                            scope = "cursor",
+                        }
+                        vim.diagnostic.open_float(nil, opts)
+                    end,
+                })
+            end
+
+            -- Use project-local typescript installation if available, fallback to global install
+            -- assumes typescript installed globally w/ nvm
+            local function get_typescript_server_path(root_dir)
+                local global_ts = nvim_lsp.util.path.join(
+                    vim.fn.stdpath("data"),
+                    "mason",
+                    "packages",
+                    "typescript-language-server",
+                    "node_modules",
+                    "typescript",
+                    "lib"
+                )
+
+                local project_ts = ""
+                local function check_dir(path)
+                    project_ts = nvim_lsp.util.path.join(path, "node_modules", "typescript", "lib")
+                    if nvim_lsp.util.path.exists(project_ts) then
+                        return path
+                    end
+                end
+                if nvim_lsp.util.search_ancestors(root_dir, check_dir) then
+                    return project_ts
+                else
+                    return global_ts
+                end
+            end
 
             local servers = {
                 lua_ls = {
@@ -311,12 +356,22 @@ return {
                 rls = {},
                 tsserver = {},
                 svelte = {},
-                vuels = {},
+                volar = {
+                    on_new_config = function(new_config, new_root_dir)
+                        new_config.init_options.typescript.tsdk = get_typescript_server_path(new_root_dir)
+                    end,
+                },
                 gopls = {},
             }
 
             for server, opts in pairs(servers) do
-                nvim_lsp[server].setup(opts)
+                local base_options = {
+                    capabilities = capabilities,
+                    on_attach = on_attach,
+                }
+                local options = vim.tbl_deep_extend("force", base_options, opts)
+
+                nvim_lsp[server].setup(options)
             end
         end,
     },
