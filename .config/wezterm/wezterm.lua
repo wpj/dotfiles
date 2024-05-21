@@ -81,4 +81,6 @@ config.key_tables = {
     },
 }
 
+config.check_for_updates = false;
+
 return config
