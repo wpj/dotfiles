@@ -136,10 +136,19 @@ return {
         "hrsh7th/nvim-cmp",
         event = "InsertEnter",
         dependencies = {
+            "neovim/nvim-lspconfig",
             "hrsh7th/cmp-nvim-lsp",
-            "hrsh7th/vim-vsnip",
             "hrsh7th/cmp-buffer",
+            "hrsh7th/cmp-path",
+            "hrsh7th/cmp-cmdline",
             "hrsh7th/cmp-nvim-lua",
+            {
+                "dcampos/nvim-snippy",
+                dependencies = {
+                    "honza/vim-snippets",
+                },
+            },
+            "dcampos/cmp-snippy",
         },
         config = function()
             local cmp = require("cmp")
@@ -157,12 +166,12 @@ return {
                 }),
                 snippet = {
                     expand = function(args)
-                        vim.fn["vsnip#anonymous"](args.body)
+                        require("snippy").expand_snippet(args.body) -- For `snippy` users.
                     end,
                 },
                 sources = cmp.config.sources({
                     { name = "nvim_lsp" },
-                    { name = "vsnip" },
+                    { name = "snippy" },
                 }, {
                     { name = "buffer" },
                 }),
