@@ -103,7 +103,12 @@ return {
                 },
 
                 -- nvim-telescope/telescope.nvim
-                ["/"] = { "<cmd>Telescope live_grep<cr>", "Search project files" },
+                ["/"] = {
+                    function()
+                        require("telescope").extensions.live_grep_args.live_grep_args()
+                    end,
+                    "Search project files",
+                },
                 ["<leader>"] = { "<cmd>Telescope find_files<cr>", "Find file in project" },
 
                 ["?"] = { "<cmd> WhichKey<cr>", "Show key bindings" },
@@ -288,7 +293,13 @@ return {
     },
     {
         "nvim-telescope/telescope.nvim",
-        dependencies = { "nvim-lua/plenary.nvim" },
+        dependencies = {
+            "nvim-lua/plenary.nvim",
+            {
+                "nvim-telescope/telescope-live-grep-args.nvim",
+                version = "^1.0.0",
+            },
+        },
         opts = {
             defaults = {
                 mappings = {
@@ -309,6 +320,12 @@ return {
                 },
             },
         },
+        config = function(_, opts)
+            local telescope = require("telescope")
+
+            telescope.setup(opts)
+            telescope.load_extension("live_grep_args")
+        end,
     },
     {
         "nvim-treesitter/nvim-treesitter",
