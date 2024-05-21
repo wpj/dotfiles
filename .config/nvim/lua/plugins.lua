@@ -87,6 +87,13 @@ return {
                     -- nvim-telescope/telescope.nvim
                     f = { "<cmd>Telescope find_files<cr>", "Find file in project" },
                     r = { "<cmd>Telescope oldfiles<cr>", "Search recent files" },
+                    y = {
+                        function()
+                            local path = vim.api.nvim_buf_get_name(0)
+                            vim.fn.setreg("+", path)
+                        end,
+                        "Yank the path of the current file",
+                    },
                 },
 
                 -- tpope/vim-fugitive
