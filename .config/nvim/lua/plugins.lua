@@ -68,7 +68,13 @@ return {
                     a = { "<cmd> Lspsaga code_action<cr>", "Code actions" },
                     D = { "<cmd> Lspsaga peek_definition<cr>", "Preview definition" },
                     e = { "<cmd> Lspsaga show_line_diagnostics<cr>", "Show line diagnostics" },
-                    h = { "<cmd> Lspsaga lsp_finder<cr>", "Find references" },
+                    h = {
+                        function()
+                            vim.lsp.buf.references()
+                        end,
+                        "Find references & implementation",
+                    },
+                    -- h = { "<cmd> Lspsaga lsp_finder<cr>", "Find references" },
                     r = { "<cmd> Lspsaga rename<cr>", "Rename" },
                     s = { "<cmd> Lspsaga signature_help<cr>", "Show signature" },
 
