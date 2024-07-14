@@ -53,90 +53,84 @@ return {
             vim.o.timeout = true
             vim.o.timeoutlen = 300
         end,
-        config = function()
-            local wk = require("which-key")
-
-            wk.setup({})
-
-            wk.register({
-                c = {
-                    name = "code",
-
-                    d = { "<cmd>lua vim.lsp.buf.definition()<cr>", "Go to definition" },
-
-                    -- nvimdev/lspsaga.nvim
-                    a = { "<cmd> Lspsaga code_action<cr>", "Code actions" },
-                    D = { "<cmd> Lspsaga peek_definition<cr>", "Preview definition" },
-                    e = { "<cmd> Lspsaga show_line_diagnostics<cr>", "Show line diagnostics" },
-                    h = {
+        opts = {
+            preset = "helix",
+            spec = {
+                {
+                    "<leader>c",
+                    group = "code",
+                    { "<leader>cd", "<cmd>lua vim.lsp.buf.definition()<cr>", desc = "Go to definition" },
+                    { "<leader>ca", "<cmd> Lspsaga code_action<cr>", desc = "Code actions" }, -- nvimdev/lspsaga.nvim
+                    { "<leader>cD", "<cmd> Lspsaga peek_definition<cr>", desc = "Preview definition" }, -- nvimdev/lspsaga.nvim
+                    { "<leader>ce", "<cmd> Lspsaga show_line_diagnostics<cr>", desc = "Show line diagnostics" }, -- nvimdev/lspsaga.nvim
+                    {
+                        "<leader>ch",
                         function()
                             vim.lsp.buf.references()
                         end,
-                        "Find references & implementation",
+                        desc = "Find references & implementation",
                     },
-                    -- h = { "<cmd> Lspsaga lsp_finder<cr>", "Find references" },
-                    r = { "<cmd> Lspsaga rename<cr>", "Rename" },
-                    s = { "<cmd> Lspsaga signature_help<cr>", "Show signature" },
-
-                    -- stevearc/conform.nvim
-                    f = {
+                    { "<leader>cr", "<cmd> Lspsaga rename<cr>", desc = "Rename" },
+                    { "<leader>cs", "<cmd> Lspsaga signature_help<cr>", desc = "Show signature" },
+                    {
+                        "<leader>cf",
                         function()
                             require("conform").format({ timeout_ms = 3000 })
                         end,
-                        "Format code",
+                        desc = "Format code",
                     },
                 },
 
-                f = {
-                    name = "file",
-
-                    -- nvim-telescope/telescope.nvim
-                    f = { "<cmd>Telescope find_files<cr>", "Find file in project" },
-                    r = { "<cmd>Telescope oldfiles<cr>", "Search recent files" },
-                    y = {
+                {
+                    "<leader>f",
+                    group = "file",
+                    { "<leader>ff", "<cmd>Telescope find_files<cr>", desc = "Find file in project" }, -- nvim-telescope/telescope.nvim
+                    { "<leader>fr", "<cmd>Telescope oldfiles<cr>", desc = "Search recent files" }, -- nvim-telescope/telescope.nvim
+                    {
+                        "<leader>fy",
                         function()
                             local path = vim.api.nvim_buf_get_name(0)
                             vim.fn.setreg("+", path)
                         end,
-                        "Yank the path of the current file",
+                        desc = "Yank the path of the current file",
                     },
                 },
 
-                -- tpope/vim-fugitive
-                g = {
-                    name = "git",
-                    g = { "<cmd> Git<cr>", "Git" },
+                {
+                    "<leader>g",
+                    group = "git",
+                    { "<leader>gg", "<cmd> Git<cr>", desc = "Git" }, -- tpope/vim-fugitive
                 },
 
-                -- nvim-telescope/telescope.nvim
-                ["/"] = {
+                {
+                    "<leader>/",
                     function()
                         require("telescope").extensions.live_grep_args.live_grep_args()
                     end,
-                    "Search project files",
+                    desc = "Search project files",
                 },
-                ["<leader>"] = { "<cmd>Telescope find_files<cr>", "Find file in project" },
+                { "<leader><leader>", "<cmd>Telescope find_files<cr>", desc = "Find file in project" }, -- nvim-telescope/telescope.nvim
+                {
+                    "<leader>?",
+                    function()
+                        require("which-key").show()
+                    end,
+                    desc = "Show key bindings",
+                },
 
-                ["?"] = { "<cmd> WhichKey<cr>", "Show key bindings" },
-            }, { prefix = "<leader>" })
-
-            wk.register({
-                -- nvimdev/lspsaga.nvim
-                ["[d"] = { "<cmd> Lspsaga diagnostic_jump_prev<cr>", "Previous diagnostic" },
-                ["]d"] = { "<cmd> Lspsaga diagnostic_jump_next<cr>", "Next diagnostic" },
-
-                -- quickfix
-                ["[q"] = { vim.cmd.cprevious, "Previous quickfix" },
-                ["]q"] = { vim.cmd.cnext, "Next quickfix" },
-
-                ["-"] = {
+                { "[d", "<cmd> Lspsaga diagnostic_jump_prev<cr>", desc = "Previous diagnostic" },
+                { "]d", "<cmd> Lspsaga diagnostic_jump_next<cr>", desc = "Next diagnostic" },
+                { "[q", vim.cmd.cprevious, desc = "Previous quickfix" },
+                { "]q", vim.cmd.cnext, desc = "Next quickfix" },
+                {
+                    "-",
                     function()
                         require("mini.files").open(vim.api.nvim_buf_get_name(0), true)
                     end,
-                    "Open file browser",
+                    desc = "Open file browser",
                 },
-            })
-        end,
+            },
+        },
     },
     {
         "hrsh7th/nvim-cmp",
