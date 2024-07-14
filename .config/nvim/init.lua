@@ -13,8 +13,11 @@ vim.opt.rtp:prepend(lazypath)
 
 vim.g.mapleader = " "
 
-require("lazy").setup("plugins", {
+require("lazy").setup({
     change_detection = { notify = false }, -- Disable config change notifications.
+    spec = {
+        { import = "plugins" },
+    },
 })
 
 require("settings")
