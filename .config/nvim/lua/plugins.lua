@@ -84,8 +84,22 @@ return {
                 {
                     "<leader>f",
                     group = "file",
-                    { "<leader>ff", "<cmd>Telescope find_files<cr>", desc = "Find file in project" }, -- nvim-telescope/telescope.nvim
-                    { "<leader>fr", "<cmd>Telescope oldfiles<cr>", desc = "Search recent files" }, -- nvim-telescope/telescope.nvim
+                    {
+                        "<leader>ff",
+                        function()
+                            require("mini.files").close()
+                            require("telescope.builtin").find_files()
+                        end,
+                        desc = "Find file in project",
+                    }, -- nvim-telescope/telescope.nvim
+                    {
+                        "<leader>fr",
+                        function()
+                            require("mini.files").close()
+                            require("telescope.builtin").oldfiles()
+                        end,
+                        desc = "Search recent files",
+                    }, -- nvim-telescope/telescope.nvim
                     {
                         "<leader>fy",
                         function()
@@ -105,11 +119,19 @@ return {
                 {
                     "<leader>/",
                     function()
+                        require("mini.files").close()
                         require("telescope").extensions.live_grep_args.live_grep_args()
                     end,
                     desc = "Search project files",
                 },
-                { "<leader><leader>", "<cmd>Telescope find_files<cr>", desc = "Find file in project" }, -- nvim-telescope/telescope.nvim
+                {
+                    "<leader><leader>",
+                    function()
+                        require("mini.files").close()
+                        require("telescope.builtin").find_files()
+                    end,
+                    desc = "Find file in project",
+                }, -- nvim-telescope/telescope.nvim
                 {
                     "<leader>?",
                     function()
