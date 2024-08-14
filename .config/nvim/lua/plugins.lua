@@ -412,7 +412,18 @@ return {
         "nvim-lualine/lualine.nvim",
         event = "VeryLazy",
         dependencies = { "nvim-tree/nvim-web-devicons" },
-        opts = {},
+        opts = {
+            sections = {
+                lualine_y = {
+                    {
+                        "searchcount",
+                        maxcount = 9999,
+                        timeout = 500,
+                    },
+                    "progress",
+                },
+            },
+        },
     },
     {
         "nvim-pack/nvim-spectre",
