@@ -446,6 +446,13 @@ return {
                         ["<C-k>"] = "cycle_history_prev",
                     },
                 },
+                layout_config = {
+                    horizontal = {
+                        -- Workaround for setting 100% width.
+                        width = { padding = 0 },
+                        preview_width = 0.33,
+                    },
+                },
             },
             pickers = {
                 find_files = {
