@@ -438,33 +438,40 @@ return {
                 version = "^1.0.0",
             },
         },
-        opts = {
-            defaults = {
-                mappings = {
-                    i = {
-                        ["<C-j>"] = "cycle_history_next",
-                        ["<C-k>"] = "cycle_history_prev",
+        opts = function()
+            local mappings = {
+                ["<C-j>"] = "cycle_history_next",
+                ["<C-k>"] = "cycle_history_prev",
+                ["<C-p>"] = require("telescope.actions.layout").toggle_preview,
+            }
+
+            return {
+                defaults = {
+                    path_display = { "filename_first" },
+                    mappings = {
+                        i = mappings,
+                        n = mappings,
+                    },
+                    layout_config = {
+                        horizontal = {
+                            -- Workaround for setting 100% width.
+                            width = { padding = 0 },
+                            preview_width = 0.33,
+                        },
                     },
                 },
-                layout_config = {
-                    horizontal = {
-                        -- Workaround for setting 100% width.
-                        width = { padding = 0 },
-                        preview_width = 0.33,
+                pickers = {
+                    find_files = {
+                        hidden = true,
+                    },
+                    live_grep = {
+                        additional_args = function()
+                            return { "--hidden" }
+                        end,
                     },
                 },
-            },
-            pickers = {
-                find_files = {
-                    hidden = true,
-                },
-                live_grep = {
-                    additional_args = function()
-                        return { "--hidden" }
-                    end,
-                },
-            },
-        },
+            }
+        end,
         config = function(_, opts)
             local telescope = require("telescope")
 
