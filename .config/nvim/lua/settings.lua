@@ -4,23 +4,17 @@ if vim.fn.executable("fish") then
     opt.shell = "fish"
 end
 
-opt.autoindent = true
-opt.autoread = true
-opt.backspace = { "indent", "eol", "start" }
 opt.cmdheight = 2
 opt.colorcolumn = "80"
 opt.completeopt:remove("longest") -- nvm-cmp
 opt.cursorline = true
 opt.diffopt:append("vertical")
-opt.encoding = "utf-8"
 opt.expandtab = true -- Use spaces instead of tabs
 if vim.fn.executable("rg") then
     opt.grepprg = "rg --vimgrep"
 end
-opt.hlsearch = true
 opt.ignorecase = true
 opt.inccommand = "nosplit" -- Preview incremental substitute
-opt.incsearch = true -- Enable incremental search
 opt.mouse = "a" -- Enable mouse mode
 opt.number = true -- Show current line number
 opt.pumblend = 10 -- Popup blend
@@ -38,7 +32,6 @@ opt.softtabstop = 2
 opt.splitbelow = true -- Put new windows below the current one
 opt.splitright = true -- Put new windows to the right of the current one
 opt.tabstop = 2 -- Number of spaces a tab is equivalent to
-opt.termguicolors = true -- Enable true color
 opt.title = true
 opt.undofile = true
 opt.virtualedit = "block" -- Move cursor anywhere in visual block mode.
@@ -51,12 +44,7 @@ opt.backup = false
 opt.writebackup = false
 opt.swapfile = false
 
--- ------------
--- color scheme
--- ------------
-vim.cmd([[colorscheme tokyonight]])
-
-vim.cmd("syntax enable")
+vim.cmd("colorscheme tokyonight")
 
 -- Highlight on yank
 vim.api.nvim_create_autocmd("TextYankPost", {
