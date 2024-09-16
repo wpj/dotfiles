@@ -17,6 +17,7 @@ return {
         "echasnovski/mini.files",
         opts = {},
     },
+    { "echasnovski/mini.icons", version = false, config = true },
     {
         "echasnovski/mini.indentscope",
         event = "VeryLazy",
@@ -36,9 +37,33 @@ return {
     },
     "editorconfig/editorconfig-vim",
     {
+        "folke/noice.nvim",
+        event = "VeryLazy",
+        opts = {
+            cmdline = {
+                view = "cmdline", -- Position cmdline at bottom
+            },
+            lsp = {
+                -- override markdown rendering so that **cmp** and other plugins use **Treesitter**
+                override = {
+                    ["vim.lsp.util.convert_input_to_markdown_lines"] = true,
+                    ["vim.lsp.util.stylize_markdown"] = true,
+                    ["cmp.entry.get_documentation"] = true, -- requires hrsh7th/nvim-cmp
+                },
+            },
+            presets = {
+                bottom_search = true, -- Position search cmdline at the bottom
+            },
+        },
+        dependencies = {
+            "MunifTanjim/nui.nvim",
+            "rcarriga/nvim-notify",
+        },
+    },
+    {
         "folke/trouble.nvim",
-        cmd = { "Trouble", "TroubleToggle" },
-        dependencies = { "nvim-tree/nvim-web-devicons" },
+        opts = {},
+        cmd = "Trouble",
     },
     {
 
@@ -403,7 +428,6 @@ return {
         "nvimdev/lspsaga.nvim",
         event = "LspAttach",
         dependencies = {
-            "nvim-tree/nvim-web-devicons",
             "nvim-treesitter/nvim-treesitter",
         },
         opts = {},
@@ -411,7 +435,6 @@ return {
     {
         "nvim-lualine/lualine.nvim",
         event = "VeryLazy",
-        dependencies = { "nvim-tree/nvim-web-devicons" },
         opts = {
             sections = {
                 lualine_y = {
@@ -483,6 +506,7 @@ return {
         "nvim-treesitter/nvim-treesitter",
         build = ":TSUpdate",
         config = function()
+            ---@diagnostic disable: missing-fields
             require("nvim-treesitter.configs").setup({
                 ensure_installed = {
                     "bash",
@@ -496,6 +520,7 @@ return {
                     "lua",
                     "markdown",
                     "python",
+                    "regex",
                     "rust",
                     "scss",
                     "svelte",

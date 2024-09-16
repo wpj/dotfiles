@@ -14,12 +14,13 @@ opt.cursorline = true
 opt.diffopt:append("vertical")
 opt.encoding = "utf-8"
 opt.expandtab = true -- Use spaces instead of tabs
-opt.grepprg = "rg --vimgrep"
+if vim.fn.executable("rg") then
+    opt.grepprg = "rg --vimgrep"
+end
 opt.hlsearch = true
 opt.ignorecase = true
 opt.inccommand = "nosplit" -- Preview incremental substitute
 opt.incsearch = true -- Enable incremental search
-opt.lazyredraw = true
 opt.mouse = "a" -- Enable mouse mode
 opt.number = true -- Show current line number
 opt.pumblend = 10 -- Popup blend
@@ -27,7 +28,6 @@ opt.pumheight = 10 -- Max number of entries in a popup
 opt.relativenumber = true -- Show relative line numvers
 opt.scrolloff = 7 -- Lines of context when moving the cursor near the screen edge
 opt.shiftwidth = 2 -- Indent size
-opt.shortmess:append({ S = true }) -- Disable default search results UI.
 opt.showmatch = true
 opt.showmode = false -- Mode is shown in the status line
 opt.sidescrolloff = 8 -- Side scroll context lines
