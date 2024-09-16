@@ -35,7 +35,6 @@ return {
         event = "VeryLazy",
         opts = {},
     },
-    "editorconfig/editorconfig-vim",
     {
         "folke/noice.nvim",
         event = "VeryLazy",
