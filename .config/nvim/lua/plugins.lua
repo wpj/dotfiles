@@ -314,115 +314,137 @@ return {
         config = true,
     },
     {
-
         "williamboman/mason-lspconfig.nvim",
-        opts = {
-            ensure_installed = {
-                "gopls",
-                "lua_ls",
-                "stylelint_lsp",
-                "tsserver",
-                "volar",
-            },
-        },
-    },
-    {
-        "neovim/nvim-lspconfig",
         dependencies = {
-            {
-                "hrsh7th/cmp-nvim-lsp",
-                -- neodev must be set up before lua_ls (https://github.com/folke/neodev.nvim/tree/80487e4f7bfa11c2ef2a1b461963db019aad6a73#-setup).
-                "folke/neodev.nvim",
-                opts = {},
-            },
+            "neovim/nvim-lspconfig",
+            "hrsh7th/cmp-nvim-lsp",
+            -- neodev must be set up before lua_ls (https://github.com/folke/neodev.nvim/tree/80487e4f7bfa11c2ef2a1b461963db019aad6a73#-setup).
+            "folke/neodev.nvim",
         },
         config = function()
-            local nvim_lsp = require("lspconfig")
-            local capabilities = require("cmp_nvim_lsp").default_capabilities()
+            local lspconfig = require("lspconfig")
+            local mason_lspconfig = require("mason-lspconfig")
 
-            local on_attach = function(_client, bufnr)
-                vim.api.nvim_create_autocmd("CursorHold", {
-                    buffer = bufnr,
-                    callback = function()
-                        local opts = {
-                            focusable = false,
-                            close_events = { "BufLeave", "CursorMoved", "InsertEnter", "FocusLost" },
-                            border = "rounded",
-                            source = "always",
-                            prefix = " ",
-                            scope = "cursor",
-                        }
-                        vim.diagnostic.open_float(nil, opts)
-                    end,
-                })
-            end
+            local options_with_defaults = function(options)
+                local capabilities = require("cmp_nvim_lsp").default_capabilities()
 
-            -- Use project-local typescript installation if available, fallback to global install
-            -- assumes typescript installed globally w/ nvm
-            local function get_typescript_server_path(root_dir)
-                local global_ts = nvim_lsp.util.path.join(
-                    vim.fn.stdpath("data"),
-                    "mason",
-                    "packages",
-                    "typescript-language-server",
-                    "node_modules",
-                    "typescript",
-                    "lib"
-                )
-
-                local project_ts = ""
-                local function check_dir(path)
-                    project_ts = nvim_lsp.util.path.join(path, "node_modules", "typescript", "lib")
-                    if nvim_lsp.util.path.exists(project_ts) then
-                        return path
-                    end
+                local on_attach = function(_client, bufnr)
+                    vim.api.nvim_create_autocmd("CursorHold", {
+                        buffer = bufnr,
+                        callback = function()
+                            local opts = {
+                                focusable = false,
+                                close_events = { "BufLeave", "CursorMoved", "InsertEnter", "FocusLost" },
+                                border = "rounded",
+                                source = "always",
+                                prefix = " ",
+                                scope = "cursor",
+                            }
+                            vim.diagnostic.open_float(nil, opts)
+                        end,
+                    })
                 end
-                if nvim_lsp.util.search_ancestors(root_dir, check_dir) then
-                    return project_ts
-                else
-                    return global_ts
-                end
-            end
 
-            local servers = {
-                lua_ls = {
-                    settings = {
-                        Lua = {
-                            runtime = {
-                                -- Tell the language server which version of Lua you're using
-                                -- (most likely LuaJIT in the case of Neovim)
-                                version = "LuaJIT",
-                            },
-                            workspace = {
-                                -- Make lua_ls recognize vim config files.
-                                library = vim.api.nvim_get_runtime_file("", true),
-                                checkThirdParty = false,
-                            },
-                        },
-                    },
-                },
-                rls = {},
-                tsserver = {},
-                svelte = {},
-                volar = {
-                    on_new_config = function(new_config, new_root_dir)
-                        new_config.init_options.typescript.tsdk = get_typescript_server_path(new_root_dir)
-                    end,
-                },
-                gopls = {},
-            }
-
-            for server, opts in pairs(servers) do
-                local base_options = {
+                local default_options = {
                     capabilities = capabilities,
                     on_attach = on_attach,
                 }
-                local options = vim.tbl_deep_extend("force", base_options, opts)
 
-                nvim_lsp[server].setup(options)
+                return vim.tbl_extend("error", default_options, options)
             end
+
+            local default_setup = function(server)
+                lspconfig[server].setup(options_with_defaults({}))
+            end
+
+            mason_lspconfig.setup({
+                handlers = {
+                    default_setup,
+                    lua_ls = function()
+                        lspconfig.lua_ls.setup(options_with_defaults({
+                            settings = {
+                                Lua = {
+                                    runtime = {
+                                        -- Tell the language server which version of Lua you're using
+                                        -- (most likely LuaJIT in the case of Neovim)
+                                        version = "LuaJIT",
+                                    },
+                                    workspace = {
+                                        -- Make lua_ls recognize vim config files.
+                                        library = vim.api.nvim_get_runtime_file("", true),
+                                        checkThirdParty = false,
+                                    },
+                                },
+                            },
+                        }))
+                    end,
+                    tsserver = function()
+                        local global_pnpm_root_directory = "~/Library/pnpm/global/5/node_modules"
+                        -- Use project-local typescript installation if available, fallback to global install
+                        -- assumes typescript installed globally w/ nvm
+                        lspconfig.tsserver.setup(options_with_defaults({
+                            init_options = {
+                                plugins = {
+                                    {
+                                        name = "@vue/typescript-plugin",
+                                        location = vim.fn.expand(
+                                            global_pnpm_root_directory .. "/@vue/typescript-plugin"
+                                        ),
+                                        languages = { "javascript", "typescript", "vue" },
+                                    },
+                                },
+                            },
+                            filetypes = {
+                                "javascript",
+                                "typescript",
+                                "vue",
+                            },
+                        }))
+                    end,
+                    volar = function()
+                        local function get_typescript_server_path(root_dir)
+                            local global_ts = lspconfig.util.path.join(
+                                vim.fn.stdpath("data"),
+                                "mason",
+                                "packages",
+                                "typescript-language-server",
+                                "node_modules",
+                                "typescript",
+                                "lib"
+                            )
+
+                            local project_ts = ""
+                            local function check_dir(path)
+                                project_ts = lspconfig.util.path.join(path, "node_modules", "typescript", "lib")
+                                if lspconfig.util.path.exists(project_ts) then
+                                    return path
+                                end
+                            end
+                            if lspconfig.util.search_ancestors(root_dir, check_dir) then
+                                return project_ts
+                            else
+                                return global_ts
+                            end
+                        end
+
+                        lspconfig.volar.setup(options_with_defaults({
+                            on_new_config = function(new_config, new_root_dir)
+                                new_config.init_options.typescript.tsdk = get_typescript_server_path(new_root_dir)
+                            end,
+                        }))
+                    end,
+                },
+                ensure_installed = {
+                    "gopls",
+                    "lua_ls",
+                    "stylelint_lsp",
+                    "tsserver",
+                    "volar",
+                },
+            })
         end,
     },
+    "neovim/nvim-lspconfig",
     {
         "nvimdev/lspsaga.nvim",
         event = "LspAttach",
