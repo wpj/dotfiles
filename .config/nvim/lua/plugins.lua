@@ -161,6 +161,13 @@ return {
                     "<leader>n",
                     group = "navigate",
                 },
+
+                {
+                    "<leader>q",
+                    group = "quickfix",
+                    { "<leader>qq", vim.cmd.copen, desc = "Open quickfix list" },
+                },
+
                 {
                     "<leader>/",
                     function()
