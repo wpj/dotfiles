@@ -36,6 +36,21 @@ return {
         opts = {},
     },
     {
+        "folke/flash.nvim",
+        event = "VeryLazy",
+        ---@type Flash.Config
+        opts = {},
+        -- stylua: ignore
+        keys = {
+            { "<s-cr>", mode = { "n", "x", "o" }, function() require("flash").jump() end, desc = "Flash" },
+            { "<c-s>", mode = { "c" }, function() require("flash").toggle() end, desc = "Toggle Flash search" },
+            { "<leader>nf", mode = { "n", "x", "o" }, function() require("flash").jump() end, desc = "Flash" },
+            { "<leader>nF", mode = { "n", "x", "o" }, function() require("flash").treesitter() end, desc = "Flash treesitter" },
+            { "<leader>nr", mode = "o", function() require("flash").remote() end, desc = "Remote Flash" },
+            { "<leader>nR", mode = { "o", "x" }, function() require("flash").treesitter_search() end, desc = "Treesitter search" },
+        },
+    },
+    {
         "folke/noice.nvim",
         event = "VeryLazy",
         opts = {
@@ -142,6 +157,10 @@ return {
                     { "<leader>gg", "<cmd> Git<cr>", desc = "Git" }, -- tpope/vim-fugitive
                 },
 
+                {
+                    "<leader>n",
+                    group = "navigate",
+                },
                 {
                     "<leader>/",
                     function()
