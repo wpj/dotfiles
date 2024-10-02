@@ -20,6 +20,8 @@
 
 (setq projectile-project-search-path '("~/workspace/projects"))
 (setq projectile-sort-order 'recentf)
+;; Open magit status buffer when switching projects.
+(setq +workspaces-switch-project-function #'magit-status)
 
 ;; enable lsp-mode as a backend for company completion in rust files
 (after! rust-mode
