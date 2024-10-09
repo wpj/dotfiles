@@ -147,7 +147,18 @@ return {
                             vim.fn.setreg("+", path)
                             notify("Yanked current file path to clipboard", "info")
                         end,
-                        desc = "Yank the path of the current file",
+                        desc = "Yank file path",
+                    },
+                    {
+                        "<leader>fY",
+                        function()
+                            local notify = require("notify")
+                            local Path = require("plenary.path")
+                            local path = Path:new(vim.api.nvim_buf_get_name(0)):make_relative()
+                            vim.fn.setreg("+", path)
+                            notify("Yanked current file path to clipboard", "info")
+                        end,
+                        desc = "Yank file path (relative to project root)",
                     },
                 },
 
