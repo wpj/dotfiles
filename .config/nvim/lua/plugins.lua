@@ -142,21 +142,19 @@ return {
                     {
                         "<leader>fy",
                         function()
-                            local notify = require("notify")
                             local path = vim.api.nvim_buf_get_name(0)
                             vim.fn.setreg("+", path)
-                            notify("Yanked current file path to clipboard", "info")
+                            vim.notify("Yanked current file path to clipboard", vim.log.levels.INFO)
                         end,
                         desc = "Yank file path",
                     },
                     {
                         "<leader>fY",
                         function()
-                            local notify = require("notify")
                             local Path = require("plenary.path")
                             local path = Path:new(vim.api.nvim_buf_get_name(0)):make_relative()
                             vim.fn.setreg("+", path)
-                            notify("Yanked current file path to clipboard", "info")
+                            vim.notify("Yanked current file path to clipboard", vim.log.levels.INFO)
                         end,
                         desc = "Yank file path (relative to project root)",
                     },
@@ -597,6 +595,10 @@ return {
     {
         "rcarriga/nvim-notify",
         lazy = true,
+        opts = {
+            stages = "static", -- Do not animate notifications.
+            render = "minimal",
+        },
     },
     {
         "stevearc/conform.nvim",
