@@ -666,7 +666,6 @@ return {
             }
         end,
     },
-    "tpope/vim-endwise",
     {
         "tpope/vim-fugitive",
         cmd = { "Git", "GBrowse" },
@@ -674,6 +673,4 @@ return {
             "tpope/vim-rhubarb",
         },
     },
-    "tpope/vim-repeat",
-    "wellle/targets.vim",
 }
