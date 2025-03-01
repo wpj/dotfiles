@@ -11,6 +11,8 @@ config.inactive_pane_hsb = {
     brightness = 0.7,
 }
 
+config.window_padding = { left = 0, right = 0, top = 0, bottom = 0 }
+
 config.font = wezterm.font({ family = "Berkeley Mono" })
 config.font_size = 16.0
 config.bold_brightens_ansi_colors = true
