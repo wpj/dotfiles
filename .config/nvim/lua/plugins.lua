@@ -14,6 +14,10 @@ return {
         },
     },
     {
+        "echasnovski/mini.extra",
+        opts = {},
+    },
+    {
         "echasnovski/mini.files",
         opts = {},
     },
@@ -29,6 +33,10 @@ return {
                 },
             }
         end,
+    },
+    {
+        "echasnovski/mini.pick",
+        opts = {},
     },
     {
         "echasnovski/mini.pairs",
@@ -127,18 +135,18 @@ return {
                         "<leader>ff",
                         function()
                             require("mini.files").close()
-                            require("telescope.builtin").find_files()
+                            require("mini.pick").builtin.files()
                         end,
                         desc = "Find file in project",
-                    }, -- nvim-telescope/telescope.nvim
+                    },
                     {
                         "<leader>fr",
                         function()
                             require("mini.files").close()
-                            require("telescope.builtin").oldfiles()
+                            require("mini.extra").pickers.oldfiles()
                         end,
                         desc = "Search recent files",
-                    }, -- nvim-telescope/telescope.nvim
+                    },
                     {
                         "<leader>fy",
                         function()
@@ -181,7 +189,7 @@ return {
                     "<leader>/",
                     function()
                         require("mini.files").close()
-                        require("telescope").extensions.live_grep_args.live_grep_args()
+                        require("mini.pick").builtin.grep_live()
                     end,
                     desc = "Search project files",
                 },
@@ -189,10 +197,10 @@ return {
                     "<leader><leader>",
                     function()
                         require("mini.files").close()
-                        require("telescope.builtin").find_files()
+                        require("mini.pick").builtin.files()
                     end,
                     desc = "Find file in project",
-                }, -- nvim-telescope/telescope.nvim
+                },
                 {
                     "<leader>?",
                     function()
@@ -507,56 +515,6 @@ return {
     {
         "nvim-pack/nvim-spectre",
         dependencies = { "nvim-lua/plenary.nvim" },
-    },
-    {
-        "nvim-telescope/telescope.nvim",
-        dependencies = {
-            "nvim-lua/plenary.nvim",
-            {
-                "nvim-telescope/telescope-live-grep-args.nvim",
-                version = "^1.0.0",
-            },
-        },
-        opts = function()
-            local mappings = {
-                ["<C-j>"] = "cycle_history_next",
-                ["<C-k>"] = "cycle_history_prev",
-                ["<C-p>"] = require("telescope.actions.layout").toggle_preview,
-            }
-
-            return {
-                defaults = {
-                    path_display = { "filename_first" },
-                    mappings = {
-                        i = mappings,
-                        n = mappings,
-                    },
-                    layout_config = {
-                        horizontal = {
-                            -- Workaround for setting 100% width.
-                            width = { padding = 0 },
-                            preview_width = 0.33,
-                        },
-                    },
-                },
-                pickers = {
-                    find_files = {
-                        hidden = true,
-                    },
-                    live_grep = {
-                        additional_args = function()
-                            return { "--hidden" }
-                        end,
-                    },
-                },
-            }
-        end,
-        config = function(_, opts)
-            local telescope = require("telescope")
-
-            telescope.setup(opts)
-            telescope.load_extension("live_grep_args")
-        end,
     },
     {
         "nvim-treesitter/nvim-treesitter",
