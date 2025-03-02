@@ -13,6 +13,7 @@ return {
             },
         },
     },
+    "echasnovski/mini.diff",
     {
         "echasnovski/mini.extra",
         opts = {},
@@ -21,6 +22,7 @@ return {
         "echasnovski/mini.files",
         opts = {},
     },
+    "echasnovski/mini-git",
     { "echasnovski/mini.icons", version = false, config = true },
     {
         "echasnovski/mini.indentscope",
@@ -41,6 +43,10 @@ return {
     {
         "echasnovski/mini.pairs",
         event = "VeryLazy",
+        opts = {},
+    },
+    {
+        "echasnovski/mini.statusline",
         opts = {},
     },
     {
@@ -495,22 +501,6 @@ return {
             "nvim-treesitter/nvim-treesitter",
         },
         opts = {},
-    },
-    {
-        "nvim-lualine/lualine.nvim",
-        event = "VeryLazy",
-        opts = {
-            sections = {
-                lualine_y = {
-                    {
-                        "searchcount",
-                        maxcount = 9999,
-                        timeout = 500,
-                    },
-                    "progress",
-                },
-            },
-        },
     },
     {
         "nvim-pack/nvim-spectre",
