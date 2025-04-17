@@ -38,7 +38,21 @@ return {
     },
     {
         "echasnovski/mini.pick",
-        opts = {},
+        opts = function()
+            return {
+                mappings = {
+                    send_all_to_quickfix = {
+                        char = "<C-q>",
+                        -- Send all items to the quickfix list (see
+                        -- https://github.com/echasnovski/mini.nvim/discussions/1028).
+                        func = function()
+                            local mappings = require("mini.pick").get_picker_opts().mappings
+                            vim.api.nvim_input(mappings.mark_all .. mappings.choose_marked)
+                        end,
+                    },
+                },
+            }
+        end,
     },
     {
         "echasnovski/mini.pairs",
