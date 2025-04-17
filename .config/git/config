@@ -7,9 +7,8 @@
 	lg = log --color --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset' --abbrev-commit
 	rho = !git fetch origin && git reset --hard origin/$(git branch --show-current)
 [core]
-	excludesfile = ~/.gitignore_global
-	editor = nvim
-  pager = delta
+    editor = nvim
+    pager = delta
 [interactive]
   diffFilter = delta --color-only
 
