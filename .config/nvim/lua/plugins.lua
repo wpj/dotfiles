@@ -100,6 +100,16 @@ return {
         },
     },
     {
+        "folke/snacks.nvim",
+        priority = 1000,
+        lazy = false,
+        opts = {
+            gitbrowse = {
+                what = "permalink",
+            },
+        },
+    },
+    {
         "folke/trouble.nvim",
         opts = {},
         cmd = "Trouble",
@@ -189,6 +199,28 @@ return {
                     "<leader>g",
                     group = "git",
                     { "<leader>gg", "<cmd> Git<cr>", desc = "Git" }, -- tpope/vim-fugitive
+                    {
+                        "<leader>go",
+                        function()
+                            require("snacks").gitbrowse()
+                        end,
+                        mode = { "n", "v" },
+                        desc = "Open git remote url",
+                    },
+                    {
+                        "<leader>gy",
+                        function()
+                            require("snacks").gitbrowse({
+                                open = function(url)
+                                    vim.fn.setreg("+", url)
+                                    vim.notify("Yanked " .. url .. " to system clipboard")
+                                end,
+                                notify = false,
+                            })
+                        end,
+                        mode = { "n", "v" },
+                        desc = "Yank git remote url",
+                    },
                 },
 
                 {
@@ -510,7 +542,7 @@ return {
     },
     {
         "tpope/vim-fugitive",
-        cmd = { "Git", "GBrowse" },
+        cmd = { "Git" },
         dependencies = {
             "tpope/vim-rhubarb",
         },
