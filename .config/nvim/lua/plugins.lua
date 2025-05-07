@@ -1,5 +1,8 @@
 return {
-    "andymass/vim-matchup",
+    {
+        "andymass/vim-matchup",
+        event = { "BufReadPost" },
+    },
     "browserslist/vim-browserslist",
     {
         "echasnovski/mini.comment",
@@ -15,11 +18,30 @@ return {
     "echasnovski/mini.diff",
     {
         "echasnovski/mini.extra",
+        dependencies = { "echasnovski/mini.files" },
+        keys = {
+            {
+                "<leader>fr",
+                function()
+                    require("mini.files").close()
+                    require("mini.extra").pickers.oldfiles()
+                end,
+                desc = "Search recent files",
+            },
+        },
         opts = {},
     },
     {
         "echasnovski/mini.files",
-        opts = {},
+        keys = {
+            {
+                "-",
+                function()
+                    require("mini.files").open(vim.api.nvim_buf_get_name(0), true)
+                end,
+                desc = "Open file browser",
+            },
+        },
     },
     "echasnovski/mini-git",
     { "echasnovski/mini.icons", version = false, config = true },
@@ -36,7 +58,42 @@ return {
         end,
     },
     {
+        "echasnovski/mini.notify",
+        config = function()
+            require("mini.notify").setup()
+
+            vim.notify = require("mini.notify").make_notify()
+        end,
+    },
+    {
         "echasnovski/mini.pick",
+        dependencies = { "echasnovski/mini.files" },
+        keys = {
+            {
+                "<leader>ff",
+                function()
+                    require("mini.files").close()
+                    require("mini.pick").builtin.files()
+                end,
+                desc = "Find file in project",
+            },
+            {
+                "<leader>/",
+                function()
+                    require("mini.files").close()
+                    require("mini.pick").builtin.grep_live()
+                end,
+                desc = "Search project files",
+            },
+            {
+                "<leader><leader>",
+                function()
+                    require("mini.files").close()
+                    require("mini.pick").builtin.files()
+                end,
+                desc = "Find file in project",
+            },
+        },
         opts = function()
             return {
                 mappings = {
@@ -78,29 +135,42 @@ return {
         },
     },
     {
-        "folke/noice.nvim",
-        event = "VeryLazy",
+        "folke/lazydev.nvim",
+        ft = "lua",
         opts = {
-            cmdline = {
-                view = "cmdline", -- Position cmdline at bottom
+            library = {
+                -- Load luvit types when the `vim.uv` word is found
+                { path = "${3rd}/luv/library", words = { "vim%.uv" } },
             },
-            lsp = {
-                override = {
-                    ["vim.lsp.util.convert_input_to_markdown_lines"] = true,
-                    ["vim.lsp.util.stylize_markdown"] = true,
-                },
-            },
-            presets = {
-                bottom_search = true, -- Position search cmdline at the bottom
-            },
-        },
-        dependencies = {
-            "MunifTanjim/nui.nvim",
-            "rcarriga/nvim-notify",
         },
     },
     {
         "folke/snacks.nvim",
+        keys = {
+
+            {
+                "<leader>go",
+                function()
+                    require("snacks").gitbrowse()
+                end,
+                mode = { "n", "v" },
+                desc = "Open git remote url",
+            },
+            {
+                "<leader>gy",
+                function()
+                    require("snacks").gitbrowse({
+                        open = function(url)
+                            vim.fn.setreg("+", url)
+                            vim.notify("Yanked " .. url .. " to system clipboard")
+                        end,
+                        notify = false,
+                    })
+                end,
+                mode = { "n", "v" },
+                desc = "Yank git remote url",
+            },
+        },
         priority = 1000,
         lazy = false,
         opts = {
@@ -123,151 +193,41 @@ return {
     {
         "folke/which-key.nvim",
         event = "VeryLazy",
-        init = function()
-            vim.o.timeout = true
-            vim.o.timeoutlen = 300
-        end,
+        keys = {
+            {
+                "<leader>?",
+                function()
+                    require("which-key").show()
+                end,
+                desc = "Show key bindings",
+            },
+        },
         opts = {
             preset = "helix",
             spec = {
                 {
                     "<leader>c",
                     group = "code",
-                    { "<leader>cd", "<cmd>lua vim.lsp.buf.definition()<cr>", desc = "Go to definition" },
-                    { "<leader>ca", "<cmd> Lspsaga code_action<cr>", desc = "Code actions" }, -- nvimdev/lspsaga.nvim
-                    { "<leader>cD", "<cmd> Lspsaga peek_definition<cr>", desc = "Preview definition" }, -- nvimdev/lspsaga.nvim
-                    { "<leader>ce", "<cmd> Lspsaga show_line_diagnostics<cr>", desc = "Show line diagnostics" }, -- nvimdev/lspsaga.nvim
-                    {
-                        "<leader>ch",
-                        function()
-                            vim.lsp.buf.references()
-                        end,
-                        desc = "Find references & implementation",
-                    },
-                    { "<leader>cr", "<cmd> Lspsaga rename<cr>", desc = "Rename" },
-                    { "<leader>cs", "<cmd> Lspsaga signature_help<cr>", desc = "Show signature" },
-                    {
-                        "<leader>cf",
-                        function()
-                            require("conform").format({ timeout_ms = 3000 })
-                        end,
-                        desc = "Format code",
-                    },
                 },
-
+                {
+                    "<leader>d",
+                    group = "diagnostic",
+                },
                 {
                     "<leader>f",
                     group = "file",
-                    {
-                        "<leader>ff",
-                        function()
-                            require("mini.files").close()
-                            require("mini.pick").builtin.files()
-                        end,
-                        desc = "Find file in project",
-                    },
-                    {
-                        "<leader>fr",
-                        function()
-                            require("mini.files").close()
-                            require("mini.extra").pickers.oldfiles()
-                        end,
-                        desc = "Search recent files",
-                    },
-                    {
-                        "<leader>fy",
-                        function()
-                            local path = vim.api.nvim_buf_get_name(0)
-                            vim.fn.setreg("+", path)
-                            vim.notify("Yanked current file path to clipboard", vim.log.levels.INFO)
-                        end,
-                        desc = "Yank file path",
-                    },
-                    {
-                        "<leader>fY",
-                        function()
-                            local Path = require("plenary.path")
-                            local path = Path:new(vim.api.nvim_buf_get_name(0)):make_relative()
-                            vim.fn.setreg("+", path)
-                            vim.notify("Yanked current file path to clipboard", vim.log.levels.INFO)
-                        end,
-                        desc = "Yank file path (relative to project root)",
-                    },
                 },
-
                 {
                     "<leader>g",
                     group = "git",
-                    { "<leader>gg", "<cmd> Git<cr>", desc = "Git" }, -- tpope/vim-fugitive
-                    {
-                        "<leader>go",
-                        function()
-                            require("snacks").gitbrowse()
-                        end,
-                        mode = { "n", "v" },
-                        desc = "Open git remote url",
-                    },
-                    {
-                        "<leader>gy",
-                        function()
-                            require("snacks").gitbrowse({
-                                open = function(url)
-                                    vim.fn.setreg("+", url)
-                                    vim.notify("Yanked " .. url .. " to system clipboard")
-                                end,
-                                notify = false,
-                            })
-                        end,
-                        mode = { "n", "v" },
-                        desc = "Yank git remote url",
-                    },
                 },
-
                 {
                     "<leader>n",
                     group = "navigate",
                 },
-
                 {
                     "<leader>q",
                     group = "quickfix",
-                    { "<leader>qq", vim.cmd.copen, desc = "Open quickfix list" },
-                },
-
-                {
-                    "<leader>/",
-                    function()
-                        require("mini.files").close()
-                        require("mini.pick").builtin.grep_live()
-                    end,
-                    desc = "Search project files",
-                },
-                {
-                    "<leader><leader>",
-                    function()
-                        require("mini.files").close()
-                        require("mini.pick").builtin.files()
-                    end,
-                    desc = "Find file in project",
-                },
-                {
-                    "<leader>?",
-                    function()
-                        require("which-key").show()
-                    end,
-                    desc = "Show key bindings",
-                },
-
-                { "[d", "<cmd> Lspsaga diagnostic_jump_prev<cr>", desc = "Previous diagnostic" },
-                { "]d", "<cmd> Lspsaga diagnostic_jump_next<cr>", desc = "Next diagnostic" },
-                { "[q", vim.cmd.cprevious, desc = "Previous quickfix" },
-                { "]q", vim.cmd.cnext, desc = "Next quickfix" },
-                {
-                    "-",
-                    function()
-                        require("mini.files").open(vim.api.nvim_buf_get_name(0), true)
-                    end,
-                    desc = "Open file browser",
                 },
             },
         },
@@ -288,14 +248,6 @@ return {
             -- https://github.com/JoosepAlviste/nvim-ts-context-commentstring/wiki/Integrations#minicomment
             enable_autocmd = false,
         },
-    },
-    {
-        "junegunn/rainbow_parentheses.vim",
-        cmd = "RainbowParentheses",
-    },
-    {
-        "junegunn/seoul256.vim",
-        lazy = true,
     },
     {
         "lewis6991/gitsigns.nvim",
@@ -351,9 +303,7 @@ return {
     {
         "neovim/nvim-lspconfig",
         dependencies = {
-            -- neodev must be set up before lua_ls (https://github.com/folke/neodev.nvim/tree/80487e4f7bfa11c2ef2a1b461963db019aad6a73#-setup).
-            "folke/neodev.nvim",
-            "nvim-treesitter/nvim-treesitter",
+            "saghen/blink.cmp",
         },
         config = function()
             vim.lsp.config("lua_ls", {
@@ -413,69 +363,95 @@ return {
         end,
     },
     {
-        "nvimdev/lspsaga.nvim",
-        event = "LspAttach",
-        dependencies = {
-            "nvim-treesitter/nvim-treesitter",
-        },
-        opts = {},
+        "nvim-lua/plenary.nvim",
+        lazy = true,
     },
     {
         "nvim-pack/nvim-spectre",
+        cmd = "Spectre",
         dependencies = { "nvim-lua/plenary.nvim" },
     },
     {
         "nvim-treesitter/nvim-treesitter",
         build = ":TSUpdate",
-        config = function()
-            ---@diagnostic disable: missing-fields
-            require("nvim-treesitter.configs").setup({
-                ensure_installed = {
-                    "bash",
-                    "css",
-                    "fish",
-                    "go",
-                    "graphql",
-                    "html",
-                    "javascript",
-                    "json",
-                    "lua",
-                    "markdown",
-                    "python",
-                    "regex",
-                    "rust",
-                    "scss",
-                    "svelte",
-                    "toml",
-                    "tsx",
-                    "typescript",
-                    "vue",
-                    "yaml",
-                },
-                highlight = {
-                    enable = true,
-                },
-            })
-        end,
-    },
-    {
-        "rcarriga/nvim-notify",
-        lazy = true,
+        main = "nvim-treesitter.configs",
         opts = {
-            stages = "static", -- Do not animate notifications.
-            render = "minimal",
+            ensure_installed = {
+                "bash",
+                "css",
+                "fish",
+                "go",
+                "graphql",
+                "html",
+                "javascript",
+                "json",
+                "lua",
+                "markdown",
+                "python",
+                "regex",
+                "rust",
+                "scss",
+                "svelte",
+                "toml",
+                "tsx",
+                "typescript",
+                "vue",
+                "yaml",
+            },
+            auto_install = true,
+            highlight = {
+                enable = true,
+                additional_vim_regex_highlighting = { "ruby" },
+            },
+            indent = { enable = true, disable = { "ruby" } },
         },
     },
     {
+        "rachartier/tiny-inline-diagnostic.nvim",
+        event = "VeryLazy",
+        keys = function()
+            return {
+                {
+                    "<leader>dt",
+                    require("tiny-inline-diagnostic").toggle,
+                    desc = "Toggle inline diagnostics",
+                },
+            }
+        end,
+        opts = {},
+        priority = 1000,
+    },
+    {
         "saghen/blink.cmp",
-        dependencies = { "rafamadriz/friendly-snippets" },
+        event = "VimEnter",
+        dependencies = { "rafamadriz/friendly-snippets", "folke/lazydev.nvim" },
         version = "1.*",
         ---@module 'blink.cmp'
         ---@type blink.cmp.Config
-        opts = {},
+        opts = {
+            keymap = {
+                preset = "default",
+            },
+            sources = {
+                default = { "lsp", "path", "snippets", "lazydev" },
+                providers = {
+                    lazydev = { module = "lazydev.integrations.blink", score_offset = 100 },
+                },
+            },
+        },
     },
     {
         "stevearc/conform.nvim",
+        cmd = { "ConformInfo" },
+        keys = {
+            {
+                "<leader>cf",
+                function()
+                    require("conform").format({ timeout_ms = 3000 })
+                end,
+                desc = "Format code",
+            },
+        },
         opts = function()
             local js_formatter = "prettier"
             if vim.env.NVIM_USE_PRETTIER_ESLINT ~= nil then
@@ -543,6 +519,9 @@ return {
     {
         "tpope/vim-fugitive",
         cmd = { "Git" },
+        keys = {
+            { "<leader>gg", "<cmd> Git<cr>", desc = "Git" },
+        },
         dependencies = {
             "tpope/vim-rhubarb",
         },
