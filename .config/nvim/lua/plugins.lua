@@ -32,7 +32,10 @@ return {
             },
         },
     },
-    "echasnovski/mini-git",
+    {
+        "echasnovski/mini-git",
+        cmd = { "Git" },
+    },
     { "echasnovski/mini.icons", version = false, config = true },
     {
         "echasnovski/mini.indentscope",
@@ -290,6 +293,30 @@ return {
         end,
     },
     {
+        "NeogitOrg/neogit",
+        dependencies = {
+            "nvim-lua/plenary.nvim",
+            "sindrets/diffview.nvim",
+            "echasnovski/mini.pick",
+        },
+        opts = {
+            integrations = {
+                diffview = true,
+                mini_pick = true,
+            },
+        },
+        cmd = { "Neogit" },
+        keys = {
+            {
+                "<leader>gg",
+                function()
+                    require("neogit").open()
+                end,
+                desc = "Git",
+            },
+        },
+    },
+    {
         "neovim/nvim-lspconfig",
         dependencies = {
             "saghen/blink.cmp",
@@ -483,16 +510,6 @@ return {
                 },
             }
         end,
-    },
-    {
-        "tpope/vim-fugitive",
-        cmd = { "Git" },
-        keys = {
-            { "<leader>gg", "<cmd> Git<cr>", desc = "Git" },
-        },
-        dependencies = {
-            "tpope/vim-rhubarb",
-        },
     },
     {
         "windwp/nvim-autopairs",
