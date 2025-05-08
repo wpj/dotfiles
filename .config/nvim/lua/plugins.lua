@@ -306,23 +306,6 @@ return {
             "saghen/blink.cmp",
         },
         config = function()
-            vim.lsp.config("lua_ls", {
-                settings = {
-                    Lua = {
-                        runtime = {
-                            -- Tell the language server which version of Lua you're using
-                            -- (most likely LuaJIT in the case of Neovim)
-                            version = "LuaJIT",
-                        },
-                        workspace = {
-                            -- Make lua_ls recognize vim config files.
-                            library = vim.api.nvim_get_runtime_file("", true),
-                            checkThirdParty = false,
-                        },
-                    },
-                },
-            })
-
             local global_pnpm_root_directory = "~/Library/pnpm/global/5/node_modules"
 
             -- Use project-local typescript installation if available, fallback to global install
@@ -344,21 +327,10 @@ return {
                 },
             })
 
-            vim.lsp.config("volar", {
-                on_new_config = function(new_config, new_root_dir)
-                    local lib_path =
-                        vim.fs.find("node_modules/typescript/lib", { path = new_root_dir, upward = true })[1]
-                    if lib_path then
-                        new_config.init_options.typescript.tsdk = lib_path
-                    end
-                end,
-            })
-
             vim.lsp.enable({
                 "gopls",
                 "lua_ls",
                 "ts_ls",
-                "volar",
             })
         end,
     },
@@ -435,7 +407,11 @@ return {
             sources = {
                 default = { "lsp", "path", "snippets", "lazydev" },
                 providers = {
-                    lazydev = { module = "lazydev.integrations.blink", score_offset = 100 },
+                    lazydev = {
+                        name = "LazyDev",
+                        module = "lazydev.integrations.blink",
+                        score_offset = 100,
+                    },
                 },
             },
         },
