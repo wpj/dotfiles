@@ -414,6 +414,9 @@ return {
                     },
                 },
             },
+            signature = {
+                enabled = true,
+            },
         },
     },
     {
