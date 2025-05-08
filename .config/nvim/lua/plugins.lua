@@ -4,17 +4,6 @@ return {
         event = { "BufReadPost" },
     },
     "browserslist/vim-browserslist",
-    {
-        "echasnovski/mini.comment",
-        event = "VeryLazy",
-        opts = {
-            options = {
-                custom_commentstring = function()
-                    return require("ts_context_commentstring").calculate_commentstring() or vim.bo.commentstring
-                end,
-            },
-        },
-    },
     "echasnovski/mini.diff",
     {
         "echasnovski/mini.extra",
@@ -140,6 +129,11 @@ return {
         },
     },
     {
+        "folke/ts-comments.nvim",
+        opts = {},
+        event = "VeryLazy",
+    },
+    {
         "folke/snacks.nvim",
         keys = {
 
@@ -238,18 +232,6 @@ return {
         "kevinhwang91/nvim-bqf",
         opts = {},
         ft = "qf",
-    },
-    {
-        "JoosepAlviste/nvim-ts-context-commentstring",
-        lazy = true,
-        init = function()
-            -- See https://github.com/JoosepAlviste/nvim-ts-context-commentstring/tree/b8ff464f2afc2000f6c72fa331a8fc090cb46b39
-            vim.g.skip_ts_context_commentstring_module = true
-        end,
-        opts = {
-            -- https://github.com/JoosepAlviste/nvim-ts-context-commentstring/wiki/Integrations#minicomment
-            enable_autocmd = false,
-        },
     },
     {
         "lewis6991/gitsigns.nvim",
