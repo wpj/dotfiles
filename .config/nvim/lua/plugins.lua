@@ -111,11 +111,6 @@ return {
         end,
     },
     {
-        "echasnovski/mini.pairs",
-        event = "VeryLazy",
-        opts = {},
-    },
-    {
         "echasnovski/mini.statusline",
         opts = {},
     },
@@ -516,5 +511,10 @@ return {
         dependencies = {
             "tpope/vim-rhubarb",
         },
+    },
+    {
+        "windwp/nvim-autopairs",
+        event = "InsertEnter",
+        opts = {},
     },
 }
