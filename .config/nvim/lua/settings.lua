@@ -3,6 +3,7 @@ local opt = vim.opt
 opt.breakindent = true
 opt.cmdheight = 1
 opt.colorcolumn = "80"
+opt.confirm = true
 opt.cursorline = true
 opt.diffopt:append("vertical")
 opt.expandtab = true -- Use spaces instead of tabs
