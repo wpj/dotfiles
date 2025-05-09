@@ -50,14 +50,6 @@ return {
         end,
     },
     {
-        "echasnovski/mini.notify",
-        config = function()
-            require("mini.notify").setup()
-
-            vim.notify = require("mini.notify").make_notify()
-        end,
-    },
-    {
         "echasnovski/mini.pick",
         dependencies = { "echasnovski/mini.files" },
         keys = {
@@ -169,7 +161,29 @@ return {
             gitbrowse = {
                 what = "permalink",
             },
+            notify = {},
+            notifier = {},
         },
+        config = function(_plugin, opts)
+            local snacks = require("snacks")
+            snacks.setup(opts)
+
+            -- https://github.com/folke/snacks.nvim/blob/bc0630e43be5699bb94dadc302c0d21615421d93/docs/notifier.md#-examples
+            vim.api.nvim_create_autocmd("LspProgress", {
+                ---@param ev {data: {client_id: integer, params: lsp.ProgressParams}}
+                callback = function(ev)
+                    local spinner = { "⠋", "⠙", "⠹", "⠸", "⠼", "⠴", "⠦", "⠧", "⠇", "⠏" }
+                    vim.notify(vim.lsp.status(), "info", {
+                        id = "lsp_progress",
+                        title = "LSP Progress",
+                        opts = function(notif)
+                            notif.icon = ev.data.params.value.kind == "end" and " "
+                                or spinner[math.floor(vim.uv.hrtime() / (1e6 * 80)) % #spinner + 1]
+                        end,
+                    })
+                end,
+            })
+        end,
     },
     {
         "folke/todo-comments.nvim",
