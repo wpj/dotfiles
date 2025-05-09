@@ -163,6 +163,7 @@ return {
             },
             notify = {},
             notifier = {},
+            rename = {},
         },
         config = function(_plugin, opts)
             local snacks = require("snacks")
@@ -181,6 +182,14 @@ return {
                                 or spinner[math.floor(vim.uv.hrtime() / (1e6 * 80)) % #spinner + 1]
                         end,
                     })
+                end,
+            })
+
+            -- https://github.com/folke/snacks.nvim/blob/bc0630e43be5699bb94dadc302c0d21615421d93/docs/rename.md#minifiles
+            vim.api.nvim_create_autocmd("User", {
+                pattern = "MiniFilesActionRename",
+                callback = function(event)
+                    snacks.rename.on_rename_file(event.data.from, event.data.to)
                 end,
             })
         end,
