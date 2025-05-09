@@ -161,6 +161,7 @@ return {
             gitbrowse = {
                 what = "permalink",
             },
+            input = {},
             notify = {},
             notifier = {},
             rename = {},
