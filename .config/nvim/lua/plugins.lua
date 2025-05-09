@@ -4,7 +4,10 @@ return {
         event = { "BufReadPost" },
     },
     "browserslist/vim-browserslist",
-    "echasnovski/mini.diff",
+    {
+        "echasnovski/mini.ai",
+        opts = {},
+    },
     {
         "echasnovski/mini.extra",
         dependencies = { "echasnovski/mini.files" },
@@ -34,7 +37,6 @@ return {
     },
     {
         "echasnovski/mini-git",
-        cmd = { "Git" },
     },
     { "echasnovski/mini.icons", version = false, config = true },
     {
