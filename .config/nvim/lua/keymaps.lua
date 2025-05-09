@@ -10,6 +10,9 @@ vim.keymap.set("n", "<leader>cs", vim.lsp.buf.signature_help, { desc = "Show sig
 
 vim.keymap.set("n", "<leader>dd", vim.diagnostic.open_float, { desc = "Show line diagnostics" })
 
+vim.keymap.set("n", "gcd", "yygccp", { remap = true, desc = "Comment & duplicate line" })
+
+vim.keymap.set("x", "/", "<Esc>/\\%V") --search within visual selection
 
 vim.keymap.set("n", "<leader>fy", function()
     local path = vim.api.nvim_buf_get_name(0)
