@@ -9,6 +9,11 @@ return {
         opts = {},
     },
     {
+        "echasnovski/mini.diff",
+        event = "VeryLazy",
+        opts = {},
+    },
+    {
         "echasnovski/mini.extra",
         dependencies = { "echasnovski/mini.files" },
         keys = {
@@ -167,6 +172,12 @@ return {
             notify = {},
             notifier = {},
             rename = {},
+            statuscolumn = {
+                folds = {
+                    git_hl = true,
+                    open = true,
+                },
+            },
         },
         config = function(_plugin, opts)
             local snacks = require("snacks")
@@ -261,12 +272,6 @@ return {
         "kevinhwang91/nvim-bqf",
         opts = {},
         ft = "qf",
-    },
-    {
-        "lewis6991/gitsigns.nvim",
-        event = "VeryLazy",
-        dependencies = { "nvim-lua/plenary.nvim" },
-        opts = {},
     },
     {
         "mattn/emmet-vim",

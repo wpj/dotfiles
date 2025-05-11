@@ -63,3 +63,13 @@ vim.api.nvim_create_autocmd("TextYankPost", {
 vim.diagnostic.config({
     virtual_text = false,
 })
+
+-- ufo-style folding
+-- NOTE: snacks.nvim's statuscolumn plugin must be enabled for this to work.
+opt.foldenable = true
+opt.foldlevel = 99
+opt.foldmethod = "expr"
+opt.foldexpr = "v:lua.vim.treesitter.foldexpr()"
+opt.foldtext = ""
+opt.foldcolumn = "0"
+opt.fillchars:append({ fold = " " })
