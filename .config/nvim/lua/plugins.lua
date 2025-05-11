@@ -454,7 +454,7 @@ return {
                 preset = "default",
             },
             sources = {
-                default = { "lsp", "path", "snippets", "lazydev" },
+                default = { "lsp", "path", "snippets", "lazydev", "buffer" },
                 providers = {
                     lazydev = {
                         name = "LazyDev",
