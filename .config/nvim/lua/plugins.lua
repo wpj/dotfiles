@@ -402,6 +402,7 @@ return {
                 "fish",
                 "go",
                 "graphql",
+                "gitcommit",
                 "html",
                 "javascript",
                 "json",
