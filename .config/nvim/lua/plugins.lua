@@ -36,6 +36,8 @@ return {
     },
     {
         "echasnovski/mini.files",
+        opts = {},
+        lazy = false,
         keys = {
             {
                 "-",
