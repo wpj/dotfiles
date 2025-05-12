@@ -8,10 +8,16 @@ return {
         "echasnovski/mini.ai",
         opts = {},
     },
+    -- FIX: Enable mini.diff (and remove gitsigns) when the snacks.statuscolumn
+    -- integration can be made to show diagnostic signs with mini.diff enabled.
     {
         "echasnovski/mini.diff",
-        event = "VeryLazy",
-        opts = {},
+        enabled = false,
+        opts = {
+            view = {
+                style = "number",
+            },
+        },
     },
     {
         "echasnovski/mini.extra",
@@ -173,6 +179,8 @@ return {
             notifier = {},
             rename = {},
             statuscolumn = {
+                left = { "mark", "sign" },
+                right = { "fold" },
                 folds = {
                     git_hl = true,
                     open = true,
@@ -273,6 +281,13 @@ return {
         "kevinhwang91/nvim-bqf",
         opts = {},
         ft = "qf",
+    },
+    {
+        "lewis6991/gitsigns.nvim",
+        opts = {
+            signcolumn = false,
+            numhl = true,
+        },
     },
     {
         "mattn/emmet-vim",
