@@ -50,6 +50,46 @@ return {
     },
     {
         "echasnovski/mini-git",
+        main = "mini.git",
+        cmd = { "Git" },
+        keys = {
+            {
+                "<leader>gb",
+                "<cmd>vertical Git blame -- %<cr>",
+                desc = "Git blame",
+            },
+            {
+                "<leader>gs",
+                function()
+                    require("mini.git").show_at_cursor()
+                end,
+                mode = { "n", "x" },
+                desc = "Show at cursor",
+            },
+        },
+        config = function(_plugin, opts)
+            local minigit = require("mini.git")
+            minigit.setup(opts)
+
+            -- https://github.com/echasnovski/mini.nvim/blob/c665f30bb372c2ec8cfd61f7531098d3658b6634/doc/mini-git.txt#L90-L111
+            local align_blame = function(au_data)
+                if au_data.data.git_subcommand ~= "blame" then
+                    return
+                end
+
+                -- Align blame output with source
+                local win_src = au_data.data.win_source
+                vim.wo.wrap = false
+                vim.fn.winrestview({ topline = vim.fn.line("w0", win_src) })
+                vim.api.nvim_win_set_cursor(0, { vim.fn.line(".", win_src), 0 })
+
+                -- Bind both windows so that they scroll together
+                vim.wo[win_src].scrollbind, vim.wo.scrollbind = true, true
+            end
+
+            local au_opts = { pattern = "MiniGitCommandSplit", callback = align_blame }
+            vim.api.nvim_create_autocmd("User", au_opts)
+        end,
     },
     { "echasnovski/mini.icons", version = false, config = true },
     {
