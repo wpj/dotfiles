@@ -20,21 +20,6 @@ return {
         },
     },
     {
-        "echasnovski/mini.extra",
-        dependencies = { "echasnovski/mini.files" },
-        keys = {
-            {
-                "<leader>fr",
-                function()
-                    require("mini.files").close()
-                    require("mini.extra").pickers.oldfiles()
-                end,
-                desc = "Search recent files",
-            },
-        },
-        opts = {},
-    },
-    {
         "echasnovski/mini.files",
         opts = {},
         lazy = false,
@@ -105,51 +90,6 @@ return {
         end,
     },
     {
-        "echasnovski/mini.pick",
-        dependencies = { "echasnovski/mini.files" },
-        keys = {
-            {
-                "<leader>ff",
-                function()
-                    require("mini.files").close()
-                    require("mini.pick").builtin.files()
-                end,
-                desc = "Find file in project",
-            },
-            {
-                "<leader>/",
-                function()
-                    require("mini.files").close()
-                    require("mini.pick").builtin.grep_live()
-                end,
-                desc = "Search project files",
-            },
-            {
-                "<leader><leader>",
-                function()
-                    require("mini.files").close()
-                    require("mini.pick").builtin.files()
-                end,
-                desc = "Find file in project",
-            },
-        },
-        opts = function()
-            return {
-                mappings = {
-                    send_all_to_quickfix = {
-                        char = "<C-q>",
-                        -- Send all items to the quickfix list (see
-                        -- https://github.com/echasnovski/mini.nvim/discussions/1028).
-                        func = function()
-                            local mappings = require("mini.pick").get_picker_opts().mappings
-                            vim.api.nvim_input(mappings.mark_all .. mappings.choose_marked)
-                        end,
-                    },
-                },
-            }
-        end,
-    },
-    {
         "echasnovski/mini.statusline",
         opts = {},
     },
@@ -209,6 +149,38 @@ return {
                 mode = { "n", "v" },
                 desc = "Yank git remote url",
             },
+            {
+                "<leader>ff",
+                function()
+                    require("mini.files").close()
+                    require("snacks").picker.files()
+                end,
+                desc = "Find file in project",
+            },
+            {
+                "<leader>/",
+                function()
+                    require("mini.files").close()
+                    require("snacks").picker.grep()
+                end,
+                desc = "Search project files",
+            },
+            {
+                "<leader><leader>",
+                function()
+                    require("mini.files").close()
+                    require("snacks").picker.smart()
+                end,
+                desc = "Find file in project",
+            },
+            {
+                "<leader>fr",
+                function()
+                    require("mini.files").close()
+                    require("snacks").picker.recent()
+                end,
+                desc = "Search recent files",
+            },
         },
         priority = 1000,
         lazy = false,
@@ -219,6 +191,19 @@ return {
             input = {},
             notify = {},
             notifier = {},
+            picker = {
+                layout = {
+                    fullscreen = true,
+                },
+                win = {
+                    input = {
+                        keys = {
+                            ["<C-j>"] = { "history_forward", mode = { "i", "n" } },
+                            ["<C-k>"] = { "history_back", mode = { "i", "n" } },
+                        },
+                    },
+                },
+            },
             rename = {},
             statuscolumn = {
                 left = { "mark", "sign" },
@@ -386,12 +371,12 @@ return {
         dependencies = {
             "nvim-lua/plenary.nvim",
             "sindrets/diffview.nvim",
-            "echasnovski/mini.pick",
+            "folke/snacks.nvim",
         },
         opts = {
             integrations = {
                 diffview = true,
-                mini_pick = true,
+                snacks = true,
             },
         },
         cmd = { "Neogit" },
