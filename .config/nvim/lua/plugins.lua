@@ -12,6 +12,76 @@ return {
         "echasnovski/mini.bracketed",
         opts = {},
     },
+    {
+        "echasnovski/mini.clue",
+        event = "VeryLazy",
+        opts = function()
+            local miniclue = require("mini.clue")
+
+            return {
+                triggers = {
+                    -- Leader triggers
+                    { mode = "n", keys = "<Leader>" },
+                    { mode = "x", keys = "<Leader>" },
+
+                    -- Built-in completion
+                    { mode = "i", keys = "<C-x>" },
+
+                    -- `g` key
+                    { mode = "n", keys = "g" },
+                    { mode = "x", keys = "g" },
+
+                    -- Marks
+                    { mode = "n", keys = "'" },
+                    { mode = "n", keys = "`" },
+                    { mode = "x", keys = "'" },
+                    { mode = "x", keys = "`" },
+
+                    -- Registers
+                    { mode = "n", keys = '"' },
+                    { mode = "x", keys = '"' },
+                    { mode = "i", keys = "<C-r>" },
+                    { mode = "c", keys = "<C-r>" },
+
+                    -- Window commands
+                    { mode = "n", keys = "<C-w>" },
+
+                    -- `z` key
+                    { mode = "n", keys = "z" },
+                    { mode = "x", keys = "z" },
+
+                    -- Moving
+                    { mode = "n", keys = "[" },
+                    { mode = "n", keys = "]" },
+                },
+                clues = {
+                    { mode = "n", keys = "<leader>c", desc = "+code" },
+                    { mode = "n", keys = "<leader>d", desc = "+diagnostic" },
+                    { mode = "n", keys = "<leader>f", desc = "+file" },
+                    { mode = "n", keys = "<leader>g", desc = "+git" },
+                    { mode = "x", keys = "<leader>g", desc = "+git" },
+                    { mode = "n", keys = "<leader>n", desc = "+navigate" },
+                    { mode = "n", keys = "<leader>q", desc = "+quickfix" },
+                    { mode = "n", keys = "[", desc = "+prev" },
+                    { mode = "n", keys = "]", desc = "+next" },
+                    miniclue.gen_clues.builtin_completion(),
+                    miniclue.gen_clues.g(),
+                    miniclue.gen_clues.marks(),
+                    miniclue.gen_clues.registers(),
+                    miniclue.gen_clues.windows(),
+                    miniclue.gen_clues.z(),
+                },
+                window = {
+                    delay = 250,
+                    scroll_down = "<C-f>",
+                    scroll_up = "<C-b>",
+                    config = {
+                        width = "auto",
+                    },
+                },
+            }
+        end,
+    },
     -- FIX: Enable mini.diff (and remove gitsigns) when the snacks.statuscolumn
     -- integration can be made to show diagnostic signs with mini.diff enabled.
     {
@@ -269,48 +339,6 @@ return {
         "folke/tokyonight.nvim",
         lazy = false,
         priority = 1000,
-    },
-    {
-        "folke/which-key.nvim",
-        event = "VeryLazy",
-        keys = {
-            {
-                "<leader>?",
-                function()
-                    require("which-key").show()
-                end,
-                desc = "Show key bindings",
-            },
-        },
-        opts = {
-            preset = "helix",
-            spec = {
-                {
-                    "<leader>c",
-                    group = "code",
-                },
-                {
-                    "<leader>d",
-                    group = "diagnostic",
-                },
-                {
-                    "<leader>f",
-                    group = "file",
-                },
-                {
-                    "<leader>g",
-                    group = "git",
-                },
-                {
-                    "<leader>n",
-                    group = "navigate",
-                },
-                {
-                    "<leader>q",
-                    group = "quickfix",
-                },
-            },
-        },
     },
     {
         "kevinhwang91/nvim-bqf",
