@@ -8,6 +8,10 @@ return {
         "echasnovski/mini.ai",
         opts = {},
     },
+    {
+        "echasnovski/mini.bracketed",
+        opts = {},
+    },
     -- FIX: Enable mini.diff (and remove gitsigns) when the snacks.statuscolumn
     -- integration can be made to show diagnostic signs with mini.diff enabled.
     {
@@ -88,6 +92,10 @@ return {
                 },
             }
         end,
+    },
+    {
+        "echasnovski/mini.operators",
+        opts = {},
     },
     {
         "echasnovski/mini.statusline",
