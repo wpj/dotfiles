@@ -10,7 +10,15 @@ return {
     },
     {
         "echasnovski/mini.bracketed",
-        opts = {},
+        opts = {
+            diagnostic = {
+                options = {
+                    -- Disable diagnostic float in favor of
+                    -- tiny-inline-diagnostic.
+                    float = false,
+                },
+            },
+        },
     },
     {
         "echasnovski/mini.clue",
