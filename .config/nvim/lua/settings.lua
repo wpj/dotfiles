@@ -1,53 +1,51 @@
-local opt = vim.opt
-
-opt.breakindent = true
-opt.cmdheight = 1
-opt.colorcolumn = "80"
-opt.confirm = true
-opt.cursorline = true
-opt.diffopt:append("vertical")
-opt.expandtab = true -- Use spaces instead of tabs
-opt.ignorecase = true
-opt.inccommand = "nosplit" -- Preview incremental substitute
-opt.mouse = "a" -- Enable mouse mode
-opt.number = true -- Show current line number
-opt.pumblend = 10 -- Popup blend
-opt.pumheight = 10 -- Max number of entries in a popup
-opt.scrolloff = 7 -- Lines of context when moving the cursor near the screen edge
-opt.shiftwidth = 2 -- Indent size
-opt.showmatch = true
-opt.showmode = false -- Mode is shown in the status line
-opt.sidescrolloff = 8 -- Side scroll context lines
-opt.signcolumn = "yes" -- Prevents text shifts when lightbulb/other signs are shown
-opt.smartcase = true
-opt.smartindent = true -- Insert indents automatically
-opt.softtabstop = 2
-opt.splitbelow = true -- Put new windows below the current one
-opt.splitright = true -- Put new windows to the right of the current one
-opt.tabstop = 2 -- Number of spaces a tab is equivalent to
-opt.timeoutlen = 300
-opt.title = true
-opt.undofile = true
-opt.updatetime = 250
-opt.virtualedit = "block" -- Move cursor anywhere in visual block mode.
-opt.visualbell = true
-opt.wildmenu = true
-opt.wrap = false -- Disable line wrapping
+vim.o.breakindent = true
+vim.o.cmdheight = 1
+vim.o.colorcolumn = "80"
+vim.o.confirm = true
+vim.o.cursorline = true
+vim.opt.diffopt:append("vertical")
+vim.o.expandtab = true -- Use spaces instead of tabs
+vim.o.ignorecase = true
+vim.o.inccommand = "nosplit" -- Preview incremental substitute
+vim.o.mouse = "a" -- Enable mouse mode
+vim.o.number = true -- Show current line number
+vim.o.pumblend = 10 -- Popup blend
+vim.o.pumheight = 10 -- Max number of entries in a popup
+vim.o.scrolloff = 7 -- Lines of context when moving the cursor near the screen edge
+vim.o.shiftwidth = 2 -- Indent size
+vim.o.showmatch = true
+vim.o.showmode = false -- Mode is shown in the status line
+vim.o.sidescrolloff = 8 -- Side scroll context lines
+vim.o.signcolumn = "yes" -- Prevents text shifts when lightbulb/other signs are shown
+vim.o.smartcase = true
+vim.o.smartindent = true -- Insert indents automatically
+vim.o.softtabstop = 2
+vim.o.splitbelow = true -- Put new windows below the current one
+vim.o.splitright = true -- Put new windows to the right of the current one
+vim.o.tabstop = 2 -- Number of spaces a tab is equivalent to
+vim.o.timeoutlen = 300
+vim.o.title = true
+vim.o.undofile = true
+vim.o.updatetime = 250
+vim.o.virtualedit = "block" -- Move cursor anywhere in visual block mode.
+vim.o.visualbell = true
+vim.o.wildmenu = true
+vim.o.wrap = false -- Disable line wrapping
 
 vim.schedule(function()
     if vim.fn.executable("fish") then
-        opt.shell = "fish"
+        vim.o.shell = "fish"
     end
 
     if vim.fn.executable("rg") then
-        opt.grepprg = "rg --vimgrep"
+        vim.o.grepprg = "rg --vimgrep"
     end
 end)
 
 -- files, backups, undo
-opt.backup = false
-opt.writebackup = false
-opt.swapfile = false
+vim.o.backup = false
+vim.o.writebackup = false
+vim.o.swapfile = false
 
 vim.cmd("colorscheme tokyonight")
 
@@ -66,10 +64,10 @@ vim.diagnostic.config({
 
 -- ufo-style folding
 -- NOTE: snacks.nvim's statuscolumn plugin must be enabled for this to work.
-opt.foldenable = true
-opt.foldlevel = 99
-opt.foldmethod = "expr"
-opt.foldexpr = "v:lua.vim.treesitter.foldexpr()"
-opt.foldtext = ""
-opt.foldcolumn = "0"
-opt.fillchars:append({ fold = " " })
+vim.o.foldenable = true
+vim.o.foldlevel = 99
+vim.o.foldmethod = "expr"
+vim.o.foldexpr = "v:lua.vim.treesitter.foldexpr()"
+vim.o.foldtext = ""
+vim.o.foldcolumn = "0"
+vim.opt.fillchars:append({ fold = " " })
