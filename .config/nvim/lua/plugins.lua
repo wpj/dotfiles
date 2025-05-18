@@ -72,6 +72,7 @@ return {
                     { mode = "n", keys = "<leader>q", desc = "+quickfix" },
                     { mode = "n", keys = "[", desc = "+prev" },
                     { mode = "n", keys = "]", desc = "+next" },
+                    { mode = "n", keys = "gz", desc = "+surround" },
                     miniclue.gen_clues.builtin_completion(),
                     miniclue.gen_clues.g(),
                     miniclue.gen_clues.marks(),
@@ -178,6 +179,20 @@ return {
     {
         "echasnovski/mini.statusline",
         opts = {},
+    },
+    {
+        "echasnovski/mini.surround",
+        opts = {
+            mappings = {
+                add = "gza",
+                delete = "gzd",
+                find = "gzf",
+                find_left = "gzF",
+                highlight = "gzh",
+                replace = "gzr",
+                update_n_lines = "gzn",
+            },
+        },
     },
     {
         "folke/flash.nvim",
