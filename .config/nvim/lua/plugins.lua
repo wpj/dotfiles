@@ -65,7 +65,7 @@ return {
                 clues = {
                     { mode = "n", keys = "<leader>c", desc = "+code" },
                     { mode = "n", keys = "<leader>d", desc = "+diagnostic" },
-                    { mode = "n", keys = "<leader>f", desc = "+file" },
+                    { mode = "n", keys = "<leader>f", desc = "+file/find" },
                     { mode = "n", keys = "<leader>g", desc = "+git" },
                     { mode = "x", keys = "<leader>g", desc = "+git" },
                     { mode = "n", keys = "<leader>n", desc = "+navigate" },
@@ -376,6 +376,20 @@ return {
         },
     },
     {
+        "MagicDuck/grug-far.nvim",
+        cmd = { "GrugFar" },
+        opts = {},
+        keys = {
+            {
+                "<leader>fR",
+                function()
+                    require("grug-far").open()
+                end,
+                desc = "Find and replace",
+            },
+        },
+    },
+    {
         "mattn/emmet-vim",
         ft = {
             "css",
@@ -486,11 +500,6 @@ return {
     {
         "nvim-lua/plenary.nvim",
         lazy = true,
-    },
-    {
-        "nvim-pack/nvim-spectre",
-        cmd = "Spectre",
-        dependencies = { "nvim-lua/plenary.nvim" },
     },
     {
         "nvim-treesitter/nvim-treesitter",
