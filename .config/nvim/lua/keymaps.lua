@@ -14,6 +14,8 @@ vim.keymap.set("n", "gcd", "yygccp", { remap = true, desc = "Comment & duplicate
 
 vim.keymap.set("x", "/", "<Esc>/\\%V") --search within visual selection
 
+vim.keymap.set('n', '<leader>L', '<cmd>Lazy<cr>', { desc = 'Lazy' })
+
 vim.keymap.set("n", "<leader>fy", function()
     local path = vim.api.nvim_buf_get_name(0)
     vim.fn.setreg("+", path)
