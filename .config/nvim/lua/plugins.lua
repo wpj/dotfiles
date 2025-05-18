@@ -70,6 +70,7 @@ return {
                     { mode = "x", keys = "<leader>g", desc = "+git" },
                     { mode = "n", keys = "<leader>n", desc = "+navigate" },
                     { mode = "n", keys = "<leader>q", desc = "+quickfix" },
+                    { mode = "n", keys = "<leader>s", desc = "+search" },
                     { mode = "n", keys = "[", desc = "+prev" },
                     { mode = "n", keys = "]", desc = "+next" },
                     { mode = "n", keys = "gz", desc = "+surround" },
@@ -280,6 +281,27 @@ return {
                     require("snacks").picker.recent()
                 end,
                 desc = "Search recent files",
+            },
+            {
+                "<leader>sk",
+                function()
+                    require("snacks").picker.keymaps()
+                end,
+                desc = "Keymaps",
+            },
+            {
+                "<leader>sc",
+                function()
+                    require("snacks").picker.commands()
+                end,
+                desc = "Commands",
+            },
+            {
+                "<leader>sh",
+                function()
+                    require("snacks").picker.help()
+                end,
+                desc = "Keymaps",
             },
         },
         priority = 1000,
