@@ -580,7 +580,7 @@ return {
     {
         "saghen/blink.cmp",
         event = "VimEnter",
-        dependencies = { "rafamadriz/friendly-snippets", "folke/lazydev.nvim" },
+        dependencies = { "rafamadriz/friendly-snippets" },
         version = "1.*",
         ---@module 'blink.cmp'
         ---@type blink.cmp.Config
@@ -589,7 +589,7 @@ return {
                 preset = "default",
             },
             sources = {
-                default = { "lsp", "path", "snippets", "lazydev", "buffer" },
+                default = { "lazydev", "lsp", "path", "snippets", "buffer" },
                 providers = {
                     lazydev = {
                         name = "LazyDev",
