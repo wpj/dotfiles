@@ -487,9 +487,6 @@ return {
     },
     {
         "neovim/nvim-lspconfig",
-        dependencies = {
-            "saghen/blink.cmp",
-        },
         config = function()
             local global_pnpm_root_directory = "~/Library/pnpm/global/5/node_modules"
 
@@ -580,7 +577,7 @@ return {
     },
     {
         "saghen/blink.cmp",
-        event = "VimEnter",
+        event = "VeryLazy",
         dependencies = { "rafamadriz/friendly-snippets" },
         version = "1.*",
         ---@module 'blink.cmp'
