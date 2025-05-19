@@ -227,7 +227,22 @@ return {
     {
         "folke/snacks.nvim",
         keys = {
-
+            {
+                "<leader>/",
+                function()
+                    require("mini.files").close()
+                    require("snacks").picker.grep()
+                end,
+                desc = "Grep files",
+            },
+            {
+                "<leader><leader>",
+                function()
+                    require("mini.files").close()
+                    require("snacks").picker.smart()
+                end,
+                desc = "Find file in project",
+            },
             {
                 "<leader>go",
                 function()
@@ -259,20 +274,12 @@ return {
                 desc = "Find file in project",
             },
             {
-                "<leader>/",
+                "<leader>fg",
                 function()
                     require("mini.files").close()
-                    require("snacks").picker.grep()
+                    require("snacks").picker.git_files()
                 end,
-                desc = "Search project files",
-            },
-            {
-                "<leader><leader>",
-                function()
-                    require("mini.files").close()
-                    require("snacks").picker.smart()
-                end,
-                desc = "Find file in project",
+                desc = "Find git files",
             },
             {
                 "<leader>fr",
@@ -280,14 +287,7 @@ return {
                     require("mini.files").close()
                     require("snacks").picker.recent()
                 end,
-                desc = "Search recent files",
-            },
-            {
-                "<leader>sk",
-                function()
-                    require("snacks").picker.keymaps()
-                end,
-                desc = "Keymaps",
+                desc = "Find recent files",
             },
             {
                 "<leader>sc",
@@ -300,6 +300,13 @@ return {
                 "<leader>sh",
                 function()
                     require("snacks").picker.help()
+                end,
+                desc = "Keymaps",
+            },
+            {
+                "<leader>sk",
+                function()
+                    require("snacks").picker.keymaps()
                 end,
                 desc = "Keymaps",
             },
