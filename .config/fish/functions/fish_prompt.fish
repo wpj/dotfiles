@@ -3,6 +3,22 @@ if ! set -q lucid_dirty_indicator
     set -g lucid_dirty_indicator "•"
 end
 
+if ! set -q lucid_prompt_symbol
+    set -g lucid_prompt_symbol "❯"
+end
+
+if ! set -q lucid_prompt_symbol_error
+    set -g lucid_prompt_symbol_error "❯"
+end
+
+if ! set -q lucid_prompt_symbol_color
+    set -g lucid_prompt_symbol_color "$fish_color_normal"
+end
+
+if ! set -q lucid_prompt_symbol_error_color
+    set -g lucid_prompt_symbol_error_color "$fish_color_normal"
+end
+
 # This should be set to be at least as long as lucid_dirty_indicator, due to a fish bug
 if ! set -q lucid_clean_indicator
     set -g lucid_clean_indicator (string replace -r -a '.' ' ' $lucid_dirty_indicator)
@@ -49,15 +65,15 @@ function __lucid_git_status
         set __lucid_dirty ""
     end
 
-    # Determine git working directory
-    set -l git_dir (command git --no-optional-locks rev-parse --absolute-git-dir 2>/dev/null)
-    if test $status -ne 0
-        return 1
-    end
-
     # Fetch git position & action synchronously.
     # Memoize results to avoid recomputation on subsequent redraws.
     if test -z $__lucid_git_static
+        # Determine git working directory
+        set -l git_dir (command git --no-optional-locks rev-parse --absolute-git-dir 2>/dev/null)
+        if test $status -ne 0
+            return 1
+        end
+
         set -l position (command git --no-optional-locks symbolic-ref --short HEAD 2>/dev/null)
         if test $status -ne 0
             # Denote detached HEAD state with short commit hash
@@ -72,9 +88,9 @@ function __lucid_git_status
         if test -f "$git_dir/MERGE_HEAD"
             set action "merge"
         else if test -d "$git_dir/rebase-merge"
-            set branch "rebase"
+            set action "rebase"
         else if test -d "$git_dir/rebase-apply"
-            set branch "rebase"
+            set action "rebase"
         end
 
         set -l state $position
@@ -162,20 +178,64 @@ function __lucid_git_status
     set_color normal
 end
 
+function __lucid_vi_indicator
+    if [ $fish_key_bindings = "fish_vi_key_bindings" ]
+        switch $fish_bind_mode
+            case "insert"
+                set_color green
+                echo -n "[I] "
+            case "default"
+                set_color red
+                echo -n "[N] "
+            case "visual"
+                set_color yellow
+                echo -n "[S] "
+            case "replace"
+                set_color blue
+                echo -n "[R] "
+        end
+        set_color normal
+    end
+end
+
+# Suppress default mode prompt
+function fish_mode_prompt
+end
+
 function fish_prompt
+    set -l last_pipestatus $pipestatus
     set -l cwd (pwd | string replace "$HOME" '~')
 
-    echo ''
+    if test -z "$lucid_skip_newline"
+        echo ''
+    end
+
     set_color $lucid_cwd_color
     echo -sn $cwd
     set_color normal
 
-    if test $cwd != '~'
+    if test $cwd != '~'; or test -n "$lucid_git_status_in_home_directory"
         set -l git_state (__lucid_git_status)
         if test $status -eq 0
             echo -sn " on $git_state"
         end
     end
 
-    echo -en '\n❯ '
+    echo ''
+    __lucid_vi_indicator
+
+    set -l prompt_symbol "$lucid_prompt_symbol"
+    set -l prompt_symbol_color "$lucid_prompt_symbol_color"
+
+    for status_code in $last_pipestatus
+        if test "$status_code" -ne 0
+            set prompt_symbol "$lucid_prompt_symbol_error"
+            set prompt_symbol_color "$lucid_prompt_symbol_error_color"
+            break
+        end
+    end
+
+    set_color "$prompt_symbol_color"
+    echo -n "$prompt_symbol "
+    set_color normal
 end
