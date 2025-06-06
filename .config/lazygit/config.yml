@@ -1,0 +1,9 @@
+git:
+    autofetch: false
+    autoRefresh: false
+gui:
+    border: 'rounded'
+    showBottomLine: false
+notARepository: 'quit'
+os:
+    editPreset: 'nvim'

@@ -8,6 +8,8 @@ set -gx PNPM_HOME $HOME/Library/pnpm
 
 set -x RIPGREP_CONFIG_PATH $HOME/.config/ripgrep/ripgreprc
 
+set -gx LG_CONFIG_FILE $HOME/.config/lazygit/config.yml
+
 set -l HOMEBREW_BASE
 if test (uname -m) = 'arm64'
 	set HOMEBREW_BASE /opt/homebrew
