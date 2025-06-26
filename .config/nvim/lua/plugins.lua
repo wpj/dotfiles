@@ -6,7 +6,16 @@ return {
     "browserslist/vim-browserslist",
     {
         "echasnovski/mini.ai",
-        opts = {},
+        opts = function()
+            local gen_spec = require("mini.ai").gen_spec
+
+            return {
+                custom_textobjects = {
+                    -- Function definition (needs treesitter queries with these captures)
+                    F = gen_spec.treesitter({ a = "@function.outer", i = "@function.inner" }),
+                },
+            }
+        end,
     },
     {
         "echasnovski/mini.bracketed",
