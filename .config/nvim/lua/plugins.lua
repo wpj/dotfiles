@@ -478,6 +478,23 @@ return {
         end,
     },
     {
+        "mrjones2014/smart-splits.nvim",
+        lazy = false,
+        keys = function()
+            return {
+                { "<A-h>", require("smart-splits").resize_left, desc = "Resize left" },
+                { "<A-j>", require("smart-splits").resize_down, desc = "Resize down" },
+                { "<A-k>", require("smart-splits").resize_up, desc = "Resize up" },
+                { "<A-l>", require("smart-splits").resize_right, desc = "Resize right" },
+                { "<C-S-h>", require("smart-splits").move_cursor_left, desc = "Cursor left" },
+                { "<C-S-j>", require("smart-splits").move_cursor_down, desc = "Cursor down" },
+                { "<C-S-k>", require("smart-splits").move_cursor_up, desc = "Cursor up" },
+                { "<C-S-l>", require("smart-splits").move_cursor_right, desc = "Cursor right" },
+            }
+        end,
+        opts = {},
+    },
+    {
         "NeogitOrg/neogit",
         dependencies = {
             "nvim-lua/plenary.nvim",
