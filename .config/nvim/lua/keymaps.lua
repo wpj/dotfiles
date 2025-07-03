@@ -1,3 +1,11 @@
+-- See https://github.com/LazyVim/LazyVim/blob/25abbf546d564dc484cf903804661ba12de45507/lua/lazyvim/config/keymaps.lua#L7
+vim.keymap.set({ "n", "x" }, "j", "v:count == 0 ? 'gj' : 'j'", { desc = "Down", expr = true, silent = true })
+vim.keymap.set({ "n", "x" }, "k", "v:count == 0 ? 'gk' : 'k'", { desc = "Up", expr = true, silent = true })
+
+-- See https://github.com/LazyVim/LazyVim/blob/25abbf546d564dc484cf903804661ba12de45507/lua/lazyvim/config/keymaps.lua#L84-L85
+vim.keymap.set("v", "<", "<gv")
+vim.keymap.set("v", ">", ">gv")
+
 vim.keymap.set("n", "<Esc>", "<cmd>nohlsearch<CR>")
 
 vim.keymap.set("n", "<leader>qq", vim.cmd.copen, { desc = "Open quickfix list" })
@@ -14,7 +22,7 @@ vim.keymap.set("n", "gcd", "yygccp", { remap = true, desc = "Comment & duplicate
 
 vim.keymap.set("x", "/", "<Esc>/\\%V") --search within visual selection
 
-vim.keymap.set('n', '<leader>L', '<cmd>Lazy<cr>', { desc = 'Lazy' })
+vim.keymap.set("n", "<leader>L", "<cmd>Lazy<cr>", { desc = "Lazy" })
 
 vim.keymap.set("n", "<leader>fy", function()
     local path = vim.api.nvim_buf_get_name(0)
