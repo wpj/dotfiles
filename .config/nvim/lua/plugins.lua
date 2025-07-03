@@ -76,6 +76,7 @@ return {
                     { mode = "n", keys = "]" },
                 },
                 clues = {
+                    { mode = "n", keys = "<leader>b", desc = "+buffer" },
                     { mode = "n", keys = "<leader>c", desc = "+code" },
                     { mode = "n", keys = "<leader>d", desc = "+diagnostic" },
                     { mode = "n", keys = "<leader>f", desc = "+file/find" },
@@ -255,6 +256,20 @@ return {
                     snacks().picker.smart()
                 end,
                 desc = "Find file in project",
+            },
+            {
+                "<leader>bd",
+                function()
+                    snacks().bufdelete()
+                end,
+                desc = "Delete buffer",
+            },
+            {
+                "<leader>bo",
+                function()
+                    snacks().bufdelete.other()
+                end,
+                desc = "Delete other buffers",
             },
             {
                 "<leader>go",
