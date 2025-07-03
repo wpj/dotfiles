@@ -577,8 +577,10 @@ return {
     },
     {
         "nvim-treesitter/nvim-treesitter",
+        event = { "VeryLazy" },
         build = ":TSUpdate",
         main = "nvim-treesitter.configs",
+        dependencies = { "nvim-treesitter/nvim-treesitter-textobjects" },
         opts = {
             ensure_installed = {
                 "bash",
