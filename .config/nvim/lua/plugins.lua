@@ -1,3 +1,7 @@
+local function snacks()
+    return require("snacks")
+end
+
 return {
     {
         "andymass/vim-matchup",
@@ -240,7 +244,7 @@ return {
                 "<leader>/",
                 function()
                     require("mini.files").close()
-                    require("snacks").picker.grep()
+                    snacks().picker.grep()
                 end,
                 desc = "Grep files",
             },
@@ -248,14 +252,14 @@ return {
                 "<leader><leader>",
                 function()
                     require("mini.files").close()
-                    require("snacks").picker.smart()
+                    snacks().picker.smart()
                 end,
                 desc = "Find file in project",
             },
             {
                 "<leader>go",
                 function()
-                    require("snacks").gitbrowse()
+                    snacks().gitbrowse()
                 end,
                 mode = { "n", "v" },
                 desc = "Open git remote url",
@@ -263,7 +267,7 @@ return {
             {
                 "<leader>gy",
                 function()
-                    require("snacks").gitbrowse({
+                    snacks().gitbrowse({
                         open = function(url)
                             vim.fn.setreg("+", url)
                             vim.notify("Yanked " .. url .. " to system clipboard")
@@ -278,7 +282,7 @@ return {
                 "<leader>ff",
                 function()
                     require("mini.files").close()
-                    require("snacks").picker.files()
+                    snacks().picker.files()
                 end,
                 desc = "Find file in project",
             },
@@ -286,7 +290,7 @@ return {
                 "<leader>fg",
                 function()
                     require("mini.files").close()
-                    require("snacks").picker.git_files()
+                    snacks().picker.git_files()
                 end,
                 desc = "Find git files",
             },
@@ -294,28 +298,28 @@ return {
                 "<leader>fr",
                 function()
                     require("mini.files").close()
-                    require("snacks").picker.recent()
+                    snacks().picker.recent()
                 end,
                 desc = "Find recent files",
             },
             {
                 "<leader>sc",
                 function()
-                    require("snacks").picker.commands()
+                    snacks().picker.commands()
                 end,
                 desc = "Commands",
             },
             {
                 "<leader>sh",
                 function()
-                    require("snacks").picker.help()
+                    snacks().picker.help()
                 end,
                 desc = "Keymaps",
             },
             {
                 "<leader>sk",
                 function()
-                    require("snacks").picker.keymaps()
+                    snacks().picker.keymaps()
                 end,
                 desc = "Keymaps",
             },
@@ -353,8 +357,7 @@ return {
             },
         },
         config = function(_plugin, opts)
-            local snacks = require("snacks")
-            snacks.setup(opts)
+            snacks().setup(opts)
 
             -- https://github.com/folke/snacks.nvim/blob/bc0630e43be5699bb94dadc302c0d21615421d93/docs/notifier.md#-examples
             vim.api.nvim_create_autocmd("LspProgress", {
@@ -376,7 +379,7 @@ return {
             vim.api.nvim_create_autocmd("User", {
                 pattern = "MiniFilesActionRename",
                 callback = function(event)
-                    snacks.rename.on_rename_file(event.data.from, event.data.to)
+                    snacks().rename.on_rename_file(event.data.from, event.data.to)
                 end,
             })
         end,
