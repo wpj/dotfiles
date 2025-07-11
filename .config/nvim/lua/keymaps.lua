@@ -1,3 +1,11 @@
+vim.keymap.set("n", "<leader>wh", "<C-w>h", { desc = "Go to left window", remap = true })
+vim.keymap.set("n", "<leader>wj", "<C-w>j", { desc = "Go to bottom window", remap = true })
+vim.keymap.set("n", "<leader>wk", "<C-w>k", { desc = "Go to top window", remap = true })
+vim.keymap.set("n", "<leader>wl", "<C-w>l", { desc = "Go to right window", remap = true })
+vim.keymap.set("n", "<leader>w-", "<C-W>s", { desc = "Split window horizontally", remap = true })
+vim.keymap.set("n", "<leader>w|", "<C-W>v", { desc = "Split window vertically", remap = true })
+vim.keymap.set("n", "<leader>wd", "<C-W>c", { desc = "Delete window", remap = true })
+
 -- See https://github.com/LazyVim/LazyVim/blob/25abbf546d564dc484cf903804661ba12de45507/lua/lazyvim/config/keymaps.lua#L7
 vim.keymap.set({ "n", "x" }, "j", "v:count == 0 ? 'gj' : 'j'", { desc = "Down", expr = true, silent = true })
 vim.keymap.set({ "n", "x" }, "k", "v:count == 0 ? 'gk' : 'k'", { desc = "Up", expr = true, silent = true })
