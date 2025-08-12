@@ -1,6 +1,6 @@
 [user]
 	name = Wyatt Johnston
-	email = git@wyatt.page
+	email = git@wyattjohnston.email
 	signingkey = 75C6F16A8AC04A03
 [alias]
 	co = checkout
