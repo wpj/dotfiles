@@ -719,6 +719,7 @@ return {
                 },
                 formatters_by_ft = {
                     css = { "prettier" },
+                    fish = { "fish_indent" },
                     go = { "gofmt" },
                     html = { "prettier" },
                     javascript = { js_formatter },
@@ -729,6 +730,7 @@ return {
                     markdown = { "prettier" },
                     scss = { "prettier" },
                     svelte = { "prettier" },
+                    toml = { "taplo" },
                     typescript = { js_formatter },
                     typescriptreact = { js_formatter },
                     vue = { js_formatter },
