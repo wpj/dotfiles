@@ -10,38 +10,24 @@ function fish_jj_prompt --description 'Write out the jj prompt'
         return 1
     end
 
+    if test $FISH_JJ_PROMPT_PREFER_GIT
+        return 1
+    end
 
-	if test $FISH_JJ_PROMPT_PREFER_GIT
-		return 1
-	end
+    set -l info (jj log 2>/dev/null --no-graph --ignore-working-copy --color=always --revisions @ \
+		--template '
+			surround(
+				"(",
+				")",
+				separate(commit_summary_separator,
+					format_short_change_id_with_hidden_and_divergent_info(self),
+					bookmarks,
+					tags,
+					if(conflict, label("conflict", "×")),
+					if(empty, label("empty", "empty"))
+				)
+			)'
+	)
 
-    # Generate prompt
-    jj log --ignore-working-copy --no-graph --color always -r @ -T '
-        surround(
-            " (",
-            ")",
-            separate(
-                " ",
-                bookmarks.join(", "),
-                coalesce(
-                    surround(
-                        "\"",
-                        "\"",
-                        if(
-                            description.first_line().substr(0, 24).starts_with(description.first_line()),
-                            description.first_line().substr(0, 24),
-                            description.first_line().substr(0, 23) ++ "…"
-                        )
-                    ),
-                    label(if(empty, "empty"), description_placeholder)
-                ),
-                change_id.shortest(),
-                commit_id.shortest(),
-                if(conflict, label("conflict", "(conflict)")),
-                if(empty, label("empty", "(empty)")),
-                if(divergent, "(divergent)"),
-                if(hidden, "(hidden)"),
-            )
-        )
-    '
+    printf ' %s' $info
 end

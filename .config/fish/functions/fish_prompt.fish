@@ -1,9 +1,19 @@
+function __vcs_info
+    set -l normal (set_color normal)
+    set -l separator_color (set_color "#565f89")
+
+    set -l info (fish_vcs_prompt)
+    if test $status -ne 0
+        return 1
+    end
+    printf " $separator_color::$(set_color normal)%s" $info
+end
+
 function fish_prompt --description 'Write out the prompt'
     set -l last_status $status
     set -l normal (set_color normal)
     set -l status_color (set_color brgreen)
     set -l cwd_color (set_color $fish_color_cwd)
-    set -l vcs_color (set_color brpurple)
     set -l prompt_status ""
 
     # Since we display the prompt on a new line allow the directory names to be longer.
@@ -25,6 +35,6 @@ function fish_prompt --description 'Write out the prompt'
         set prompt_status $status_color "[" $last_status "]" $normal
     end
 
-    echo -s $cwd_color (prompt_pwd) $vcs_color (fish_vcs_prompt) $normal ' ' $prompt_status
+    echo -s $cwd_color (prompt_pwd) (__vcs_info) $normal ' ' $prompt_status
     echo -n -s (fish_default_mode_prompt) $status_color $suffix ' ' $normal
 end
