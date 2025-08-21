@@ -1,5 +1,6 @@
-local function snacks()
-    return require("snacks")
+local function run_after_minifiles_close(fn)
+    require("mini.files").close()
+    fn()
 end
 
 return {
@@ -239,128 +240,196 @@ return {
         event = "VeryLazy",
     },
     {
-        "folke/snacks.nvim",
-        keys = {
-            {
-                "<leader>/",
-                function()
-                    require("mini.files").close()
-                    snacks().picker.grep()
-                end,
-                desc = "Grep files",
+        "ibhagwan/fzf-lua",
+        dependencies = { "echasnovski/mini.icons" },
+        opts = {
+            defaults = { git_icons = false },
+            files = {
+                fzf_opts = {
+                    ["--history"] = vim.fn.stdpath("data") .. "/fzf-lua-files-history",
+                },
             },
-            {
-                "<leader><leader>",
-                function()
-                    require("mini.files").close()
-                    snacks().picker.smart()
-                end,
-                desc = "Find file in project",
+            grep = {
+                fzf_opts = {
+                    ["--history"] = vim.fn.stdpath("data") .. "/fzf-lua-grep-history",
+                },
             },
-            {
-                "<leader>bd",
-                function()
-                    snacks().bufdelete()
-                end,
-                desc = "Delete buffer",
+            keymap = {
+                builtin = {
+                    ["<C-/>"] = "toggle-help",
+                    ["<C-S-p>"] = "toggle-preview",
+                },
+                fzf = {
+                    ["ctrl-q"] = "select-all+accept",
+                },
             },
-            {
-                "<leader>bo",
-                function()
-                    snacks().bufdelete.other()
-                end,
-                desc = "Delete other buffers",
+            oldfiles = {
+                include_current_session = true,
             },
-            {
-                "<leader>go",
-                function()
-                    snacks().gitbrowse()
-                end,
-                mode = { "n", "v" },
-                desc = "Open git remote url",
-            },
-            {
-                "<leader>gy",
-                function()
-                    snacks().gitbrowse({
-                        open = function(url)
-                            vim.fn.setreg("+", url)
-                            vim.notify("Yanked " .. url .. " to system clipboard")
-                        end,
-                        notify = false,
-                    })
-                end,
-                mode = { "n", "v" },
-                desc = "Yank git remote url",
-            },
-            {
-                "<leader>ff",
-                function()
-                    require("mini.files").close()
-                    snacks().picker.files()
-                end,
-                desc = "Find file in project",
-            },
-            {
-                "<leader>fg",
-                function()
-                    require("mini.files").close()
-                    snacks().picker.git_files()
-                end,
-                desc = "Find git files",
-            },
-            {
-                "<leader>fr",
-                function()
-                    require("mini.files").close()
-                    snacks().picker.recent()
-                end,
-                desc = "Find recent files",
-            },
-            {
-                "<leader>sc",
-                function()
-                    snacks().picker.commands()
-                end,
-                desc = "Commands",
-            },
-            {
-                "<leader>sh",
-                function()
-                    snacks().picker.help()
-                end,
-                desc = "Keymaps",
-            },
-            {
-                "<leader>sk",
-                function()
-                    snacks().picker.keymaps()
-                end,
-                desc = "Keymaps",
+            winopts = {
+                preview = { hidden = true },
             },
         },
+        cmd = { "FzfLua" },
+        keys = function()
+            local fzf_lua = require("fzf-lua")
+
+            return {
+                {
+                    "<leader>/",
+                    function()
+                        run_after_minifiles_close(fzf_lua.live_grep)
+                    end,
+                    desc = "Grep files",
+                },
+                {
+                    "<leader><leader>",
+                    function()
+                        run_after_minifiles_close(fzf_lua.files)
+                    end,
+                    desc = "Find file in project",
+                },
+                {
+                    "<leader>ff",
+                    function()
+                        run_after_minifiles_close(fzf_lua.files)
+                    end,
+                    desc = "Find file in project",
+                },
+                {
+                    "<leader>fg",
+                    function()
+                        run_after_minifiles_close(fzf_lua.git_files)
+                    end,
+                    desc = "Find git files",
+                },
+                {
+                    "<leader>fr",
+                    function()
+                        run_after_minifiles_close(fzf_lua.oldfiles)
+                    end,
+                    desc = "Find recent files",
+                },
+                {
+                    "<leader>fc",
+                    function()
+                        fzf_lua.grep_visual()
+                    end,
+                    mode = { "v" },
+                    desc = "Grep current visual selection",
+                },
+                {
+                    "<leader>fc",
+                    function()
+                        fzf_lua.grep_cword()
+                    end,
+                    mode = { "n" },
+                    desc = "Grep word under cursor",
+                },
+                {
+                    "<leader>sc",
+                    function()
+                        fzf_lua.commands()
+                    end,
+                    desc = "Commands",
+                },
+                {
+                    "<leader>sh",
+                    function()
+                        fzf_lua.helptags()
+                    end,
+                    desc = "Help",
+                },
+                {
+                    "<leader>sk",
+                    function()
+                        fzf_lua.keymaps()
+                    end,
+                    desc = "Keymaps",
+                },
+            }
+        end,
+    },
+    {
+        "folke/snacks.nvim",
+        keys = function()
+            local snacks = require("snacks")
+            return {
+                {
+                    "<leader>bd",
+                    function()
+                        snacks.bufdelete()
+                    end,
+                    desc = "Delete buffer",
+                },
+                {
+                    "<leader>bo",
+                    function()
+                        snacks.bufdelete.other()
+                    end,
+                    desc = "Delete other buffers",
+                },
+                {
+                    "<leader>gg",
+                    function()
+                        snacks.lazygit()
+                    end,
+                    desc = "Lazygit",
+                },
+                {
+                    "<leader>gl",
+                    function()
+                        snacks.lazygit.log()
+                    end,
+                    desc = "Git log",
+                },
+                {
+                    "<leader>gL",
+                    function()
+                        snacks.lazygit.log_file()
+                    end,
+                    desc = "Git log file",
+                },
+                {
+                    "<leader>go",
+                    function()
+                        snacks.gitbrowse()
+                    end,
+                    mode = { "n", "v" },
+                    desc = "Open git remote url",
+                },
+                {
+                    "<leader>gy",
+                    function()
+                        snacks.gitbrowse({
+                            open = function(url)
+                                vim.fn.setreg("+", url)
+                                vim.notify("Yanked " .. url .. " to system clipboard")
+                            end,
+                            notify = false,
+                        })
+                    end,
+                    mode = { "n", "v" },
+                    desc = "Yank git remote url",
+                },
+            }
+        end,
         priority = 1000,
         lazy = false,
         opts = {
+            bigfile = {},
             gitbrowse = {
                 what = "permalink",
             },
             input = {},
-            notify = {},
-            notifier = {},
-            picker = {
-                layout = {
-                    fullscreen = true,
-                },
+            lazygit = {
                 win = {
-                    input = {
-                        keys = {
-                            ["<C-j>"] = { "history_forward", mode = { "i", "n" } },
-                            ["<C-k>"] = { "history_back", mode = { "i", "n" } },
-                        },
-                    },
+                    width = 0.95,
+                    height = 0.95,
                 },
             },
+            notify = {},
+            notifier = {},
             rename = {},
             statuscolumn = {
                 left = { "mark", "sign" },
@@ -372,14 +441,14 @@ return {
             },
         },
         config = function(_plugin, opts)
-            snacks().setup(opts)
-
+            local snacks = require("snacks")
+            snacks.setup(opts)
 
             -- https://github.com/folke/snacks.nvim/blob/bc0630e43be5699bb94dadc302c0d21615421d93/docs/rename.md#minifiles
             vim.api.nvim_create_autocmd("User", {
                 pattern = "MiniFilesActionRename",
                 callback = function(event)
-                    snacks().rename.on_rename_file(event.data.from, event.data.to)
+                    snacks.rename.on_rename_file(event.data.from, event.data.to)
                 end,
             })
         end,
@@ -489,18 +558,18 @@ return {
         dependencies = {
             "nvim-lua/plenary.nvim",
             "sindrets/diffview.nvim",
-            "folke/snacks.nvim",
+            "ibhagwan/fzf-lua",
         },
         opts = {
             integrations = {
                 diffview = true,
-                snacks = true,
+                fzf_lua = true,
             },
         },
         cmd = { "Neogit" },
         keys = {
             {
-                "<leader>gg",
+                "<leader>gG",
                 function()
                     require("neogit").open()
                 end,
