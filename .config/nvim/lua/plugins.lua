@@ -524,6 +524,15 @@ return {
     {
         "mfussenegger/nvim-lint",
         event = { "BufReadPre", "BufNewFile" },
+        keys = {
+            {
+                "<leader>cl",
+                function()
+                    require("lint").try_lint()
+                end,
+                desc = "Lint file",
+            },
+        },
         opts = {
             events = { "BufEnter", "BufWritePost", "InsertLeave" },
             linters_by_ft = {
