@@ -17,10 +17,6 @@ return {
         keys = {
             { "<cr>", mode = { "n", "x", "o" }, function() require("flash").jump() end, desc = "Flash" },
             { "<c-s>", mode = { "c" }, function() require("flash").toggle() end, desc = "Toggle Flash search" },
-            { "<leader>nf", mode = { "n", "x", "o" }, function() require("flash").jump() end, desc = "Flash" },
-            { "<leader>nF", mode = { "n", "x", "o" }, function() require("flash").treesitter() end, desc = "Flash treesitter" },
-            { "<leader>nr", mode = "o", function() require("flash").remote() end, desc = "Remote Flash" },
-            { "<leader>nR", mode = { "o", "x" }, function() require("flash").treesitter_search() end, desc = "Treesitter search" },
         },
     },
     {
@@ -221,6 +217,13 @@ return {
                 what = "permalink",
             },
             input = {},
+            image = {
+                resolve = function(path, src)
+                    if require("obsidian.api").path_is_note(path) then
+                        return require("obsidian.api").resolve_image_path(src)
+                    end
+                end,
+            },
             lazygit = {
                 win = {
                     width = 0.95,
@@ -494,7 +497,7 @@ return {
                     { mode = "n", keys = "<leader>f", desc = "+file/find" },
                     { mode = "n", keys = "<leader>g", desc = "+git" },
                     { mode = "x", keys = "<leader>g", desc = "+git" },
-                    { mode = "n", keys = "<leader>n", desc = "+navigate" },
+                    { mode = "n", keys = "<leader>n", desc = "+notes" },
                     { mode = "n", keys = "<leader>q", desc = "+quickfix" },
                     { mode = "n", keys = "<leader>s", desc = "+search" },
                     { mode = "n", keys = "<leader>w", desc = "+window" },
@@ -562,12 +565,7 @@ return {
             vim.api.nvim_create_autocmd("User", {
                 pattern = "MiniFilesBufferCreate",
                 callback = function(args)
-                    vim.keymap.set(
-                        "n",
-                        "fp",
-                        files_grep,
-                        { buffer = args.data.buf_id, desc = "Search in directory" }
-                    )
+                    vim.keymap.set("n", "fp", files_grep, { buffer = args.data.buf_id, desc = "Search in directory" })
                 end,
             })
         end,
@@ -721,6 +719,74 @@ return {
                 },
             },
             indent = { enable = true, disable = { "ruby" } },
+        },
+    },
+    {
+        "obsidian-nvim/obsidian.nvim",
+        version = "*",
+        cmd = { "Obsidian" },
+        keys = {
+            {
+                "<leader>n<leader>",
+                "<cmd>Obsidian quick_switch<cr>",
+                desc = "Quick switch",
+            },
+            {
+                "<leader>nf",
+                "<cmd>Obsidian search<cr>",
+                desc = "Search notes",
+            },
+            {
+                "<leader>nl",
+                "<cmd>Obsidian backlinks<cr>",
+                desc = "Backlinks",
+            },
+            {
+                "<leader>nn",
+                "<cmd>Obsidian new<cr>",
+                desc = "Create new note",
+            },
+            {
+                "<leader>nt",
+                "<cmd>Obsidian today<cr>",
+                desc = "Open today's daily note",
+            },
+        },
+        ft = "markdown",
+        ---@module 'obsidian'
+        ---@type obsidian.config
+        opts = {
+            legacy_commands = false,
+            picker = {
+                name = "fzf-lua",
+            },
+            completion = {
+                blink = true,
+            },
+            note_id_func = function(title)
+                -- Create note IDs with a timestamp and a suffix.
+                local suffix = ""
+                if title ~= nil then
+                    suffix = title:gsub(" ", "-"):gsub("[^A-Za-z0-9-]", ""):lower()
+                else
+                    -- If title is nil, add 4 random uppercase letters to the suffix.
+                    for _ = 1, 4 do
+                        suffix = suffix .. string.char(math.random(65, 90))
+                    end
+                end
+                return os.date("%Y-%m-%d", os.time()) .. "-" .. suffix
+            end,
+            new_notes_location = "notes_subdir",
+            notes_subdir = "notes",
+            daily_notes = {
+                folder = "journal",
+            },
+            workspaces = {
+                {
+                    name = "personal",
+                    path = "~/Library/Mobile Documents/com~apple~CloudDocs/Documents/Obsidian Vaults/Personal",
+                },
+            },
         },
     },
     {
