@@ -52,7 +52,7 @@ return {
             keymap = {
                 builtin = {
                     ["<C-/>"] = "toggle-help",
-                    ["<C-S-p>"] = "toggle-preview",
+                    ["<C-_>"] = "toggle-preview",
                 },
                 fzf = {
                     ["ctrl-q"] = "select-all+accept",
