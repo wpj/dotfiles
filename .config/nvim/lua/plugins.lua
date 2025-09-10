@@ -53,8 +53,10 @@ return {
                 builtin = {
                     ["<C-/>"] = "toggle-help",
                     ["<C-_>"] = "toggle-preview",
+                    ["<c-=>"] = "toggle-fullscreen",
                 },
                 fzf = {
+                    ["ctrl-a"] = "select-all",
                     ["ctrl-q"] = "select-all+accept",
                 },
             },
@@ -732,7 +734,7 @@ return {
                 desc = "Quick switch",
             },
             {
-                "<leader>nf",
+                "<leader>n/",
                 "<cmd>Obsidian search<cr>",
                 desc = "Search notes",
             },
