@@ -761,20 +761,20 @@ return {
         },
         ft = "markdown",
         opts = function()
-                ---@type obsidian.Workspace[]
-                local workspaces = {}
+            ---@type obsidian.Workspace[]
+            local workspaces = {}
 
-                if vim.env.OBSIDIAN_WORK_VAULT_PATH ~= nil then
-                    table.insert(workspaces, {
-                        name = "work",
-                        path = vim.env.OBSIDIAN_WORK_VAULT_PATH,
-                    })
-                end
-
+            if vim.env.OBSIDIAN_WORK_VAULT_PATH ~= nil then
                 table.insert(workspaces, {
-                    name = "personal",
-                    path = "~/Library/Mobile Documents/com~apple~CloudDocs/Documents/Obsidian Vaults/Personal",
+                    name = "work",
+                    path = vim.env.OBSIDIAN_WORK_VAULT_PATH,
                 })
+            end
+
+            table.insert(workspaces, {
+                name = "personal",
+                path = "~/Library/Mobile Documents/iCloud~md~obsidian/Documents/Personal",
+            })
 
             ---@module 'obsidian'
             ---@type obsidian.config
