@@ -30,23 +30,12 @@ config.check_for_updates = false
 -- Key mappings
 config.leader = { key = "a", mods = "CTRL", timeout_milliseconds = 3000 }
 config.keys = {
-    -- Send C-a when C-a is pressed twice.
-    {
-        key = "a",
-        mods = "LEADER|CTRL",
-        action = wezterm.action.SendKey({ key = "a", mods = "CTRL" }),
-    },
 
-    { key = "c", mods = "LEADER", action = act.ActivateCopyMode },
-    { key = "d", mods = "LEADER", action = act.ShowDebugOverlay },
-    { key = "P", mods = "LEADER", action = act.ActivateCommandPalette },
-    { key = "-", mods = "LEADER", action = act.SplitVertical({ domain = "CurrentPaneDomain" }) },
-    { key = "|", mods = "LEADER", action = act.SplitHorizontal({ domain = "CurrentPaneDomain" }) },
-
-    { key = "h", mods = "LEADER", action = act.ActivatePaneDirection("Left") },
-    { key = "j", mods = "LEADER", action = act.ActivatePaneDirection("Down") },
-    { key = "k", mods = "LEADER", action = act.ActivatePaneDirection("Up") },
-    { key = "l", mods = "LEADER", action = act.ActivatePaneDirection("Right") },
+    { key = "c", mods = "CTRL|SHIFT", action = act.ActivateCopyMode },
+    { key = "d", mods = "CTRL|SHIFT", action = act.ShowDebugOverlay },
+    { key = "p", mods = "CMD", action = act.ActivateCommandPalette },
+    { key = "-", mods = "CTRL|SHIFT", action = act.SplitVertical({ domain = "CurrentPaneDomain" }) },
+    { key = "|", mods = "CTRL|SHIFT", action = act.SplitHorizontal({ domain = "CurrentPaneDomain" }) },
 
     { key = "h", mods = "CTRL|SHIFT", action = act.ActivatePaneDirection("Left") },
     { key = "j", mods = "CTRL|SHIFT", action = act.ActivatePaneDirection("Down") },
@@ -60,31 +49,22 @@ config.keys = {
 
     { key = "x", mods = "LEADER", action = act.CloseCurrentPane({ confirm = true }) },
 
-    { key = "z", mods = "META", action = act.TogglePaneZoomState },
+    { key = "f", mods = "CTRL|SHIFT", action = act.TogglePaneZoomState },
 
-    { key = "p", mods = "LEADER", action = act.ActivateKeyTable({ name = "move_pane" }) },
-    { key = "r", mods = "LEADER", action = act.ActivateKeyTable({ name = "resize_pane" }) },
+    { key = "p", mods = "CTRL|SHIFT", action = act.ActivateKeyTable({ name = "move_pane" }) },
+    { key = "r", mods = "CTRL|SHIFT", action = act.ActivateKeyTable({ name = "resize_pane" }) },
 
-    { key = "n", mods = "LEADER", action = act.SpawnTab("CurrentPaneDomain") },
-    { key = "[", mods = "SHIFT|CMD", action = act.ActivateTabRelative(-1) },
-    { key = "]", mods = "SHIFT|CMD", action = act.ActivateTabRelative(1) },
-    { key = "[", mods = "LEADER", action = act.MoveTabRelative(-1) },
-    { key = "]", mods = "LEADER", action = act.MoveTabRelative(1) },
-    { key = "t", mods = "LEADER", action = act.ShowTabNavigator },
+    { key = "n", mods = "CMD", action = act.SpawnWindow },
+    { key = "t", mods = "CMD", action = act.SpawnTab("CurrentPaneDomain") },
+    { key = "[", mods = "CMD|SHIFT", action = act.ActivateTabRelative(-1) },
+    { key = "]", mods = "CMD|SHIFT", action = act.ActivateTabRelative(1) },
+    { key = "[", mods = "CTRL|SHIFT", action = act.MoveTabRelative(-1) },
+    { key = "]", mods = "CTRL|SHIFT", action = act.MoveTabRelative(1) },
+    { key = "t", mods = "CTRL|SHIFT", action = act.ShowTabNavigator },
 
-    { key = "w", mods = "LEADER", action = act.ShowLauncherArgs({ flags = "FUZZY|WORKSPACES" }) },
+    { key = "w", mods = "CTRL|SHIFT", action = act.ActivateKeyTable({ name = "workspaces" }) },
 
-    { key = "/", mods = "LEADER", action = act.Search("CurrentSelectionOrEmptyString") },
-
-    -- Clear the scrollback/viewport and send C-l to redraw the prompt.
-    {
-        key = "l",
-        mods = "CTRL",
-        action = act.Multiple({
-            act.ClearScrollback("ScrollbackAndViewport"),
-            act.SendKey({ key = "l", mods = "CTRL" }),
-        }),
-    },
+    { key = "/", mods = "CTRL", action = act.Search("CurrentSelectionOrEmptyString") },
 
     { mods = "CMD", key = "q", action = act.QuitApplication },
     { mods = "CMD", key = "t", action = act.SpawnTab("CurrentPaneDomain") },
@@ -99,6 +79,9 @@ config.keys = {
     { mods = "CMD", key = "3", action = act.ActivateTab(2) },
     { mods = "CMD", key = "4", action = act.ActivateTab(3) },
     { mods = "CMD", key = "5", action = act.ActivateTab(4) },
+
+    -- Use <S-CR> for multiline input.
+    { key = "Enter", mods = "SHIFT", action = act({ SendString = "\x1b\r" }) },
 }
 
 config.key_tables = {
@@ -113,6 +96,60 @@ config.key_tables = {
         { key = " ", action = act.RotatePanes("Clockwise") },
         { key = "s", action = act.PaneSelect({ mode = "SwapWithActive" }) },
         { key = "Escape", action = "PopKeyTable" },
+    },
+    workspaces = {
+        { key = "w", action = act.ShowLauncherArgs({ flags = "FUZZY|WORKSPACES" }) },
+        {
+            key = "r",
+            action = act.PromptInputLine({
+                description = wezterm.format({
+                    { Attribute = { Intensity = "Bold" } },
+                    { Text = "Rename workspace:" },
+                }),
+                action = wezterm.action_callback(function(_, _, line)
+                    if line then
+                        local mux = wezterm.mux
+                        mux.rename_workspace(mux.get_active_workspace(), line)
+                    end
+                end),
+            }),
+        },
+        {
+            key = "m",
+            action = act.SwitchToWorkspace({
+                name = "monitoring",
+                spawn = {
+                    args = {
+                        os.getenv("SHELL"),
+                        "-c",
+                        "btm",
+                    },
+                },
+            }),
+        },
+        {
+            key = "n",
+            action = act.PromptInputLine({
+                description = wezterm.format({
+                    { Attribute = { Intensity = "Bold" } },
+                    { Foreground = { AnsiColor = "Fuchsia" } },
+                    { Text = "Enter name for new workspace" },
+                }),
+                action = wezterm.action_callback(function(window, pane, line)
+                    -- line will be `nil` if they hit escape without entering anything
+                    -- An empty string if they just hit enter
+                    -- Or the actual line of text they wrote
+                    if line then
+                        window:perform_action(
+                            act.SwitchToWorkspace({
+                                name = line,
+                            }),
+                            pane
+                        )
+                    end
+                end),
+            }),
+        },
     },
 }
 
