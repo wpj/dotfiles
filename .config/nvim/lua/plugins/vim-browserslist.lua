@@ -1,0 +1,3 @@
+return {
+    "browserslist/vim-browserslist",
+}
