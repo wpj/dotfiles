@@ -39,18 +39,14 @@ return {
         ---@type obsidian.Workspace[]
         local workspaces = {}
 
-        if vim.env.OBSIDIAN_WORK_VAULT_PATH ~= nil then
-            table.insert(workspaces, {
-                name = "work",
-                path = vim.env.OBSIDIAN_WORK_VAULT_PATH,
-            })
-        end
-
-        if vim.env.OBSIDIAN_PERSONAL_VAULT_PATH ~= nil then
-            table.insert(workspaces, {
-                name = "personal",
-                path = vim.env.OBSIDIAN_PERSONAL_VAULT_PATH,
-            })
+        if vim.env.OBSIDIAN_WORKSPACES ~= nil then
+            local workspace_config = vim.json.decode(vim.env.OBSIDIAN_WORKSPACES)
+            for name, path in pairs(workspace_config) do
+                table.insert(workspaces, {
+                    name = name,
+                    path = path,
+                })
+            end
         end
 
         ---@module 'obsidian'
