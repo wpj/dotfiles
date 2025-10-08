@@ -46,10 +46,12 @@ return {
             })
         end
 
-        table.insert(workspaces, {
-            name = "personal",
-            path = "~/Library/Mobile Documents/iCloud~md~obsidian/Documents/Personal",
-        })
+        if vim.env.OBSIDIAN_PERSONAL_VAULT_PATH ~= nil then
+            table.insert(workspaces, {
+                name = "personal",
+                path = vim.env.OBSIDIAN_PERSONAL_VAULT_PATH,
+            })
+        end
 
         ---@module 'obsidian'
         ---@type obsidian.config

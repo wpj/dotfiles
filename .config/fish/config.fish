@@ -73,9 +73,10 @@ abbr -a open. 'open .'
 abbr -a vi. 'vi .'
 abbr -a n 'env NNN_USE_EDITOR=1 nnn'
 
-# For stuff not checked into git
-if test -e "$HOME/.config/fish/.secret.fish"
-    source ~/.config/fish/.secret.fish
+if test -d "$HOME/.config/fish/.secret.d"
+	for file in $HOME/.config/fish/.secret.d/*.fish
+		source $file
+	end
 end
 
 alias ibrew 'arch -x86_64 /usr/local/bin/brew'
