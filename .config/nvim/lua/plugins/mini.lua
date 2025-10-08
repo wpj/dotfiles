@@ -1,7 +1,4 @@
-local function run_after_minifiles_close(fn)
-    require("mini.files").close()
-    fn()
-end
+local run_after_minifiles_close = require("utils").run_after_minifiles_close
 
 return {
     {

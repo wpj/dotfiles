@@ -1,3 +1,5 @@
+local run_after_minifiles_close = require("utils").run_after_minifiles_close
+
 return {
     "ibhagwan/fzf-lua",
     dependencies = { "nvim-mini/mini.icons" },
