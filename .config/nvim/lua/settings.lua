@@ -42,7 +42,7 @@ vim.o.backup = false
 vim.o.writebackup = false
 vim.o.swapfile = false
 
-vim.cmd("colorscheme tokyonight")
+vim.cmd("colorscheme catppuccin-mocha")
 
 vim.diagnostic.config({
     virtual_text = false,
