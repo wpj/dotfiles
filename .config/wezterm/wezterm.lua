@@ -4,7 +4,7 @@ local act = wezterm.action
 local config = wezterm.config_builder()
 
 -- Settings
-config.color_scheme = "Tokyo Night"
+config.color_scheme = 'Catppuccin Mocha'
 
 config.inactive_pane_hsb = {
     saturation = 0.5,
