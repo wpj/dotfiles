@@ -1,0 +1,69 @@
+@import url("./colors.css");
+
+* {
+    border: none;
+    border-radius: 0;
+    font-family: "Berkeley Mono";
+    font-size: 18px;
+}
+
+window#waybar {
+    background-color: @base;
+    color: @text;
+}
+
+.modules-left {
+    margin-left: 8px;
+}
+
+.modules-right {
+    margin-right: 8px;
+}
+
+#workspaces button {
+    padding: 0 6px;
+    margin: 0 1.5px;
+    min-width: 9px;
+    border-radius: 4px;
+}
+
+#workspaces button.focused {
+    color: @base;
+    background-color: @mauve;
+}
+
+#cpu,
+#battery,
+#wireplumber {
+    min-width: 12px;
+    margin: 0 7.5px;
+}
+
+#custom-notification {
+    min-width: 12px;
+    margin: 0 5px;
+}
+
+#tray {
+    margin-right: 16px;
+}
+
+#bluetooth {
+    margin-right: 17px;
+}
+
+#network {
+    margin-right: 13px;
+}
+
+#custom-expand-icon {
+    margin-right: 16px;
+}
+
+tooltip {
+    padding: 2px;
+}
+
+.hidden {
+    opacity: 0;
+}
