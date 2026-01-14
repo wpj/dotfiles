@@ -20,7 +20,7 @@ function fish_jj_prompt --description 'Write out the jj prompt'
 				"(",
 				")",
 				separate(commit_summary_separator,
-					format_short_change_id_with_hidden_and_divergent_info(self),
+					format_short_change_id_with_change_offset(self),
 					bookmarks,
 					tags,
 					if(conflict, label("conflict", "×")),
