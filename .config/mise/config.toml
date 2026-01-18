@@ -9,7 +9,6 @@ node = "lts"
 "npm:prettier" = "latest"
 "npm:stylelint-lsp" = "latest"
 pnpm = "latest"
-rust = "latest"
 
 [settings]
 experimental = true
