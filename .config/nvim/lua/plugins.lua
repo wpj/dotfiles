@@ -1,23 +1,26 @@
-local add, now, later = MiniDeps.add, MiniDeps.now, MiniDeps.later
+vim.pack.add({ 'https://github.com/nvim-mini/mini.misc' })
+local safely = require('mini.misc').safely
+local now = function(f) safely('now', f) end
+local later = function(f) safely('later', f) end
 
 local Utils = require("utils")
 local nmap, run_after_minifiles_close = Utils.nmap, Utils.run_after_minifiles_close
 
 now(function()
-    add("andymass/vim-matchup")
+    vim.pack.add({ 'https://github.com/andymass/vim-matchup' })
 end)
 
 now(function()
-    add("browserslist/vim-browserslist")
+    vim.pack.add({ 'https://github.com/browserslist/vim-browserslist' })
 end)
 
 now(function()
-    add({ source = "catppuccin/nvim", name = "catppuccin" })
+    vim.pack.add({ { src = 'https://github.com/catppuccin/nvim', name = 'catppuccin' } })
     vim.cmd("colorscheme catppuccin-mocha")
 end)
 
 later(function()
-    add("folke/flash.nvim")
+    vim.pack.add({ 'https://github.com/folke/flash.nvim' })
 
     vim.keymap.set({ "n", "x", "o" }, "<cr>", function()
         require("flash").jump()
@@ -29,7 +32,7 @@ later(function()
 end)
 
 now(function()
-    add("folke/snacks.nvim")
+    vim.pack.add({ 'https://github.com/folke/snacks.nvim' })
 
     local snacks = require("snacks")
     snacks.setup({
@@ -102,29 +105,23 @@ now(function()
 end)
 
 later(function()
-    add({
-        source = "folke/todo-comments.nvim",
-        depends = { "nvim-lua/plenary.nvim" },
-    })
-
+    vim.pack.add({ 'https://github.com/folke/todo-comments.nvim' })
     require("todo-comments").setup({ signs = false })
 end)
 
 later(function()
-    add("folke/trouble.nvim")
+    vim.pack.add({ 'https://github.com/folke/trouble.nvim' })
     require("trouble").setup()
 end)
 
 later(function()
-    add("folke/ts-comments.nvim")
+    vim.pack.add({ 'https://github.com/folke/ts-comments.nvim' })
     require("ts-comments").setup()
 end)
 
 later(function()
-    add({
-        source = "ibhagwan/fzf-lua",
-        depends = { "nvim-mini/mini.icons" },
-    })
+    -- depends on mini.icons, which is added in its own now() block above
+    vim.pack.add({ 'https://github.com/ibhagwan/fzf-lua' })
 
     local fzf_lua = require("fzf-lua")
 
@@ -201,17 +198,16 @@ later(function()
 end)
 
 now(function()
-    add("j-hui/fidget.nvim")
-
+    vim.pack.add({ 'https://github.com/j-hui/fidget.nvim' })
     require("fidget").setup({})
 end)
 
 now(function()
-    add("kevinhwang91/nvim-bqf")
+    vim.pack.add({ 'https://github.com/kevinhwang91/nvim-bqf' })
 end)
 
 later(function()
-    add("lewis6991/gitsigns.nvim")
+    vim.pack.add({ 'https://github.com/lewis6991/gitsigns.nvim' })
 
     require("gitsigns").setup({
         signcolumn = false,
@@ -220,7 +216,7 @@ later(function()
 end)
 
 later(function()
-    add("MagicDuck/grug-far.nvim")
+    vim.pack.add({ 'https://github.com/MagicDuck/grug-far.nvim' })
 
     nmap("<leader>fR", function()
         require("grug-far").open()
@@ -228,11 +224,11 @@ later(function()
 end)
 
 now(function()
-    add("NMAC427/guess-indent.nvim")
+    vim.pack.add({ 'https://github.com/NMAC427/guess-indent.nvim' })
 end)
 
 later(function()
-    add("folke/lazydev.nvim")
+    vim.pack.add({ 'https://github.com/folke/lazydev.nvim' })
 
     require("lazydev").setup({
         library = {
@@ -243,11 +239,11 @@ later(function()
 end)
 
 now(function()
-    add("nvim-lua/plenary.nvim")
+    vim.pack.add({ 'https://github.com/nvim-lua/plenary.nvim' })
 end)
 
 later(function()
-    add("nvim-mini/mini.ai")
+    vim.pack.add({ 'https://github.com/nvim-mini/mini.ai' })
 
     local gen_spec = require("mini.ai").gen_spec
 
@@ -260,7 +256,7 @@ later(function()
 end)
 
 later(function()
-    add("nvim-mini/mini.bracketed")
+    vim.pack.add({ 'https://github.com/nvim-mini/mini.bracketed' })
 
     require("mini.bracketed").setup({
         diagnostic = {
@@ -274,7 +270,7 @@ later(function()
 end)
 
 later(function()
-    add("nvim-mini/mini.clue")
+    vim.pack.add({ 'https://github.com/nvim-mini/mini.clue' })
 
     local miniclue = require("mini.clue")
 
@@ -348,21 +344,9 @@ end)
 
 -- FIX: Enable mini.diff (and remove gitsigns) when the snacks.statuscolumn
 -- integration can be made to show diagnostic signs with mini.diff enabled.
--- add({
---     source = "nvim-mini/mini.diff",
---     enabled = false,
---     opts = {
---         view = {
---             style = "number",
---         },
---     },
--- })
 
 now(function()
-    add({
-        source = "nvim-mini/mini.files",
-        depends = { "ibhagwan/fzf-lua" },
-    })
+    vim.pack.add({ 'https://github.com/nvim-mini/mini.files' })
 
     local minifiles = require("mini.files")
 
@@ -401,10 +385,7 @@ now(function()
 end)
 
 later(function()
-    add({
-        source = "nvim-mini/mini-git",
-        name = "mini.git",
-    })
+    vim.pack.add({ { src = 'https://github.com/nvim-mini/mini-git', name = 'mini.git' } })
 
     nmap("<leader>gb", "<cmd>vertical Git blame -- %<cr>", { desc = "Git blame" })
     vim.keymap.set({ "n", "x" }, "<leader>gs", function()
@@ -432,11 +413,11 @@ later(function()
 end)
 
 now(function()
-    add("nvim-mini/mini.icons")
+    vim.pack.add({ 'https://github.com/nvim-mini/mini.icons' })
 end)
 
 later(function()
-    add("nvim-mini/mini.indentscope")
+    vim.pack.add({ 'https://github.com/nvim-mini/mini.indentscope' })
 
     require("mini.indentscope").setup({
         symbol = "│",
@@ -447,11 +428,12 @@ later(function()
 end)
 
 later(function()
-    add("nvim-mini/mini.operators")
+    vim.pack.add({ 'https://github.com/nvim-mini/mini.operators' })
+    require("mini.operators").setup()
 end)
 
 now(function()
-    add("nvim-mini/mini.statusline")
+    vim.pack.add({ 'https://github.com/nvim-mini/mini.statusline' })
 
     local statusline = require("mini.statusline")
 
@@ -481,7 +463,7 @@ now(function()
 end)
 
 later(function()
-    add("nvim-mini/mini.surround")
+    vim.pack.add({ 'https://github.com/nvim-mini/mini.surround' })
 
     require("mini.surround").setup({
         mappings = {
@@ -499,11 +481,8 @@ end)
 now(function()
     local BLINK_VERSION = "v1.8.0"
 
-    add({
-        source = "saghen/blink.cmp",
-        depends = { "rafamadriz/friendly-snippets" },
-        checkout = BLINK_VERSION,
-    })
+    vim.pack.add({ 'https://github.com/rafamadriz/friendly-snippets' })
+    vim.pack.add({ { src = 'https://github.com/saghen/blink.cmp', version = BLINK_VERSION } })
 
     require("blink.cmp").setup({
         fuzzy = {
@@ -532,7 +511,7 @@ now(function()
 end)
 
 later(function()
-    add("stevearc/conform.nvim")
+    vim.pack.add({ 'https://github.com/stevearc/conform.nvim' })
 
     local js_formatter = "prettier"
     if vim.env.NVIM_USE_PRETTIER_ESLINT ~= nil then
@@ -604,13 +583,12 @@ later(function()
 end)
 
 later(function()
-    add("windwp/nvim-autopairs")
-
+    vim.pack.add({ 'https://github.com/windwp/nvim-autopairs' })
     require("nvim-autopairs").setup()
 end)
 
 later(function()
-    add("mfussenegger/nvim-lint")
+    vim.pack.add({ 'https://github.com/mfussenegger/nvim-lint' })
 
     local lint = require("lint")
 
@@ -639,7 +617,7 @@ later(function()
 end)
 
 now(function()
-    add("neovim/nvim-lspconfig")
+    vim.pack.add({ 'https://github.com/neovim/nvim-lspconfig' })
 
     local global_pnpm_root_directory = "~/Library/pnpm/global/5/node_modules"
 
@@ -670,75 +648,30 @@ now(function()
 end)
 
 later(function()
-    add({
-        source = "nvim-treesitter/nvim-treesitter",
-        hooks = {
-            post_checkout = function()
-                vim.cmd("TSUpdate")
-            end,
-        },
-        depends = { "nvim-treesitter/nvim-treesitter-textobjects" },
+    vim.pack.add({ 'https://github.com/nvim-treesitter/nvim-treesitter' })
+    vim.pack.add({ 'https://github.com/nvim-treesitter/nvim-treesitter-textobjects' })
+
+    require('nvim-treesitter').install({
+        "bash", "css", "csv", "dockerfile", "fish", "git_config", "git_rebase",
+        "gitattributes", "gitcommit", "gitignore", "go", "gomod", "gosum", "gowork",
+        "graphql", "html", "javascript", "jsdoc", "json", "lua", "luadoc", "markdown",
+        "markdown_inline", "python", "regex", "rust", "scss", "svelte", "toml",
+        "tsx", "typescript", "vim", "vimdoc", "vue", "xml", "yaml",
     })
 
-    require("nvim-treesitter.configs").setup({
-        ensure_installed = {
-            "bash",
-            "css",
-            "csv",
-            "dockerfile",
-            "fish",
-            "git_config",
-            "git_rebase",
-            "gitattributes",
-            "gitcommit",
-            "gitignore",
-            "go",
-            "gomod",
-            "gosum",
-            "gowork",
-            "graphql",
-            "html",
-            "javascript",
-            "jsdoc",
-            "json",
-            "lua",
-            "luadoc",
-            "markdown",
-            "markdown_inline",
-            "python",
-            "regex",
-            "rust",
-            "scss",
-            "svelte",
-            "toml",
-            "tsx",
-            "typescript",
-            "vim",
-            "vimdoc",
-            "vue",
-            "xml",
-            "yaml",
-        },
-        auto_install = true,
-        highlight = {
-            enable = true,
-            additional_vim_regex_highlighting = { "ruby" },
-        },
-        incremental_selection = {
-            enable = true,
-            keymaps = {
-                init_selection = "<C-space>",
-                node_incremental = "<C-space>",
-                scope_incremental = false,
-                node_decremental = "<bs>",
-            },
-        },
-        indent = { enable = true, disable = { "ruby" } },
+    -- Highlighting is handled natively by Neovim 0.12+.
+    -- Indentation is disabled for ruby (matches previous config).
+    vim.api.nvim_create_autocmd('FileType', {
+        callback = function(args)
+            if args.match ~= 'ruby' then
+                vim.bo.indentexpr = "v:lua.require'nvim-treesitter'.indentexpr()"
+            end
+        end,
     })
 end)
 
 later(function()
-    add("obsidian-nvim/obsidian.nvim")
+    vim.pack.add({ 'https://github.com/obsidian-nvim/obsidian.nvim' })
 
     ---@type obsidian.Workspace[]
     local workspaces = {}
@@ -791,7 +724,7 @@ later(function()
 end)
 
 later(function()
-    add("rachartier/tiny-inline-diagnostic.nvim")
+    vim.pack.add({ 'https://github.com/rachartier/tiny-inline-diagnostic.nvim' })
 
     nmap("<leader>dt", require("tiny-inline-diagnostic").toggle, {
         desc = "Toggle inline diagnostics",
