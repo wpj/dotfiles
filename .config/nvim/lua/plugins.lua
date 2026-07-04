@@ -691,9 +691,6 @@ later(function()
         picker = {
             name = "fzf-lua",
         },
-        completion = {
-            blink = true,
-        },
         note_id_func = function(title)
             -- Create note IDs with a timestamp and a suffix.
             local suffix = ""
