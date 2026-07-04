@@ -41,8 +41,7 @@ end, {
 })
 
 nmap("<leader>fY", function()
-    local Path = require("plenary.path")
-    local path = Path:new(vim.api.nvim_buf_get_name(0)):make_relative()
+    local path = vim.fn.fnamemodify(vim.api.nvim_buf_get_name(0), ":.")
     vim.fn.setreg("+", path)
     vim.notify("Yanked current file path to clipboard", vim.log.levels.INFO)
 end, {
