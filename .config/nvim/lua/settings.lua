@@ -1,5 +1,4 @@
 vim.o.breakindent = true
-vim.o.cmdheight = 1
 vim.o.colorcolumn = "80"
 vim.o.confirm = true
 vim.o.cursorline = true
@@ -11,7 +10,6 @@ vim.o.number = true -- Show current line number
 vim.o.pumblend = 10 -- Popup blend
 vim.o.pumheight = 10 -- Max number of entries in a popup
 vim.o.scrolloff = 7 -- Lines of context when moving the cursor near the screen edge
-vim.o.showmatch = true
 vim.o.showmode = false -- Mode is shown in the status line
 vim.o.sidescrolloff = 8 -- Side scroll context lines
 vim.o.signcolumn = "yes" -- Prevents text shifts when lightbulb/other signs are shown
@@ -24,7 +22,6 @@ vim.o.undofile = true
 vim.o.updatetime = 250
 vim.o.virtualedit = "block" -- Move cursor anywhere in visual block mode.
 vim.o.visualbell = true
-vim.o.wildmenu = true
 vim.o.wrap = false -- Disable line wrapping
 
 vim.schedule(function()
@@ -38,7 +35,6 @@ vim.schedule(function()
 end)
 
 -- files, backups, undo
-vim.o.backup = false
 vim.o.writebackup = false
 vim.o.swapfile = false
 
