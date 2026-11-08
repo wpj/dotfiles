@@ -25,11 +25,11 @@ vim.o.visualbell = true
 vim.o.wrap = false -- Disable line wrapping
 
 vim.schedule(function()
-    if vim.fn.executable("fish") then
+    if vim.fn.executable("fish") == 1 then
         vim.o.shell = "fish"
     end
 
-    if vim.fn.executable("rg") then
+    if vim.fn.executable("rg") == 1 then
         vim.o.grepprg = "rg --vimgrep"
     end
 end)
