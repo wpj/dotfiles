@@ -726,6 +726,7 @@ end)
 
 later(function()
     vim.pack.add({ 'https://github.com/rachartier/tiny-inline-diagnostic.nvim' })
+    require("tiny-inline-diagnostic").setup()
 
     nmap("<leader>dt", require("tiny-inline-diagnostic").toggle, {
         desc = "Toggle inline diagnostics",
