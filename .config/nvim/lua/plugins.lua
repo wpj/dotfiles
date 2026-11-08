@@ -634,11 +634,7 @@ now(function()
                 },
             },
         },
-        filetypes = {
-            "javascript",
-            "typescript",
-            "vue",
-        },
+        filetypes = vim.list_extend(vim.deepcopy(vim.lsp.config.ts_ls.filetypes), { "vue" }),
     })
 
     vim.lsp.enable({
