@@ -643,7 +643,21 @@ now(function()
     vim.lsp.enable({
         "gopls",
         "lua_ls",
+        "rust_analyzer",
         "ts_ls",
+    })
+end)
+
+now(function()
+    -- Indentation is disabled for ruby (matches previous config).
+    vim.api.nvim_create_autocmd('FileType', {
+        group = vim.api.nvim_create_augroup('treesitter', { clear = true }),
+        callback = function(args)
+            pcall(vim.treesitter.start)
+            if args.match ~= 'ruby' then
+                vim.bo.indentexpr = "v:lua.require'nvim-treesitter'.indentexpr()"
+            end
+        end,
     })
 end)
 
@@ -657,16 +671,6 @@ later(function()
         "graphql", "html", "javascript", "jsdoc", "json", "lua", "luadoc", "markdown",
         "markdown_inline", "python", "regex", "rust", "scss", "svelte", "toml",
         "tsx", "typescript", "vim", "vimdoc", "vue", "xml", "yaml",
-    })
-
-    -- Highlighting is handled natively by Neovim 0.12+.
-    -- Indentation is disabled for ruby (matches previous config).
-    vim.api.nvim_create_autocmd('FileType', {
-        callback = function(args)
-            if args.match ~= 'ruby' then
-                vim.bo.indentexpr = "v:lua.require'nvim-treesitter'.indentexpr()"
-            end
-        end,
     })
 end)
 
